@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.NutriCatch.TextStyle" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Theme.NutriCatch.TextStyle.Headline.Medium" parent="Theme.NutriCatch.TextStyle">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Theme.NutriCatch.TextStyle.Headline.Small" parent="Theme.NutriCatch.TextStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--    Rounded Corner Image -->
+    <style name="roundedCornersImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+</resources>

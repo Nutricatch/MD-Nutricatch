@@ -6,4 +6,5 @@ package com.nutricatch.dev.utils
 
 object Const {
     const val TOKEN_NAME = "token"
+    const val ON_BOARD = "on-board"
 }
