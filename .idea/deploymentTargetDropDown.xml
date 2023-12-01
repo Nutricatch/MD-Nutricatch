@@ -7,8 +7,8 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="829adcce" />
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\Fajar\.android\avd\Pixel_3a_XL_API_24.avd" />
           </Key>
         </deviceKey>
       </Target>

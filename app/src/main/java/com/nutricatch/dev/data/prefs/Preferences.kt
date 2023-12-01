@@ -3,6 +3,7 @@ package com.nutricatch.dev.data.prefs
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -14,10 +15,11 @@ import kotlinx.coroutines.flow.map
 * File ini digunakan untuk menyimpan token dan sesi login
 * */
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore("token")
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore("preferences")
 
-class SessionPreferences private constructor(private val dataStore: DataStore<Preferences>) {
+class Preferences private constructor(private val dataStore: DataStore<Preferences>) {
     private val tokenKey = stringPreferencesKey(Const.TOKEN_NAME)
+    private val onBoard = booleanPreferencesKey(Const.ON_BOARD)
 
     suspend fun saveToken(token: String) {
         dataStore.edit {
@@ -40,13 +42,21 @@ class SessionPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    fun isOnBoard(): Flow<Boolean> {
+        return dataStore.data.map { it[onBoard] ?: true }
+    }
+
+    suspend fun boarding() {
+        dataStore.edit { it[onBoard] = true }
+    }
+
     companion object {
         @Volatile
-        private var INSTANCE: SessionPreferences? = null
+        private var INSTANCE: com.nutricatch.dev.data.prefs.Preferences? = null
 
-        fun getInstance(dataStore: DataStore<Preferences>): SessionPreferences {
+        fun getInstance(dataStore: DataStore<Preferences>): com.nutricatch.dev.data.prefs.Preferences {
             return INSTANCE ?: synchronized(this) {
-                val instance = SessionPreferences(dataStore)
+                val instance = Preferences(dataStore)
                 INSTANCE = instance
                 instance
             }
