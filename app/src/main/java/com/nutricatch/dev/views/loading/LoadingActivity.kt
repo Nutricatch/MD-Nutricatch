@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
+import com.nutricatch.dev.LoginActivity
+import com.nutricatch.dev.RegisterActivity
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityLoadingBinding
@@ -15,7 +17,7 @@ import com.nutricatch.dev.views.on_boarding.OnBoardingActivity
 @SuppressLint("CustomSplashScreen")
 class LoadingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoadingBinding
-    private val preferences = Preferences.getInstance(applicationContext.dataStore)
+    private lateinit var preferences: Preferences
     private val viewModel by viewModels<LoadingViewModel> {
         ViewModelFactory(preferences)
     }
@@ -25,9 +27,17 @@ class LoadingActivity : AppCompatActivity() {
         binding = ActivityLoadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        preferences = Preferences.getInstance(applicationContext.dataStore)
+
         viewModel.isOnBoard().asLiveData().observe(this) { isOnBoard ->
             if (isOnBoard) {
-//                startActivity(Intent(this, Logina))
+                viewModel.getToken().asLiveData().observe(this) { token ->
+                    if (token != null) {
+                        startActivity(Intent(this, LoginActivity::class.java))
+                    } else {
+                        startActivity(Intent(this, RegisterActivity::class.java))
+                    }
+                }
             } else {
                 startActivity(Intent(this, OnBoardingActivity::class.java))
             }

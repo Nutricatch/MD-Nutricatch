@@ -8,4 +8,8 @@ class LoadingViewModel(private val preferences: Preferences) : ViewModel() {
     fun isOnBoard(): Flow<Boolean> {
         return preferences.isOnBoard()
     }
+
+    fun getToken(): Flow<String?> {
+        return preferences.getToken()
+    }
 }
