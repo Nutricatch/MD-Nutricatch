@@ -33,13 +33,19 @@ class LoadingActivity : AppCompatActivity() {
             if (isOnBoard) {
                 viewModel.getToken().asLiveData().observe(this) { token ->
                     if (token != null) {
-                        startActivity(Intent(this, LoginActivity::class.java))
+                        val intent = Intent(this, LoginActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
                     } else {
-                        startActivity(Intent(this, RegisterActivity::class.java))
+                        val intent = Intent(this, RegisterActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
                     }
                 }
             } else {
-                startActivity(Intent(this, OnBoardingActivity::class.java))
+                val intent = Intent(this, OnBoardingActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
             }
         }
     }

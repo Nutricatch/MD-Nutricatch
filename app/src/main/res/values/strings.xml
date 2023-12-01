@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">NutriCatch</string>
+    <string name="onboard_headline_1">Get the exact nutrition value of everything you eat</string>
+    <string name="onboard_body_1">We are updating our food database every minute to help you track you calories.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment2">Hello blank fragment2</string>
+    <string name="hello_blank_fragment3">Hello blank fragment3</string>
 </resources>

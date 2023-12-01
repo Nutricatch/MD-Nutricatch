@@ -43,7 +43,7 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
     }
 
     fun isOnBoard(): Flow<Boolean> {
-        return dataStore.data.map { it[onBoard] ?: true }
+        return dataStore.data.map { it[onBoard] ?: false }
     }
 
     suspend fun boarding() {
