@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
-import com.nutricatch.dev.LoginActivity
-import com.nutricatch.dev.RegisterActivity
+import com.nutricatch.dev.views.auth.LoginActivity
+import com.nutricatch.dev.views.auth.RegisterActivity
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityLoadingBinding

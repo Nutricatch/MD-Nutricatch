@@ -1,4 +1,4 @@
-package com.nutricatch.dev
+package com.nutricatch.dev.views.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
