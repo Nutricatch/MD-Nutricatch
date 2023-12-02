@@ -2,8 +2,12 @@
     <string name="app_name">NutriCatch</string>
     <string name="onboard_headline_1">Get the exact nutrition value of everything you eat</string>
     <string name="onboard_body_1">We are updating our food database every minute to help you track you calories.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hello_blank_fragment2">Hello blank fragment2</string>
-    <string name="hello_blank_fragment3">Hello blank fragment3</string>
+    <string name="onboard_headline_2">Get all the healthy recipes that you need</string>
+    <string name="onboard_body_2">Whether you are losing or gaining, we have all recipes you’ll need.</string>
+    <string name="onboard_headline_3">Get daily calorie targets based on your body weight</string>
+    <string name="onboard_body_3">Set you target weight and select your monthly schedule, and we’ll do the rest.</string>
+    <string name="skip">Skip</string>
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="login">Login</string>
 </resources>
