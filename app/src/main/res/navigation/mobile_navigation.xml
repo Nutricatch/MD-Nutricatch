@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.nutricatch.dev.views.navigation.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.nutricatch.dev.views.navigation.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.nutricatch.dev.views.navigation.settings.SettingsFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_navigation_setting_to_cameraActivity"
+            app:destination="@id/cameraActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/cameraActivity"
+        android:name="com.nutricatch.dev.views.CameraActivity"
+        android:label="activity_camera"
+        tools:layout="@layout/activity_camera" />
+</navigation>
