@@ -12,10 +12,10 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val dotIndicator = binding.dotsIndicator
-        val viewPager =binding.viewPager2
-        val adapter = OnBoardingAdapter(this)
-        viewPager.adapter = adapter
-        dotIndicator.attachTo(viewPager)
+//        val dotIndicator = binding.dotsIndicator
+//        val viewPager = binding.viewPager2
+//        val adapter = OnBoardingAdapter(this)
+//        viewPager.adapter = adapter
+//        dotIndicator.attachTo(viewPager)
     }
 }
