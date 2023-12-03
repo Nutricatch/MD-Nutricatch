@@ -26,4 +26,7 @@
     <string name="title_setting">Setting</string>
     <string name="scan_new_food">Scan New Food</string>
     <string name="camera">Camera</string>
+    <string name="capture">Capture</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -56,10 +56,12 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     // Camera
-    implementation("androidx.camera:camera-camera2:1.3.0")
-    implementation("androidx.camera:camera-lifecycle:1.3.0")
-    implementation("androidx.camera:camera-view:1.3.0")
-    implementation("androidx.exifinterface:exifinterface:1.3.6")
+    val cameraxVersion = "1.3.0"
+    implementation ("androidx.camera:camera-core:${cameraxVersion}")
+    implementation ("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation( "androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation( "androidx.camera:camera-view:${cameraxVersion}")
+    implementation( "androidx.camera:camera-extensions:${cameraxVersion}")
 
     // storage
     implementation("androidx.datastore:datastore-preferences:1.0.0")
