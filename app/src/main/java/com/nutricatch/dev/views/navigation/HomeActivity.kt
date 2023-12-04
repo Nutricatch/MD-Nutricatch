@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.nutricatch.dev.R
 import com.nutricatch.dev.databinding.ActivityHomeBinding
-import com.nutricatch.dev.views.camera.CameraActivity
+import com.nutricatch.dev.views.navigation.camera.CameraActivity
 import com.nutricatch.dev.views.navigation.history.HistoryFragment
 import com.nutricatch.dev.views.navigation.home.HomeFragment
 import com.nutricatch.dev.views.navigation.profile.ProfileFragment

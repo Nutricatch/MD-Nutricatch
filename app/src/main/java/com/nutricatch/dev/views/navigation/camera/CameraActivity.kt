@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.camera
+package com.nutricatch.dev.views.navigation.camera
 
 import android.Manifest
 import android.content.Context

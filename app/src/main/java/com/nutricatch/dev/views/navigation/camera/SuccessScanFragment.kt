@@ -1,11 +1,11 @@
-package com.nutricatch.dev.views.camera
+package com.nutricatch.dev.views.navigation.camera
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 
-class PreviewImageDialogFragment : DialogFragment() {
+class SuccessScanFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
