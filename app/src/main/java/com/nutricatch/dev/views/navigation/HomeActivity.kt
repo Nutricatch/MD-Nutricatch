@@ -16,7 +16,8 @@ import com.nutricatch.dev.databinding.ActivityHomeBinding
 import com.nutricatch.dev.views.camera.CameraActivity
 import com.nutricatch.dev.views.navigation.history.HistoryFragment
 import com.nutricatch.dev.views.navigation.home.HomeFragment
-import com.nutricatch.dev.views.navigation.settings.SettingsFragment
+import com.nutricatch.dev.views.navigation.profile.ProfileFragment
+import com.nutricatch.dev.views.navigation.recipes.RecipesFragment
 
 class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -67,6 +68,14 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                 transaction.replace(R.id.container, HomeFragment(), HomeFragment::class.java.name)
             }
 
+            R.id.navigation_recipe -> {
+                transaction.replace(
+                    R.id.container,
+                    RecipesFragment(),
+                    RecipesFragment::class.java.name
+                )
+            }
+
             R.id.navigation_camera -> {
                 /// todo handle navigate activity camera
                 startActivity(Intent(this, CameraActivity::class.java))
@@ -84,8 +93,8 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             R.id.navigation_setting -> {
                 transaction.replace(
                     R.id.container,
-                    SettingsFragment(),
-                    SettingsFragment::class.java.name
+                    ProfileFragment(),
+                    ProfileFragment::class.java.name
                 )
             }
         }

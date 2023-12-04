@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_setting"
-        android:name="com.nutricatch.dev.views.navigation.settings.SettingsFragment"
+        android:name="com.nutricatch.dev.views.navigation.profile.ProfileFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_setting" >
+        tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_navigation_setting_to_cameraActivity"
             app:destination="@id/cameraActivity" />

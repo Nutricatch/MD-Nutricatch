@@ -32,6 +32,7 @@ class LoadingActivity : AppCompatActivity() {
         viewModel.isOnBoard().asLiveData().observe(this) { isOnBoard ->
             if (isOnBoard) {
                 viewModel.getToken().asLiveData().observe(this) { token ->
+                    /// TODO pastikan logika ini benar untuk memeriksa login status
                     if (token != null) {
                         val intent = Intent(this, LoginActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
