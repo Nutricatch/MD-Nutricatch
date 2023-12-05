@@ -49,6 +49,8 @@ class HomeActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
         navView.setOnItemSelectedListener(this)
 
+        binding.navView.menu.getItem(2).isEnabled = false
+
     }
 
 //    override fun onClick(v: View) {
