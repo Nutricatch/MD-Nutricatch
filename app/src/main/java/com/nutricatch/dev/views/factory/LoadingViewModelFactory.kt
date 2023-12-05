@@ -1,11 +1,11 @@
-package com.nutricatch.dev.views
+package com.nutricatch.dev.views.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.views.loading.LoadingViewModel
 
-class ViewModelFactory(private val preferences: Preferences) :
+class LoadingViewModelFactory(private val preferences: Preferences) :
     ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

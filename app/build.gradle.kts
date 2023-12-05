@@ -56,10 +56,12 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     // Camera
-    implementation("androidx.camera:camera-camera2:1.3.0")
-    implementation("androidx.camera:camera-lifecycle:1.3.0")
-    implementation("androidx.camera:camera-view:1.3.0")
-    implementation("androidx.exifinterface:exifinterface:1.3.6")
+    val cameraxVersion = "1.3.0"
+    implementation ("androidx.camera:camera-core:${cameraxVersion}")
+    implementation ("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation( "androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation( "androidx.camera:camera-view:${cameraxVersion}")
+    implementation( "androidx.camera:camera-extensions:${cameraxVersion}")
 
     // storage
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -76,6 +78,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.activity:activity-ktx:1.8.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
 
     /// test
     testImplementation("junit:junit:4.13.2")
