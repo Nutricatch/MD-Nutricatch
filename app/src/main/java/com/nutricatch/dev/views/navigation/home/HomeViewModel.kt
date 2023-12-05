@@ -1,13 +1,10 @@
 package com.nutricatch.dev.views.navigation.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nutricatch.dev.data.repository.PostRepository
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val repository: PostRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    val latestPosts = repository.getLatestPost()
+
 }

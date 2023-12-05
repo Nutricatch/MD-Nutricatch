@@ -9,7 +9,7 @@ import androidx.lifecycle.asLiveData
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityLoadingBinding
-import com.nutricatch.dev.views.ViewModelFactory
+import com.nutricatch.dev.views.factory.LoadingViewModelFactory
 import com.nutricatch.dev.views.auth.LoginActivity
 import com.nutricatch.dev.views.navigation.HomeActivity
 import com.nutricatch.dev.views.on_boarding.OnBoardingActivity
@@ -19,7 +19,7 @@ class LoadingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoadingBinding
     private lateinit var preferences: Preferences
     private val viewModel by viewModels<LoadingViewModel> {
-        ViewModelFactory(preferences)
+        LoadingViewModelFactory(preferences)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
