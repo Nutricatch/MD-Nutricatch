@@ -57,10 +57,6 @@
 
     <include
         android:id="@+id/include_content_home"
-        layout="@layout/content_home_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/appBarLayout"
-        android:layout_gravity="bottom"/>
+        layout="@layout/content_home_fragment" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
