@@ -10,6 +10,10 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="Theme.NutriCatch.TextStyle.Headline.Medium.Bold" parent="Theme.NutriCatch.TextStyle.Headline.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Theme.NutriCatch.TextStyle.Headline.Small" parent="Theme.NutriCatch.TextStyle">
         <item name="android:textSize">16sp</item>
     </style>
