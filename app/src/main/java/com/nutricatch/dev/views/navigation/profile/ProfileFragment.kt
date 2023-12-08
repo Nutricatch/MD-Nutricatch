@@ -18,6 +18,9 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val adapter: SettingMenuAdapter by lazy {
+        SettingMenuAdapter(::onClickListener)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +33,6 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
         val settingMenu = settingMenu
-        val adapter = SettingMenuAdapter()
         adapter.submitList(settingMenu)
         binding.rvSettings.adapter = adapter
         val layoutManager = LinearLayoutManager(requireContext())
@@ -39,6 +41,10 @@ class ProfileFragment : Fragment() {
         binding.rvSettings.addItemDecoration(itemDecoration)
 
         return root
+    }
+
+    private fun onClickListener(title: String) {
+
     }
 
     override fun onDestroyView() {

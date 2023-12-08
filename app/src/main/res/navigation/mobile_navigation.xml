@@ -23,8 +23,8 @@
         android:label="@string/title_setting"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_navigation_setting_to_cameraActivity"
-            app:destination="@id/cameraActivity" />
+            android:id="@+id/action_navigation_setting_to_bodyDetailFragment"
+            app:destination="@id/bodyDetailFragment" />
     </fragment>
 
     <activity
@@ -32,4 +32,9 @@
         android:name="com.nutricatch.dev.views.navigation.camera.CameraActivity"
         android:label="activity_camera"
         tools:layout="@layout/activity_camera" />
+    <fragment
+        android:id="@+id/bodyDetailFragment"
+        android:name="com.nutricatch.dev.views.navigation.profile.BodyDetailFragment"
+        android:label="fragment_body_detail"
+        tools:layout="@layout/fragment_body_detail" />
 </navigation>

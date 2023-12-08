@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nutricatch.dev.databinding.SettingItemBinding
 import com.nutricatch.dev.model.SettingMenu
 
-class SettingMenuAdapter : ListAdapter<SettingMenu, SettingMenuAdapter.ViewHolder>(DIFF_CALLBACK) {
+class SettingMenuAdapter(private val onClick: (String) -> Unit) :
+    ListAdapter<SettingMenu, SettingMenuAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    class ViewHolder(val binding: SettingItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: SettingItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(settingMenu: SettingMenu) {
             binding.imgSettingIcon.setImageResource(settingMenu.drawableIcon)
             binding.tvSettingTitle.text = settingMenu.title
+
+            itemView.setOnClickListener {
+                onClick(settingMenu.title)
+            }
         }
     }
 
