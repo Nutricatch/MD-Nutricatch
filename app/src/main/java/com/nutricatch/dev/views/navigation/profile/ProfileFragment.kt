@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutricatch.dev.databinding.FragmentProfileBinding
+import com.nutricatch.dev.model.settingMenu
 
 class ProfileFragment : Fragment() {
 
-    private var _binding:FragmentProfileBinding? = null
+    private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,16 +24,20 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+        val viewModel by viewModels<ProfileViewModel>()
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val settingMenu = settingMenu
+        val adapter = SettingMenuAdapter()
+        adapter.submitList(settingMenu)
+        binding.rvSettings.adapter = adapter
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSettings.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        binding.rvSettings.addItemDecoration(itemDecoration)
+
         return root
     }
 

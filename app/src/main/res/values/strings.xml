@@ -32,4 +32,8 @@
     <string name="recipes">Recipes</string>
     <string name="latest_blog_posts">Latest blog posts!</string>
     <string name="home_greeting">Hello, %1$s</string>
+    <string name="profile">Profile</string>
+    <string name="account">Account</string>
+    <string name="text_placeholder">. . .</string>
+    <string name="logout">Logout</string>
 </resources>
