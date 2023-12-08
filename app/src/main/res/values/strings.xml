@@ -46,4 +46,8 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="update">Update</string>
+    <string name="language_options">Language Options</string>
+    <string name="english">English</string>
+    <string name="indonesian">Bahasa Indonesia</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>
