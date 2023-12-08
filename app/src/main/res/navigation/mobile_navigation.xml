@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_navigation_setting_to_bodyDetailFragment"
             app:destination="@id/bodyDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_setting_to_languageFragment"
+            app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_navigation_setting_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
     </fragment>
 
     <activity
@@ -37,4 +43,14 @@
         android:name="com.nutricatch.dev.views.navigation.profile.BodyDetailFragment"
         android:label="fragment_body_detail"
         tools:layout="@layout/fragment_body_detail" />
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.nutricatch.dev.views.navigation.profile.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.nutricatch.dev.PrivacyFragment"
+        android:label="fragment_privacy"
+        tools:layout="@layout/fragment_privacy" />
 </navigation>
