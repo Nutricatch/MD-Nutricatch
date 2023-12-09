@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.asLiveData
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityLoadingBinding
-import com.nutricatch.dev.views.factory.LoadingViewModelFactory
+import com.nutricatch.dev.utils.Theme
 import com.nutricatch.dev.views.auth.LoginActivity
+import com.nutricatch.dev.views.factory.PreferencesViewModelFactory
 import com.nutricatch.dev.views.navigation.HomeActivity
 import com.nutricatch.dev.views.on_boarding.OnBoardingActivity
 
@@ -19,7 +21,7 @@ class LoadingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoadingBinding
     private lateinit var preferences: Preferences
     private val viewModel by viewModels<LoadingViewModel> {
-        LoadingViewModelFactory(preferences)
+        PreferencesViewModelFactory(preferences)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,15 @@ class LoadingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         preferences = Preferences.getInstance(applicationContext.dataStore)
+
+        viewModel.theme.observe(this) { theme ->
+            AppCompatDelegate.setDefaultNightMode(
+                when (theme) {
+                    Theme.Dark -> AppCompatDelegate.MODE_NIGHT_YES
+                    Theme.Light -> AppCompatDelegate.MODE_NIGHT_NO
+                }
+            )
+        }
 
         viewModel.isOnBoard().asLiveData().observe(this) { isOnBoard ->
             if (isOnBoard) {
