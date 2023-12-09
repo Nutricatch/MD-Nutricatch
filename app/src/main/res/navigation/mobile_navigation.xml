@@ -9,7 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="com.nutricatch.dev.views.navigation.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_bodyDetailFragment"
+            app:destination="@id/bodyDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_recipe"
+        android:name="com.nutricatch.dev.views.navigation.recipes.RecipesFragment"
+        android:label="Recipes"
+        tools:layout="@layout/fragment_recipes" />
 
     <fragment
         android:id="@+id/navigation_history"
@@ -21,16 +31,28 @@
         android:id="@+id/navigation_setting"
         android:name="com.nutricatch.dev.views.navigation.profile.ProfileFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_setting_to_bodyDetailFragment"
-            app:destination="@id/bodyDetailFragment" />
+            app:destination="@id/bodyDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_navigation_setting_to_languageFragment"
-            app:destination="@id/languageFragment" />
+            app:destination="@id/languageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_navigation_setting_to_privacyFragment"
-            app:destination="@id/privacyFragment" />
+            app:destination="@id/privacyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <activity

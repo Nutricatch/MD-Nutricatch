@@ -11,14 +11,9 @@
         android:icon="@drawable/ic_recipe"
         android:title="@string/recipes" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_camera"-->
-<!--        android:icon="@drawable/ic_camera"-->
-<!--        android:title="@string/camera" />-->
-
     <item
         android:id="@+id/navigation_camera"
-        android:title=""/>
+        android:title="" />
 
     <item
         android:id="@+id/navigation_history"
@@ -27,7 +22,7 @@
 
     <item
         android:id="@+id/navigation_setting"
-        android:icon="@drawable/ic_setting"
+        android:icon="@drawable/ic_user"
         android:title="@string/title_setting" />
 
 </menu>
