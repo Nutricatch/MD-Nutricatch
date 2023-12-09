@@ -72,7 +72,7 @@
         tools:layout="@layout/fragment_language" />
     <fragment
         android:id="@+id/privacyFragment"
-        android:name="com.nutricatch.dev.PrivacyFragment"
+        android:name="com.nutricatch.dev.views.privacy.PrivacyFragment"
         android:label="fragment_privacy"
         tools:layout="@layout/fragment_privacy" />
 </navigation>
