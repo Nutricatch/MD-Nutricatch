@@ -4,35 +4,104 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import com.nutricatch.dev.R
+import com.nutricatch.dev.data.prefs.Preferences
+import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentProfileBinding
+import com.nutricatch.dev.utils.Theme
+import com.nutricatch.dev.views.factory.PreferencesViewModelFactory
 
 class ProfileFragment : Fragment() {
 
-    private var _binding:FragmentProfileBinding? = null
+    private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var preferences: Preferences
+    private val viewModel by viewModels<ProfileViewModel> {
+        PreferencesViewModelFactory(preferences)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        preferences = Preferences.getInstance(requireContext().dataStore)
+        return binding.root
+    }
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.tileMyWeight.setOnClickListener {
+            it.findNavController().navigate(
+                R.id.action_navigation_setting_to_bodyDetailFragment
+            )
         }
-        return root
+        binding.tileLanguages.setOnClickListener {
+            it.findNavController().navigate(
+                R.id.action_navigation_setting_to_languageFragment
+            )
+        }
+
+        binding.tileShare.setOnClickListener {
+            /// TODO implement share with intent explicit
+        }
+
+        binding.swTheme.setOnCheckedChangeListener { _, isChecked ->
+            changeTheme(isChecked)
+        }
+
+        viewModel.theme.observe(viewLifecycleOwner) { theme ->
+            when (theme) {
+                Theme.Dark -> {
+                    binding.swTheme.isChecked = true
+                }
+
+                Theme.Light -> {
+                    binding.swTheme.isChecked = false
+                }
+            }
+        }
+
+        binding.tileContact.setOnClickListener {
+            /// TODO implement intent to email
+        }
+
+        binding.tileHelp.setOnClickListener {
+            /// TODO implement navigate to help page
+        }
+
+        binding.tilePrivacy.setOnClickListener {
+            /// TODO implement navigate to privacy policy page
+        }
+
+    }
+
+    private fun changeTheme(isChecked: Boolean) {
+        if (isChecked) {
+            viewModel.setTheme(Theme.Dark)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            viewModel.setTheme(Theme.Light)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+    private fun onClickListener(title: String) {
+        when (title.lowercase()) {
+            "my weight" -> {
+                Navigation.createNavigateOnClickListener(R.id.action_navigation_setting_to_bodyDetailFragment)
+            }
+        }
     }
 
     override fun onDestroyView() {
