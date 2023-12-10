@@ -73,7 +73,6 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
     companion object {
         @Volatile
         private var INSTANCE: com.nutricatch.dev.data.prefs.Preferences? = null
-
         fun getInstance(dataStore: DataStore<Preferences>): com.nutricatch.dev.data.prefs.Preferences {
             return INSTANCE ?: synchronized(this) {
                 val instance = Preferences(dataStore)
