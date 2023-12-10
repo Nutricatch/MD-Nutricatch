@@ -21,6 +21,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when (v) {
             binding.btnLogin -> {
                 /// TODO handle login login
+                val email = binding.emailEt.text.toString()
+                val password = binding.passwordEt.text.toString()
 
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
