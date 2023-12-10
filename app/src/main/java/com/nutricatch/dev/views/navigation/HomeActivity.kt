@@ -11,12 +11,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nutricatch.dev.R
+import com.nutricatch.dev.data.prefs.Preferences
+import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityHomeBinding
 import com.nutricatch.dev.views.navigation.camera.CameraActivity
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var preferences: Preferences
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +28,23 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        preferences = Preferences.getInstance(applicationContext.dataStore)
+
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration.Builder(
+
+        /*
+        *   Check user mode, guest or registered user
+        * */
+        appBarConfiguration = AppBarConfiguration.Builder(
             R.id.navigation_home,
             R.id.navigation_recipe,
             R.id.navigation_camera,
             R.id.navigation_history,
-            R.id.navigation_setting
+            R.id.foodRecommendationFragment
         ).build()
 
         setSupportActionBar(binding.myToolbar)
@@ -48,7 +58,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.fabScan.setOnClickListener(this)
 
-        binding.navView.menu.getItem(2).isEnabled = false
+            binding.navView.menu.getItem(2).isEnabled = false
 
     }
 
