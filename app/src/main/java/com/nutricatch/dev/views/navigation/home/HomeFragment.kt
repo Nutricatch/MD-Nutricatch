@@ -39,6 +39,9 @@ class HomeFragment : Fragment() {
         val user = "John Doe"
         binding.toolbar.title = getString(R.string.home_greeting, user)
 
+        binding.toolbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
+        binding.collapsedToolbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
+
         binding.includeContentHome.textHome.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_navigation_setting_to_bodyDetailFragment)
         )

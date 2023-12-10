@@ -46,6 +46,7 @@
             <!-- The attribute app:layout_collapseMode="pin" is set so that
                  sticks to the top when the user scrolls the view up-->
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/collapsed_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"

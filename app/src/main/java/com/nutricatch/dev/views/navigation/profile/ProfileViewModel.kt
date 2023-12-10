@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val preferences: Preferences) : ViewModel() {
 
-    val theme: LiveData<Theme> = preferences.themeMode.asLiveData()
+    val token: LiveData<String?> = preferences.getToken().asLiveData()
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

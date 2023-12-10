@@ -11,8 +11,12 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_navigation_home_to_bodyDetailFragment"
-            app:destination="@id/bodyDetailFragment" />
+            android:id="@+id/action_navigation_home_to_navigation_setting"
+            app:destination="@id/navigation_setting"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -75,4 +79,9 @@
         android:name="com.nutricatch.dev.views.privacy.PrivacyFragment"
         android:label="fragment_privacy"
         tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/foodRecommendationFragment"
+        android:name="com.nutricatch.dev.FoodRecommendationFragment"
+        android:label="fragment_food_recommendation"
+        tools:layout="@layout/fragment_food_recommendation" />
 </navigation>
