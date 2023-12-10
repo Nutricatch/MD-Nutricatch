@@ -58,13 +58,17 @@ class ProfileFragment : Fragment() {
 
         binding.swTheme.setOnCheckedChangeListener { _, isChecked ->
             changeTheme(isChecked)
-            viewModel.theme.observe(viewLifecycleOwner) { theme ->
-                AppCompatDelegate.setDefaultNightMode(
-                    when (theme) {
-                        Theme.Dark -> AppCompatDelegate.MODE_NIGHT_YES
-                        Theme.Light -> AppCompatDelegate.MODE_NIGHT_NO
-                    }
-                )
+        }
+
+        viewModel.theme.observe(viewLifecycleOwner) { theme ->
+            when (theme) {
+                Theme.Dark -> {
+                    binding.swTheme.isChecked = true
+                }
+
+                Theme.Light -> {
+                    binding.swTheme.isChecked = false
+                }
             }
         }
 
@@ -83,13 +87,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun changeTheme(isChecked: Boolean) {
-        /// TODO implement theme changing, don't forget update preference
         if (isChecked) {
             viewModel.setTheme(Theme.Dark)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             viewModel.setTheme(Theme.Light)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
