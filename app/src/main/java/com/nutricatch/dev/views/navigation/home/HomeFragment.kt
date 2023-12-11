@@ -33,18 +33,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(requireContext())
-        binding.includeContentHome.rvLatestPost.layoutManager = layoutManager
+        binding.rvLatestPost.layoutManager = layoutManager
 
         /// nanti, ubah jadi observe ke viewmodel
         val user = "John Doe"
-        binding.toolbar.title = getString(R.string.home_greeting, user)
+        binding.tvUserName.text = getString(R.string.home_greeting, user)
 
-        binding.toolbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
-        binding.collapsedToolbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
-
-        binding.includeContentHome.textHome.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_navigation_setting_to_bodyDetailFragment)
-        )
+        binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
 
         viewModel.latestPosts.observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -53,7 +48,7 @@ class HomeFragment : Fragment() {
                     val posts = result.data.latestPosts
                     val adapter = LatestPostAdapter()
                     adapter.submitList(posts)
-                    binding.includeContentHome.rvLatestPost.adapter = adapter
+                    binding.rvLatestPost.adapter = adapter
                 }
 
                 is ResultState.Loading -> {
