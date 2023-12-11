@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentHomeBinding
-import com.nutricatch.dev.views.factory.MainViewModelFactory
+import com.nutricatch.dev.views.factory.HomeViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<HomeViewModel> {
-        MainViewModelFactory.getInstance(requireContext())
+        HomeViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(
@@ -41,13 +41,34 @@ class HomeFragment : Fragment() {
 
         binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
 
-        viewModel.latestPosts.observe(viewLifecycleOwner) { result ->
+        viewModel.foods.observe(viewLifecycleOwner){result->
+            when(result){
+                is ResultState.Success -> {
+                    // showLoading(false)
+                    val foods = result.data.foods
+                    val adapter = FoodsAdapter()
+                    adapter.submitList(foods)
+                    binding.rvFoodRecomm.adapter = adapter
+                }
+
+                is ResultState.Loading -> {
+                    // showLoading(true)
+                }
+
+                is ResultState.Error -> {
+                    // showLoading(false)
+                    // handle error
+                }
+            }
+        }
+
+        viewModel.recipes.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Success -> {
                     //showLoading(false)
-                    val posts = result.data.latestPosts
-                    val adapter = LatestPostAdapter()
-                    adapter.submitList(posts)
+                    val recipes = result.data.recipes
+                    val adapter = RecipeAdapter()
+                    adapter.submitList(recipes)
                     binding.rvLatestPost.adapter = adapter
                 }
 

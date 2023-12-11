@@ -1,10 +1,12 @@
 package com.nutricatch.dev.views.navigation.home
 
 import androidx.lifecycle.ViewModel
-import com.nutricatch.dev.data.repository.PostRepository
+import com.nutricatch.dev.data.repository.RecommendationRepository
 
-class HomeViewModel(private val repository: PostRepository) : ViewModel() {
+class HomeViewModel(private val repository: RecommendationRepository) : ViewModel() {
 
-    val latestPosts = repository.getLatestPost()
+    val recipes = repository.getRecipes()
+
+    val foods = repository.getFoods()
 
 }

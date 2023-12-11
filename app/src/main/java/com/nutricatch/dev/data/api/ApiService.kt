@@ -3,7 +3,7 @@ package com.nutricatch.dev.data.api
 import com.nutricatch.dev.data.response.AuthResponse
 import com.nutricatch.dev.model.LatestPostResponse
 import com.nutricatch.dev.model.Recipe
-import com.nutricatch.dev.model.RecipeResponse
+import com.nutricatch.dev.model.RecipeListResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -15,7 +15,7 @@ interface ApiService {
     suspend fun getLatestPosts(): LatestPostResponse
 
     @GET("recipes")
-    suspend fun getRecipes(): RecipeResponse
+    suspend fun getRecipes(): RecipeListResponse
 
     @GET("recipe/{id}")
     suspend fun getRecipe(@Path("id") id: Int): Recipe
