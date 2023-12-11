@@ -57,4 +57,7 @@
     <string name="help">Help</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="great_day_to_control_your_calories">Great day to control your calories!</string>
+    <string name="we_ve_picked_you_a_delicious_food">We\'ve picked you a delicious food</string>
+    <string name="we_also_have_recipe_for_you">We also have recipe for you</string>
 </resources>
