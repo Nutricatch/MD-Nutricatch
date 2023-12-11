@@ -10,9 +10,7 @@ class LoadingViewModel(private val preferences: Preferences) : ViewModel() {
         return preferences.isOnBoard()
     }
 
-    fun getToken(): Flow<String?> {
-        return preferences.getToken()
-    }
+    val token = preferences.getToken()
 
     val theme = preferences.themeMode.asLiveData()
 }

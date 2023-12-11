@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".views.navigation.HomeActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp">
+        android:layout_marginHorizontal="24dp"
+        app:layoutDescription="@xml/fragment_home_xml_constraintlayout_scene">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header_user"
@@ -123,6 +125,6 @@
             app:layout_constraintTop_toBottomOf="@id/text_home"
             tools:listitem="@layout/item_latest_post" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </ScrollView>
