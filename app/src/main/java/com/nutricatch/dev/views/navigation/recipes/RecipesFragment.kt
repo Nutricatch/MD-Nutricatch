@@ -27,7 +27,7 @@ class RecipesFragment : Fragment() {
         val root = binding.root
 
         val layoutManager = LinearLayoutManager(requireContext())
-        binding.rvRecipes.layoutManager = layoutManager
+        binding.rvTodayCaloriesEating.layoutManager = layoutManager
 
         viewModel.recipes.observe(viewLifecycleOwner) {
             when (it) {
@@ -36,7 +36,7 @@ class RecipesFragment : Fragment() {
                     val recipes = it.data.recipes
                     val adapter = RecipeAdapter()
                     adapter.submitList(recipes)
-                    binding.rvRecipes.adapter = adapter
+                    binding.rvTodayCaloriesEating.adapter = adapter
                 }
 
                 is ResultState.Error -> {}

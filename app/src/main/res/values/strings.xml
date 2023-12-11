@@ -61,4 +61,10 @@
     <string name="great_day_to_control_your_calories">Great day to control your calories!</string>
     <string name="we_ve_picked_you_a_delicious_food">We\'ve picked you a delicious food</string>
     <string name="we_also_have_recipe_for_you">We also have recipe for you</string>
+    <string name="my_calories">My Calories</string>
+    <string name="track_your_calories">Track Your Calories</string>
+    <string name="my_eating_history">My Eating History</string>
+    <string name="calories_count">0 Kcal</string>
+    <string name="date_picker">Date Picker</string>
+    <string name="foods">Foods</string>
 </resources>
