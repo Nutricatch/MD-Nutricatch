@@ -29,6 +29,7 @@
         android:background="@drawable/circle"
         app:layout_constraintBottom_toBottomOf="@id/viewFinder"
         app:layout_constraintEnd_toEndOf="@id/viewFinder"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="@id/viewFinder" />
 
     <com.google.android.material.button.MaterialButton
