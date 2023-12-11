@@ -37,8 +37,8 @@ class UserRepository constructor(val  userPreferences: Preferences, val apiServi
             emit(Error(errorMessage))
         }
     }
-    suspend fun saveSession(userModel: UserModel, token: String) {
-        userPreferences.saveToken(token)
+    suspend fun saveSession(userModel: UserModel) {
+        userPreferences.saveSession(userModel)
     }
 
 }

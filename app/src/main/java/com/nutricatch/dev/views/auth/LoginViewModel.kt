@@ -6,4 +6,9 @@ import com.nutricatch.dev.data.repository.UserRepository
 
 class LoginViewModel(private val repository: UserRepository): ViewModel() {
     fun login(email: String, password: String) = repository.login(email, password)
+
+    suspend fun saveSession(userModel: UserModel)
+    {
+        return repository.saveSession(userModel)
+    }
 }
