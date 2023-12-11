@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
@@ -26,14 +27,24 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root = binding.root
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(requireContext())
         binding.includeContentHome.rvLatestPost.layoutManager = layoutManager
 
         /// nanti, ubah jadi observe ke viewmodel
         val user = "John Doe"
         binding.toolbar.title = getString(R.string.home_greeting, user)
+
+        binding.toolbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
+        binding.collapsedToolbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
+
+        binding.includeContentHome.textHome.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_navigation_setting_to_bodyDetailFragment)
+        )
 
         viewModel.latestPosts.observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -55,8 +66,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-        return root
     }
 
     override fun onDestroyView() {

@@ -11,23 +11,18 @@
         android:icon="@drawable/ic_recipe"
         android:title="@string/recipes" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_camera"-->
-<!--        android:icon="@drawable/ic_camera"-->
-<!--        android:title="@string/camera" />-->
-
     <item
         android:id="@+id/navigation_camera"
-        android:title=""/>
+        android:title="" />
 
     <item
         android:id="@+id/navigation_history"
-        android:icon="@drawable/ic_history"
+        android:icon="@drawable/ic_pie"
         android:title="@string/title_history" />
 
     <item
-        android:id="@+id/navigation_setting"
-        android:icon="@drawable/ic_setting"
+        android:id="@+id/foodRecommendationFragment"
+        android:icon="@drawable/ic_salad"
         android:title="@string/title_setting" />
 
 </menu>
