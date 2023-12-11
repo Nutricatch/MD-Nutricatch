@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".views.navigation.HomeActivity">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        app:layoutDescription="@xml/fragment_home_xml_constraintlayout_scene">
+        android:layout_marginHorizontal="24dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header_user"
@@ -47,26 +46,17 @@
                 app:layout_constraintBottom_toBottomOf="@id/ic_user"
                 app:layout_constraintStart_toEndOf="@id/ic_user"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/v_statistic"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_corner_shape"
-            android:backgroundTint="#f00"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_user" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.github.chartcore.view.ChartCoreView
             android:id="@+id/chartCore"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/v_statistic"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/v_statistic" />
+            app:layout_constraintTop_toBottomOf="@id/header_user" />
+
         <TextView
             android:id="@+id/tv_food_recommendation"
             android:layout_width="wrap_content"
@@ -74,18 +64,20 @@
             android:layout_marginTop="24dp"
             android:text="@string/we_ve_picked_you_a_delicious_food"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_statistic" />
+            app:layout_constraintTop_toBottomOf="@+id/chartCore" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_food_recomm"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_food_recommendation"
+            app:spanCount="2"
+            tools:itemCount="4"
             tools:listitem="@layout/recommendation_item" />
 
         <TextView
@@ -100,13 +92,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_recipe_recomm"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_recipe_recommendation"
+            app:spanCount="2"
+            tools:itemCount="4"
             tools:listitem="@layout/recommendation_item" />
 
         <TextView
@@ -132,6 +126,6 @@
             app:layout_constraintTop_toBottomOf="@id/text_home"
             tools:listitem="@layout/item_latest_post" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

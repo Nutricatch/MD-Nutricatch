@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.chartcore.common.ChartTypes
 import com.github.chartcore.common.Position
@@ -58,8 +59,10 @@ class HomeFragment : Fragment() {
             "Minggu" to 2010.0
         )
 
-        val coreData = ChartData().addDataset(ChartNumberDataset().data(chartData.values.toList())
-            .label("Calories for Last 7 Days").offset(10)).labels(chartData.keys.toList())
+        val coreData = ChartData().addDataset(
+            ChartNumberDataset().data(chartData.values.toList())
+                .label("Calories for Last 7 Days").offset(10)
+        ).labels(chartData.keys.toList())
 
         val chartOptions = ChartOptions()
             .plugin(
@@ -103,14 +106,15 @@ class HomeFragment : Fragment() {
 
         binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
 
-        viewModel.foods.observe(viewLifecycleOwner){result->
-            when(result){
+        viewModel.foods.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is ResultState.Success -> {
                     // showLoading(false)
                     val foods = result.data.foods
                     val adapter = FoodsAdapter()
                     adapter.submitList(foods)
                     binding.rvFoodRecomm.adapter = adapter
+                    binding.rvFoodRecomm.layoutManager = GridLayoutManager(requireContext(), 2)
                 }
 
                 is ResultState.Loading -> {
@@ -131,7 +135,7 @@ class HomeFragment : Fragment() {
                     val recipes = result.data.recipes
                     val adapter = RecipeAdapter()
                     adapter.submitList(recipes)
-                    binding.rvLatestPost.adapter = adapter
+                    binding.rvRecipeRecomm.adapter = adapter
                 }
 
                 is ResultState.Loading -> {

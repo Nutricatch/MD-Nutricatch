@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nutricatch.dev.databinding.RecipeItemBinding
+import com.nutricatch.dev.databinding.RecommendationItemBinding
 import com.nutricatch.dev.model.Food
 
 class FoodsAdapter : ListAdapter<Food, FoodsAdapter.ViewHolder>(DIFF_CALLBACK) {
@@ -15,15 +15,15 @@ class FoodsAdapter : ListAdapter<Food, FoodsAdapter.ViewHolder>(DIFF_CALLBACK) {
         viewType: Int
     ): ViewHolder {
         val binding =
-            RecipeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RecommendationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    class ViewHolder(val binding: RecipeItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: RecommendationItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(food: Food) {
-            binding.tvTitle.text = food.name
-            binding.tvEstimationTime.text = food.caloric
-            Glide.with(binding.root.context).load(food.imgUrl).into(binding.imgRecipe)
+            binding.tvName.text = food.name
+            binding.tvCalories.text = food.caloric
+            Glide.with(binding.root.context).load(food.imgUrl).into(binding.imgRecommendation)
         }
     }
 
