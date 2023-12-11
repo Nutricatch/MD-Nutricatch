@@ -15,7 +15,7 @@ class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     val binding get() = _binding!!
 
-    private val viewModel by viewModels<HomeViewModel> {
+    private val viewModel by viewModels<RecipeViewModel> {
         HomeViewModelFactory.getInstance(requireContext())
     }
 

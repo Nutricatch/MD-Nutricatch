@@ -63,6 +63,9 @@ dependencies {
     implementation( "androidx.camera:camera-view:${cameraxVersion}")
     implementation( "androidx.camera:camera-extensions:${cameraxVersion}")
 
+    // fix listenable future
+    implementation ("com.google.guava:guava:31.0.1-jre")
+
     // storage
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")

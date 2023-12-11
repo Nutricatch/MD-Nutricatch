@@ -12,5 +12,5 @@ data class Food(
     val caloric: String?,
     val carb: String?,
     val fat: String?,
-    val imgUrl: String?,
+    val imgUrl: String? = null,
 )
