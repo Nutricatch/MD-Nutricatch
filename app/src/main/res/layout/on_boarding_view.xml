@@ -34,6 +34,7 @@
         app:dotsSize="@dimen/margin_8"
         app:dotsSpacing="@dimen/margin_8"
         app:dotsStrokeWidth="1dp"
+        android:layout_marginTop="@dimen/margin_8"
         app:layout_constraintTop_toBottomOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

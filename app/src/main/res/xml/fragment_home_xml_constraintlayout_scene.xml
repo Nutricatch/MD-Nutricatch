@@ -11,12 +11,7 @@
        </KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start" >
-        <Constraint
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toBottomOf="@+id/v_statistic"
-            motion:layout_constraintEnd_toEndOf="@+id/v_statistic"
-            android:id="@+id/chartCore" />
+    <ConstraintSet android:id="@+id/start">
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

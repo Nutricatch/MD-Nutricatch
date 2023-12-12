@@ -3,5 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:shape="rectangle"
     tools:tint="#f00">
-    <corners android:radius="4dp" />
+    <corners android:radius="256dp" />
 </shape>

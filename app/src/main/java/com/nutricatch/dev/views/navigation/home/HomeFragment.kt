@@ -8,19 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.chartcore.common.ChartTypes
-import com.github.chartcore.common.Position
-import com.github.chartcore.common.TextAlign
-import com.github.chartcore.data.chart.ChartCoreModel
-import com.github.chartcore.data.chart.ChartData
-import com.github.chartcore.data.dataset.ChartNumberDataset
-import com.github.chartcore.data.option.ChartOptions
-import com.github.chartcore.data.option.elements.Elements
-import com.github.chartcore.data.option.elements.Line
-import com.github.chartcore.data.option.plugin.Plugin
-import com.github.chartcore.data.option.plugin.Title
-import com.github.chartcore.data.option.plugin.Tooltip
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentHomeBinding
@@ -45,59 +35,40 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.rvLatestPost.layoutManager = layoutManager
 
-        //ini demo untuk chart
-        val chartData = mapOf(
-            "Senin" to 1960.0,
-            "Selasa" to 1950.0,
-            "Rabu" to 1840.0,
-            "Kamis" to 1870.0,
-            "Jumat" to 1910.0,
-            "Sabtu" to 1920.0,
-            "Minggu" to 2010.0
-        )
-
-        val coreData = ChartData().addDataset(
-            ChartNumberDataset().data(chartData.values.toList())
-                .label("Calories for Last 7 Days").offset(10)
-        ).labels(chartData.keys.toList())
-
-        val chartOptions = ChartOptions()
-            .plugin(
-                Plugin()
-                    .subtitle(
-                        Title()
-                            .display(true)
-                            .text("Subtitle example")
-                            .position(Position.BOTTOM)
-                    ).title(
-                        Title()
-                            .display(true)
-                            .text("Title")
-                            .position(Position.TOP)
-                            .align(TextAlign.CENTER)
-                            .color("red")
-                    )
-                    .tooltip(
-                        Tooltip(false)
-                    )
+        val aaChartView = binding.chart
+        val label: Array<String> = arrayOf("a", "b", "c", "d", "e", "f", "g")
+        val chartData: Array<Any> = arrayOf(2000, 1950, 2050, 1850, 1880, 2110, 2202)
+        val aaChartModel: AAChartModel = AAChartModel()
+            //nentuin jenis chart, ada banyak macem
+            .chartType(AAChartType.Spline)
+            //title, ilangin title biar muncul lebih besar
+            .title("")
+            .dataLabelsEnabled(false)
+            .legendEnabled(false)
+            //warna background
+            .backgroundColor("")
+            //warna tulisan dan garis
+            .axesTextColor("FFFFFF")
+            //untuk ilangin title dari y
+            .yAxisTitle("")
+            .gradientColorEnable(true)
+            //untuk nama datral variablex
+            .categories(label)
+            //untuk ketebalan garis
+            .yAxisLineWidth(2)
+            //data
+            .series(
+                arrayOf(
+                    AASeriesElement()
+                        .name("")
+                        .dataLabels(null)
+                        .data(chartData)
+                        .color("#4b2b7f")
+                )
             )
-            .elements(
-                Elements()
-                    .line(
-                        Line()
-                            .tension(0.5f)
-                    )
-            )
-
-        val chartModel = ChartCoreModel()
-            .type(ChartTypes.LINE)
-            .data(coreData)
-            .options(chartOptions)
-
-        binding.chartCore.draw(chartModel)
+        //drawing AAchart
+        aaChartView.aa_drawChartWithChartModel(aaChartModel)
 
 
         /// nanti, ubah jadi observe ke viewmodel
@@ -136,6 +107,7 @@ class HomeFragment : Fragment() {
                     val adapter = RecipeAdapter()
                     adapter.submitList(recipes)
                     binding.rvRecipeRecomm.adapter = adapter
+                    binding.rvRecipeRecomm.layoutManager = GridLayoutManager(requireContext(), 2)
                 }
 
                 is ResultState.Loading -> {
@@ -153,5 +125,9 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

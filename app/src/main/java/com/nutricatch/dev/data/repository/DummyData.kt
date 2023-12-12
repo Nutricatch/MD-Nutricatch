@@ -10,7 +10,6 @@ object DummyData {
             id = 1,
             title = "Nasi Goreng",
             estimation = "30 menit",
-            imgUrl = "https://example.com/nasi-goreng.jpg",
             caloric = "350 kkal",
             ingredients = listOf(
                 Ingredient(id = 1, name = "Nasi putih", weight = "1 porsi"),
@@ -28,7 +27,6 @@ object DummyData {
             id = 2,
             title = "Rendang",
             estimation = "2 jam",
-            imgUrl = "https://example.com/rendang.jpg",
             caloric = "450 kkal",
             ingredients = listOf(
                 Ingredient(id = 1, name = "Daging sapi", weight = "500 gr"),
@@ -48,7 +46,6 @@ object DummyData {
             id = 3,
             title = "Sate Ayam",
             estimation = "45 menit",
-            imgUrl = "https://example.com/sate-ayam.jpg",
             caloric = "300 kkal",
             ingredients = listOf(
                 Ingredient(id = 1, name = "Dada ayam", weight = "500 gr"),
@@ -67,53 +64,25 @@ object DummyData {
 
     val foods = listOf(
         Food(
-            id = 1,
-            name = "Apple",
-            caloric = "52 Kcal",
-            carb = "13.8 g",
-            fat = "0.2 g"
+            id = 1, name = "Apple", caloric = "52 Kcal", carb = "13.8 g", fat = "0.2 g"
         ),
         Food(
-            id = 2,
-            name = "Banana",
-            caloric = "105 Kcal",
-            carb = "27 g",
-            fat = "0.3 g"
+            id = 2, name = "Banana", caloric = "105 Kcal", carb = "27 g", fat = "0.3 g"
         ),
         Food(
-            id = 3,
-            name = "Orange",
-            caloric = "47 Kcal",
-            carb = "11.2 g",
-            fat = "0.1 g"
+            id = 3, name = "Orange", caloric = "47 Kcal", carb = "11.2 g", fat = "0.1 g"
         ),
         Food(
-            id = 4,
-            name = "Chicken breast",
-            caloric = "165 Kcal",
-            carb = "0 g",
-            fat = "3.6 g"
+            id = 4, name = "Chicken breast", caloric = "165 Kcal", carb = "0 g", fat = "3.6 g"
         ),
         Food(
-            id = 5,
-            name = "Salmon",
-            caloric = "208 Kcal",
-            carb = "0 g",
-            fat = "12.1 g"
+            id = 5, name = "Salmon", caloric = "208 Kcal", carb = "0 g", fat = "12.1 g"
         ),
         Food(
-            id = 6,
-            name = "Brown rice",
-            caloric = "216 Kcal",
-            carb = "45 g",
-            fat = "1.8 g"
+            id = 6, name = "Brown rice", caloric = "216 Kcal", carb = "45 g", fat = "1.8 g"
         ),
         Food(
-            id = 7,
-            name = "Broccoli",
-            caloric = "34 Kcal",
-            carb = "6 g",
-            fat = "0.3 g"
+            id = 7, name = "Broccoli", caloric = "34 Kcal", carb = "6 g", fat = "0.3 g"
         ),
     )
 }

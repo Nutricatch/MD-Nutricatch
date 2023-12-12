@@ -19,10 +19,11 @@ class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.ViewHolder>(DIFF_CALLBAC
         return ViewHolder(binding)
     }
 
-    class ViewHolder(val binding: RecommendationItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: RecommendationItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
             binding.tvName.text = recipe.title
-            binding.tvTime.text = recipe.estimation
+            binding.tvCalories.text = recipe.caloric
             Glide.with(binding.root.context).load(recipe.imgUrl).into(binding.imgRecommendation)
         }
     }

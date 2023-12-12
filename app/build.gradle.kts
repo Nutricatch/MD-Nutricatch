@@ -62,6 +62,7 @@ dependencies {
     implementation( "androidx.camera:camera-lifecycle:${cameraxVersion}")
     implementation( "androidx.camera:camera-view:${cameraxVersion}")
     implementation( "androidx.camera:camera-extensions:${cameraxVersion}")
+    implementation ("com.google.guava:guava:32.1.3-android")
 
     // fix listenable future
     implementation ("com.google.guava:guava:31.0.1-jre")
@@ -94,5 +95,5 @@ dependencies {
     implementation ("com.github.jitpack:gradle-simple:2.0")
 
     // linechart
-    implementation ("com.github.ErenAlpaslan:ChartCore:1.0.0")
+    implementation ("com.github.AAChartModel:AAChartCore-Kotlin:7.2.1")
 }
