@@ -88,7 +88,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.tilePrivacy.setOnClickListener {
-            /// TODO implement navigate to privacy policy page
+            it.findNavController().navigate(
+                R.id.action_navigation_setting_to_privacyFragment
+            )
         }
 
     }
