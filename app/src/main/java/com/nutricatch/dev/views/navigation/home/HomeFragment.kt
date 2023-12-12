@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         val chartData: Array<Any> = arrayOf(2000, 1950, 2050, 1850, 1880, 2110, 2202)
         val aaChartModel : AAChartModel = AAChartModel()
             //nentuin jenis chart, ada banyak macem
-            .chartType(AAChartType.Line)
+            .chartType(AAChartType.Spline)
             //title, ilangin title biar muncul lebih besar
             .title("")
             .dataLabelsEnabled(false)
