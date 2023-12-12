@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
             //warna background
             .backgroundColor("")
             //warna tulisan dan garis
-            .axesTextColor("FFFFFF")
+            .axesTextColor("#000000")
             //untuk ilangin title dari y
             .yAxisTitle("")
             .gradientColorEnable(true)
