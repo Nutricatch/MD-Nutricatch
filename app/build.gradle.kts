@@ -92,6 +92,5 @@ dependencies {
     implementation ("com.github.jitpack:gradle-simple:2.0")
 
     // linechart
-    implementation ("com.github.ErenAlpaslan:ChartCore:1.0.0")
     implementation ("com.github.AAChartModel:AAChartCore-Kotlin:7.2.1")
 }

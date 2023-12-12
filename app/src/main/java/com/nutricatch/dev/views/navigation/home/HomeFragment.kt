@@ -11,25 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
-import com.github.chartcore.common.ChartTypes
-import com.github.chartcore.common.Position
-import com.github.chartcore.common.TextAlign
-import com.github.chartcore.data.chart.ChartCoreModel
-import com.github.chartcore.data.chart.ChartData
-import com.github.chartcore.data.dataset.ChartNumberDataset
-import com.github.chartcore.data.option.ChartOptions
-import com.github.chartcore.data.option.elements.Elements
-import com.github.chartcore.data.option.elements.Line
-import com.github.chartcore.data.option.plugin.Plugin
-import com.github.chartcore.data.option.plugin.Title
-import com.github.chartcore.data.option.plugin.Tooltip
-import com.github.chartcore.data.option.scale.Axis
-import com.github.chartcore.data.option.scale.Scales
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentHomeBinding
 import com.nutricatch.dev.views.factory.MainViewModelFactory
-import kotlin.math.min
 
 class HomeFragment : Fragment() {
 
@@ -117,5 +102,9 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
