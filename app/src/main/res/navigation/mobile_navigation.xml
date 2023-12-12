@@ -26,8 +26,8 @@
         tools:layout="@layout/fragment_recipes" />
 
     <fragment
-        android:id="@+id/navigation_history"
-        android:name="com.nutricatch.dev.views.navigation.history.HistoryFragment"
+        android:id="@+id/navigation_daily_calories"
+        android:name="com.nutricatch.dev.views.navigation.dailyCaloriesFragment.DailyCaloriesFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_daily_calories" />
 

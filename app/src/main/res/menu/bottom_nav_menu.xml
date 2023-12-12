@@ -11,7 +11,7 @@
         android:title="" />
 
     <item
-        android:id="@+id/navigation_history"
+        android:id="@+id/navigation_daily_calories"
         android:icon="@drawable/ic_pie"
         android:title="@string/my_calories" />
 
