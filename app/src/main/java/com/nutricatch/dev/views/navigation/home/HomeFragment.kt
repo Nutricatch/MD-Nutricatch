@@ -51,7 +51,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(requireContext())
-        binding.rvLatestPost.layoutManager = layoutManager
 
 
         val aaChartView = binding.chart
@@ -101,7 +100,6 @@ class HomeFragment : Fragment() {
                     val posts = result.data.latestPosts
                     val adapter = LatestPostAdapter()
                     adapter.submitList(posts)
-                    binding.rvLatestPost.adapter = adapter
                 }
 
                 is ResultState.Loading -> {
