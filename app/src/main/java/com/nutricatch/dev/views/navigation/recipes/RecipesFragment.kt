@@ -9,14 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentRecipesBinding
-import com.nutricatch.dev.views.factory.RecipesViewModelFactory
+import com.nutricatch.dev.views.factory.HomeViewModelFactory
 
 class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     val binding get() = _binding!!
 
-    private val viewModel by viewModels<RecipesViewModel> {
-        RecipesViewModelFactory.getInstance(requireContext())
+    private val viewModel by viewModels<RecipeViewModel> {
+        HomeViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(

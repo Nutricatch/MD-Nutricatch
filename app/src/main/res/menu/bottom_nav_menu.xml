@@ -7,11 +7,6 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_recipe"
-        android:icon="@drawable/ic_recipe"
-        android:title="@string/recipes" />
-
-    <item
         android:id="@+id/navigation_camera"
         android:title="" />
 
@@ -19,10 +14,5 @@
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_pie"
         android:title="@string/my_calories" />
-
-    <item
-        android:id="@+id/foodRecommendationFragment"
-        android:icon="@drawable/ic_salad"
-        android:title="@string/foods" />
 
 </menu>

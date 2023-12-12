@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="80dp"
     tools:context=".views.navigation.HomeActivity">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -27,56 +28,43 @@
                 android:layout_height="80dp"
                 android:contentDescription="@string/profile"
                 android:src="@drawable/ic_user"
+                app:contentPadding="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/roundedCornersView"
-                app:strokeWidth="2dp"
                 app:strokeColor="@color/black"
-                />
+                app:strokeWidth="2dp" />
 
             <TextView
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
+                android:textSize="21sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_greeting"
                 app:layout_constraintStart_toEndOf="@id/ic_user"
                 app:layout_constraintTop_toTopOf="@id/ic_user"
-                tools:text="Hello, John"
-                android:textStyle="bold"
-                android:textSize="21dp"
-                />
+                tools:text="Hello, John" />
 
             <TextView
                 android:id="@+id/tv_greeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
                 android:text="@string/great_day_to_control_your_calories"
-                android:paddingStart="@dimen/margin_16"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@id/ic_user"
                 app:layout_constraintStart_toEndOf="@id/ic_user"
-                app:layout_constraintTop_toBottomOf="@id/tv_user_name"
-                android:textSize="15dp"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:id="@+id/v_statistic"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_corner_shape"
-            android:backgroundTint="#f00"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_user" />
-
 
         <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
+            android:layout_height="256dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/header_user" />
 
         <TextView
             android:id="@+id/tv_food_recommendation"
@@ -85,15 +73,14 @@
             android:layout_marginTop="24dp"
             android:text="@string/we_ve_picked_you_a_delicious_food"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_statistic" />
+            app:layout_constraintTop_toBottomOf="@+id/chart" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_food_recomm"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_food_recommendation"
@@ -111,10 +98,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_recipe_recomm"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_recipe_recommendation"
@@ -125,12 +111,11 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </ScrollView>

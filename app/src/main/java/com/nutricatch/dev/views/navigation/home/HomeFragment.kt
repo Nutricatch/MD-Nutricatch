@@ -7,21 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentHomeBinding
-import com.nutricatch.dev.views.factory.MainViewModelFactory
+import com.nutricatch.dev.views.factory.HomeViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<HomeViewModel> {
-        MainViewModelFactory.getInstance(requireContext())
+        HomeViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(
@@ -35,13 +35,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(requireContext())
-
 
         val aaChartView = binding.chart
-        val label: Array<String> = arrayOf("a","b","c","d","e","f","g")
+        val label: Array<String> = arrayOf("a", "b", "c", "d", "e", "f", "g")
         val chartData: Array<Any> = arrayOf(2000, 1950, 2050, 1850, 1880, 2110, 2202)
-        val aaChartModel : AAChartModel = AAChartModel()
+        val aaChartModel: AAChartModel = AAChartModel()
             //nentuin jenis chart, ada banyak macem
             .chartType(AAChartType.Spline)
             //title, ilangin title biar muncul lebih besar
@@ -60,12 +58,13 @@ class HomeFragment : Fragment() {
             //untuk ketebalan garis
             .yAxisLineWidth(2)
             //data
-            .series(arrayOf(
-                AASeriesElement()
-                    .name("")
-                    .dataLabels(null)
-                    .data(chartData)
-                    .color("#4b2b7f")
+            .series(
+                arrayOf(
+                    AASeriesElement()
+                        .name("")
+                        .dataLabels(null)
+                        .data(chartData)
+                        .color("#4b2b7f")
                 )
             )
         //drawing AAchart
@@ -78,13 +77,37 @@ class HomeFragment : Fragment() {
 
         binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
 
-        viewModel.latestPosts.observe(viewLifecycleOwner) { result ->
+        viewModel.foods.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ResultState.Success -> {
+                    // showLoading(false)
+                    val foods = result.data.foods
+                    val adapter = FoodsAdapter()
+                    adapter.submitList(foods)
+                    binding.rvFoodRecomm.adapter = adapter
+                    binding.rvFoodRecomm.layoutManager = GridLayoutManager(requireContext(), 2)
+                }
+
+                is ResultState.Loading -> {
+                    // showLoading(true)
+                }
+
+                is ResultState.Error -> {
+                    // showLoading(false)
+                    // handle error
+                }
+            }
+        }
+
+        viewModel.recipes.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Success -> {
                     //showLoading(false)
-                    val posts = result.data.latestPosts
-                    val adapter = LatestPostAdapter()
-                    adapter.submitList(posts)
+                    val recipes = result.data.recipes
+                    val adapter = RecipeAdapter()
+                    adapter.submitList(recipes)
+                    binding.rvRecipeRecomm.adapter = adapter
+                    binding.rvRecipeRecomm.layoutManager = GridLayoutManager(requireContext(), 2)
                 }
 
                 is ResultState.Loading -> {
@@ -104,7 +127,7 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun showLoading(isLoading: Boolean){
+    private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
