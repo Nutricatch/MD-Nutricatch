@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.github.chartcore.common.ChartTypes
 import com.github.chartcore.common.Position
 import com.github.chartcore.common.TextAlign
@@ -20,10 +23,13 @@ import com.github.chartcore.data.option.elements.Line
 import com.github.chartcore.data.option.plugin.Plugin
 import com.github.chartcore.data.option.plugin.Title
 import com.github.chartcore.data.option.plugin.Tooltip
+import com.github.chartcore.data.option.scale.Axis
+import com.github.chartcore.data.option.scale.Scales
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentHomeBinding
 import com.nutricatch.dev.views.factory.MainViewModelFactory
+import kotlin.math.min
 
 class HomeFragment : Fragment() {
 
@@ -47,54 +53,76 @@ class HomeFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvLatestPost.layoutManager = layoutManager
 
-        //ini demo untuk chart
-        val chartData = mapOf(
-            "Senin" to 1960.0,
-            "Selasa" to 1950.0,
-            "Rabu" to 1840.0,
-            "Kamis" to 1870.0,
-            "Jumat" to 1910.0,
-            "Sabtu" to 1920.0,
-            "Minggu" to 2010.0
-        )
+//        //ini demo untuk chart
+//        val chartData = mapOf(
+//            "Senin" to 1960.0,
+//            "Selasa" to 1950.0,
+//            "Rabu" to 1840.0,
+//            "Kamis" to 1870.0,
+//            "Jumat" to 1910.0,
+//            "Sabtu" to 1920.0,
+//            "Minggu" to 2010.0
+//        )
+//
+//        val coreData = ChartData().addDataset(ChartNumberDataset().data(chartData.values.toList())
+//            .offset(1000)).labels(chartData.keys.toList())
+//
+//        val chartOptions = ChartOptions()
+//            .plugin(
+//                Plugin()
+//                    .subtitle(
+//                        Title()
+//                            .display(true)
+//                            .text("Subtitle example")
+//                            .position(Position.BOTTOM)
+//                    ).title(
+//                        Title()
+//                            .display(true)
+//                            .text("Title")
+//                            .position(Position.TOP)
+//                            .align(TextAlign.CENTER)
+//                            .color("red")
+//                    )
+//                    .tooltip(
+//                        Tooltip(false)
+//                    )
+//
+//            )
+//            .elements(
+//                Elements()
+//                    .line(
+//                        Line()
+//                            .tension(0.5f)
+//                    )
+//            )
+//            .scales(
+//                Scales(x = Axis(min = 0.00), y = Axis(max = 2500.00))
+//            )
+//
+//
+//        val chartModel = ChartCoreModel()
+//            .type(ChartTypes.BAR)
+//            .data(coreData)
+//            .options(chartOptions)
+//
+//        binding.chartCore.draw(chartModel)
 
-        val coreData = ChartData().addDataset(ChartNumberDataset().data(chartData.values.toList())
-            .label("Calories for Last 7 Days").offset(10)).labels(chartData.keys.toList())
+        val aaChartView = binding.chart
 
-        val chartOptions = ChartOptions()
-            .plugin(
-                Plugin()
-                    .subtitle(
-                        Title()
-                            .display(true)
-                            .text("Subtitle example")
-                            .position(Position.BOTTOM)
-                    ).title(
-                        Title()
-                            .display(true)
-                            .text("Title")
-                            .position(Position.TOP)
-                            .align(TextAlign.CENTER)
-                            .color("red")
-                    )
-                    .tooltip(
-                        Tooltip(false)
-                    )
+        val aaChartModel : AAChartModel = AAChartModel()
+            .chartType(AAChartType.Line)
+            .title("Calories Tracker")
+            .backgroundColor("#4b2b7f")
+            .dataLabelsEnabled(false)
+            .legendEnabled(false)
+            .series(arrayOf(
+                AASeriesElement()
+                    .name("")
+                    .data(arrayOf(2000, 1950, 2050, 1850, 1880, 2110, 2102, 2113, 2231, 1820, 1922, 1966))
+                )
             )
-            .elements(
-                Elements()
-                    .line(
-                        Line()
-                            .tension(0.5f)
-                    )
-            )
-
-        val chartModel = ChartCoreModel()
-            .type(ChartTypes.LINE)
-            .data(coreData)
-            .options(chartOptions)
-
-        binding.chartCore.draw(chartModel)
+        //drawing AAchart
+        aaChartView.aa_drawChartWithChartModel(aaChartModel)
 
 
         /// nanti, ubah jadi observe ke viewmodel

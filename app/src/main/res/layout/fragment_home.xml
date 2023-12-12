@@ -60,13 +60,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header_user" />
 
-        <com.github.chartcore.view.ChartCoreView
-            android:id="@+id/chartCore"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/v_statistic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/v_statistic" />
+<!--        <com.github.chartcore.view.ChartCoreView-->
+<!--            android:id="@+id/chartCore"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/v_statistic"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/v_statistic"-->
+<!--            android:visibility="gone"/>-->
+
+        <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
         <TextView
             android:id="@+id/tv_food_recommendation"
             android:layout_width="wrap_content"

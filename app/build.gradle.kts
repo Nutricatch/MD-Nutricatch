@@ -62,6 +62,7 @@ dependencies {
     implementation( "androidx.camera:camera-lifecycle:${cameraxVersion}")
     implementation( "androidx.camera:camera-view:${cameraxVersion}")
     implementation( "androidx.camera:camera-extensions:${cameraxVersion}")
+    implementation ("com.google.guava:guava:32.1.3-android")
 
     // storage
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -92,4 +93,5 @@ dependencies {
 
     // linechart
     implementation ("com.github.ErenAlpaslan:ChartCore:1.0.0")
+    implementation ("com.github.AAChartModel:AAChartCore-Kotlin:7.2.1")
 }
