@@ -5,53 +5,61 @@
     android:id="@+id/nav_notif"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="24dp"
     tools:context=".views.navigation.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
+        android:paddingBottom="16dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
             android:contentDescription="@string/profile"
             android:src="@drawable/ic_user"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedCornersView"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
             app:tint="?attr/colorControlNormal" />
 
         <TextView
             android:id="@+id/tv_name"
             style="@style/Theme.NutriCatch.TextStyle.Headline.Medium.Bold"
-            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
             android:text="@string/text_placeholder"
             android:textAlignment="center"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@id/tv_email"
-            app:layout_constraintStart_toEndOf="@id/img_profile"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_profile" />
 
         <TextView
             android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
             android:text="@string/text_placeholder"
-            app:layout_constraintBottom_toBottomOf="@id/img_profile"
-            app:layout_constraintStart_toStartOf="@id/tv_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="contact@nutricatch.id" />
 
         <TextView
             android:id="@+id/textView7"
             style="@style/Theme.NutriCatch.TextStyle.Headline.Small"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="@dimen/margin_16"
             android:text="@string/account"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tile_my_weight"
@@ -77,7 +85,7 @@
                 android:id="@+id/tv_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:text="@string/my_weight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_weight_icon"

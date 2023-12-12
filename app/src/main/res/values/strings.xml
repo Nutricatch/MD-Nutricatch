@@ -61,4 +61,22 @@
     <string name="great_day_to_control_your_calories">Great day to control your calories!</string>
     <string name="we_ve_picked_you_a_delicious_food">We\'ve picked you a delicious food</string>
     <string name="we_also_have_recipe_for_you">We also have recipe for you</string>
+    <string name="my_calories">My Calories</string>
+    <string name="track_your_calories">Track Your Calories</string>
+    <string name="my_eating_history">My Eating History</string>
+    <string name="calories_count">0 Kcal</string>
+    <string name="date_picker">Date Picker</string>
+    <string name="foods">Foods</string>
+    <string name="privacy_policy_text">We have revamped our Terms and Conditions and Privacy Notice (earlier called Privacy Policy). The key changes are: \n\n
+For Privacy Notice, we have:\n
+NutriCatch which is a revolutionary application designed for calorie detection through camera scans. This updated Privacy Notice aims to enhance clarity and transparency regarding the collection, use, and protection of your data.\n
+Updated the disclosure on users’ legal rights.\n
+Provided a summary and redesigned the structure for better understanding.\n
+\n
+For Terms of Use, we have:\n
+Added NutriCatch Profile Terms and Conditions to provide you with seamless experience when using this app.\n
+\n
+We encourage you to read the entire Privacy Notice, NutriCatch Profile Terms, and Conditions for more information and to provide your consent by clicking the “Accept All” button below.\n
+\n
+Thank you for your trust and continued support of NutriCatch!</string>
 </resources>

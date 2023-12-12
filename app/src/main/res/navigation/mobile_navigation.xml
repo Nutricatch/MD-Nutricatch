@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_navigation_setting"
-            app:destination="@id/navigation_setting"
+            app:destination="@id/navigation_profile"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_history" />
 
     <fragment
-        android:id="@+id/navigation_setting"
+        android:id="@+id/navigation_profile"
         android:name="com.nutricatch.dev.views.navigation.profile.ProfileFragment"
         android:label="@string/title_setting"
         tools:layout="@layout/fragment_profile">

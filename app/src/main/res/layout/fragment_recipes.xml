@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_text_find_recipe"
+            android:id="@+id/tv_text_my_eating"
             style="@style/Theme.NutriCatch.TextStyle.Headline.Medium.Bold"
             android:layout_marginTop="64dp"
             android:text="Find delicious meal 🤤"
@@ -26,7 +26,7 @@
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tv_text_find_recipe"
+            app:layout_constraintTop_toBottomOf="@+id/tv_text_my_eating"
             tools:layout_editor_absoluteX="16dp" />
 
         <TextView
@@ -39,7 +39,7 @@
             tools:ignoreViewBinding="true" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recipes"
+            android:id="@+id/rv_today_calories_eating"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
