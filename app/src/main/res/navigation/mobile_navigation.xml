@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.nutricatch.dev.views.navigation.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_mhome">
         <action
             android:id="@+id/action_navigation_home_to_navigation_setting"
             app:destination="@id/navigation_profile"
@@ -37,21 +37,21 @@
         android:label="@string/title_setting"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_navigation_setting_to_bodyDetailFragment"
+            android:id="@+id/action_navigation_profile_to_bodyDetailFragment"
             app:destination="@id/bodyDetailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/action_navigation_setting_to_languageFragment"
+            android:id="@+id/action_navigation_profile_to_languageFragment"
             app:destination="@id/languageFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/action_navigation_setting_to_privacyFragment"
+            android:id="@+id/action_navigation_profile_to_privacyFragment"
             app:destination="@id/privacyFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@android:anim/fade_out"
