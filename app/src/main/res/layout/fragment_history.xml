@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp">
 
         <TextView
             android:id="@+id/tv_text_my_eating"
@@ -30,7 +31,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_text_my_eating"
             tools:ignoreViewBinding="true" />
 
-    <!-- TODO : Tambahkan customview untuk total kalori -->
+        <!-- TODO : Tambahkan customview untuk total kalori -->
 
         <ImageView
             android:id="@+id/img_calendar"
