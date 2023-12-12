@@ -41,10 +41,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         * */
         appBarConfiguration = AppBarConfiguration.Builder(
             R.id.navigation_home,
-            R.id.navigation_recipe,
             R.id.navigation_camera,
             R.id.navigation_history,
-            R.id.foodRecommendationFragment
         ).build()
 
         setSupportActionBar(binding.myToolbar)
@@ -58,7 +56,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.fabScan.setOnClickListener(this)
 
-            binding.navView.menu.getItem(2).isEnabled = false
+        binding.navView.menu.getItem(1).isEnabled = false
 
     }
 
