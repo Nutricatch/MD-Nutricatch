@@ -53,72 +53,35 @@ class HomeFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvLatestPost.layoutManager = layoutManager
 
-//        //ini demo untuk chart
-//        val chartData = mapOf(
-//            "Senin" to 1960.0,
-//            "Selasa" to 1950.0,
-//            "Rabu" to 1840.0,
-//            "Kamis" to 1870.0,
-//            "Jumat" to 1910.0,
-//            "Sabtu" to 1920.0,
-//            "Minggu" to 2010.0
-//        )
-//
-//        val coreData = ChartData().addDataset(ChartNumberDataset().data(chartData.values.toList())
-//            .offset(1000)).labels(chartData.keys.toList())
-//
-//        val chartOptions = ChartOptions()
-//            .plugin(
-//                Plugin()
-//                    .subtitle(
-//                        Title()
-//                            .display(true)
-//                            .text("Subtitle example")
-//                            .position(Position.BOTTOM)
-//                    ).title(
-//                        Title()
-//                            .display(true)
-//                            .text("Title")
-//                            .position(Position.TOP)
-//                            .align(TextAlign.CENTER)
-//                            .color("red")
-//                    )
-//                    .tooltip(
-//                        Tooltip(false)
-//                    )
-//
-//            )
-//            .elements(
-//                Elements()
-//                    .line(
-//                        Line()
-//                            .tension(0.5f)
-//                    )
-//            )
-//            .scales(
-//                Scales(x = Axis(min = 0.00), y = Axis(max = 2500.00))
-//            )
-//
-//
-//        val chartModel = ChartCoreModel()
-//            .type(ChartTypes.BAR)
-//            .data(coreData)
-//            .options(chartOptions)
-//
-//        binding.chartCore.draw(chartModel)
 
         val aaChartView = binding.chart
-
+        val label: Array<String> = arrayOf("a","b","c","d","e","f","g")
+        val chartData: Array<Any> = arrayOf(2000, 1950, 2050, 1850, 1880, 2110, 2202)
         val aaChartModel : AAChartModel = AAChartModel()
+            //nentuin jenis chart, ada banyak macem
             .chartType(AAChartType.Line)
-            .title("Calories Tracker")
-            .backgroundColor("#4b2b7f")
+            //title, ilangin title biar muncul lebih besar
+            .title("")
             .dataLabelsEnabled(false)
             .legendEnabled(false)
+            //warna background
+            .backgroundColor("")
+            //warna tulisan dan garis
+            .axesTextColor("FFFFFF")
+            //untuk ilangin title dari y
+            .yAxisTitle("")
+            .gradientColorEnable(true)
+            //untuk nama datral variablex
+            .categories(label)
+            //untuk ketebalan garis
+            .yAxisLineWidth(2)
+            //data
             .series(arrayOf(
                 AASeriesElement()
                     .name("")
-                    .data(arrayOf(2000, 1950, 2050, 1850, 1880, 2110, 2102, 2113, 2231, 1820, 1922, 1966))
+                    .dataLabels(null)
+                    .data(chartData)
+                    .color("#4b2b7f")
                 )
             )
         //drawing AAchart
