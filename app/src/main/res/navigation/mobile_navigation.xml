@@ -29,7 +29,7 @@
         android:id="@+id/navigation_history"
         android:name="com.nutricatch.dev.views.navigation.history.HistoryFragment"
         android:label="@string/title_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_daily_calories" />
 
     <fragment
         android:id="@+id/navigation_profile"
