@@ -21,32 +21,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ic_user"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:contentDescription="@string/profile"
                 android:src="@drawable/ic_user"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedCornersView"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/black"
+                />
 
             <TextView
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_16"
                 app:layout_constraintBottom_toTopOf="@+id/tv_greeting"
                 app:layout_constraintStart_toEndOf="@id/ic_user"
                 app:layout_constraintTop_toTopOf="@id/ic_user"
-                tools:text="Hello, John" />
+                tools:text="Hello, John"
+                android:textStyle="bold"
+                android:textSize="21dp"
+                />
 
             <TextView
                 android:id="@+id/tv_greeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/great_day_to_control_your_calories"
+                android:paddingStart="@dimen/margin_16"
                 app:layout_constraintBottom_toBottomOf="@id/ic_user"
                 app:layout_constraintStart_toEndOf="@id/ic_user"
-                app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+                android:textSize="15dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
