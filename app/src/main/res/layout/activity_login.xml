@@ -105,6 +105,24 @@
             tools:layout_editor_absoluteX="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cb_remember_me"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/forgotPasswordTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/forgotPasswordTextView" />
+
+    <TextView
+        android:id="@+id/v_remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/remember_me"
+        app:layout_constraintBottom_toBottomOf="@id/cb_remember_me"
+        app:layout_constraintStart_toEndOf="@id/cb_remember_me"
+        app:layout_constraintTop_toTopOf="@id/cb_remember_me" />
+
     <TextView
         android:id="@+id/forgotPasswordTextView"
         android:layout_width="wrap_content"
@@ -116,24 +134,53 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <com.google.android.material.button.MaterialButton
-        style="@style/ButtonStyle"
         android:id="@+id/btn_login"
+        style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/login"
         app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTextView" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/v_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tb_register"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tb_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="Register Here"
+            android:textColor="#00f"
+            app:layout_constraintBottom_toBottomOf="@id/v_register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/v_register"
+            app:layout_constraintTop_toTopOf="@id/v_register" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
