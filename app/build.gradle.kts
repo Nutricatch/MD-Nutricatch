@@ -23,6 +23,7 @@ android {
     buildFeatures {
         buildConfig = true
         viewBinding = true
+        mlModelBinding = true
     }
 
     buildTypes {
@@ -54,6 +55,9 @@ dependencies {
     // Custom View
     /// Dot Indicator
     implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
 
     // Camera
     val cameraxVersion = "1.3.0"

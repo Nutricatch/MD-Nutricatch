@@ -3,8 +3,11 @@ package com.nutricatch.dev.views.navigation.camera
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,7 +21,12 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
 import com.nutricatch.dev.databinding.ActivityCameraBinding
+import com.nutricatch.dev.ml.ModelSave
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -29,6 +37,7 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var executorService: ExecutorService
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraProvidedFuture: ListenableFuture<ProcessCameraProvider>
+    private var uri: Uri? = null
 
     private val activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permission ->
@@ -65,6 +74,10 @@ class CameraActivity : AppCompatActivity() {
         binding.btnCapture.setOnClickListener {
             capture()
         }
+
+        binding.btnRetake.setOnClickListener {
+            startCamera()
+        }
     }
 
     private fun capture() {
@@ -80,11 +93,12 @@ class CameraActivity : AppCompatActivity() {
         imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    val uri = outputFileResults.savedUri
+                    uri = outputFileResults.savedUri
                     val msg = "Photo capture succeeded: $uri"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
                     stopCamera()
+                    process()
 //                    PreviewImageDialogFragment().show(supportFragmentManager, "Preview Dialog")
                 }
 
@@ -138,6 +152,81 @@ class CameraActivity : AppCompatActivity() {
 
     private fun allPermissionGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun process() {
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+        val resizeBitmap: Bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
+        val model = ModelSave.newInstance(this)
+
+        val bytebuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
+        bytebuffer.order(ByteOrder.nativeOrder())
+        val intValues = IntArray(224 * 224)
+        bitmap.getPixels(
+            intValues,
+            0,
+            resizeBitmap.width,
+            0,
+            0,
+            resizeBitmap.width,
+            resizeBitmap.height
+        )
+        var pixel = 0
+        for (i in 0..223) {
+            for (j in 0..223) {
+                val tmpVal = intValues[pixel++]
+                bytebuffer.putFloat(((tmpVal shr 16) and 0xFF) * (1.0f / 1))
+                bytebuffer.putFloat(((tmpVal shr 8) and 0xFF) * (1.0f / 1))
+                bytebuffer.putFloat((tmpVal and 0xFF) * (1.0f / 1))
+            }
+        }
+        val inputFeature0 =
+            TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
+        inputFeature0.loadBuffer(bytebuffer)
+        val outputs = model.process(inputFeature0)
+        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
+        val tab = outputFeature0.floatArray
+        for (e in tab) {
+            Log.d(TAG, "processImage: $e")
+        }
+        val biggest = tab.max()
+        val index = tab.indexOfFirst { it == biggest }
+
+        val strings = arrayOf(
+            "apel",
+            "ayam_goreng",
+            "ayam_pop",
+            "bakso_kuah",
+            "cumi_tepung",
+            "daging_rendang",
+            "gado_gado",
+            "gulai_ikan",
+            "ikan_goreng",
+            "kacang_rebus",
+            "kentang_goreng",
+            "lemon",
+            "mangga",
+            "mie_goreng",
+            "mie_kuah",
+            "nanas",
+            "nasi_goreng",
+            "opor_ayam",
+            "pear",
+            "pempek",
+            "pisang",
+            "sate_bakar",
+            "sayur_asam",
+            "sayur_bayam",
+            "semangka",
+            "somay",
+            "tahu_goreng",
+            "telur_balado",
+            "telur_dadar",
+            "tempe_goreng",
+        )
+
+        Log.d(TAG, "processImage: ${outputFeature0.dataType} $biggest Index $index ${strings[index]}")
+        model.close()
     }
 
     companion object {
