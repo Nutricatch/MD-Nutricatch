@@ -12,7 +12,7 @@ import com.nutricatch.dev.animation.setParallaxTransformation
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.OnBoardingViewBinding
-import com.nutricatch.dev.views.auth.LoginActivity
+import com.nutricatch.dev.views.navigation.HomeActivity
 import com.nutricatch.dev.views.on_boarding.OnBoardingAdapter
 import com.omni.onboardingscreen.feature.onboarding.entity.OnBoardingPage
 import kotlinx.coroutines.launch
@@ -78,17 +78,15 @@ constructor(
         nextBtn.setOnClickListener { navigateToNextSlide(viewPager2) }
         skipBtn.setOnClickListener {
             setFirstTimeLaunchToFalse()
-            navigateToLogin()
+            navigateToHome()
         }
         startBtn.setOnClickListener {
             setFirstTimeLaunchToFalse()
-            navigateToLogin()
+            navigateToHome()
         }
     }
 
     private fun setFirstTimeLaunchToFalse() {
-//        prefManager.isFirstTimeLaunch = false
-        /// TODO handle first time here
         findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
             preferences.boarding()
         }
@@ -99,8 +97,8 @@ constructor(
         slider?.setCurrentItem(nextSlidePos, true)
     }
 
-    private fun navigateToLogin() {
-        val intent = Intent(context, LoginActivity::class.java)
+    private fun navigateToHome() {
+        val intent = Intent(context, HomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
     }
