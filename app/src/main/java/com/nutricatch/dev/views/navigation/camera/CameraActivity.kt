@@ -21,7 +21,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
 import com.nutricatch.dev.databinding.ActivityCameraBinding
-import com.nutricatch.dev.ml.ModelSave
+import com.nutricatch.dev.ml.SaveModel
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
@@ -157,7 +157,7 @@ class CameraActivity : AppCompatActivity() {
     private fun process() {
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
         val resizeBitmap: Bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
-        val model = ModelSave.newInstance(this)
+        val model = SaveModel.newInstance(this)
 
         val bytebuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
         bytebuffer.order(ByteOrder.nativeOrder())
@@ -225,7 +225,10 @@ class CameraActivity : AppCompatActivity() {
             "tempe_goreng",
         )
 
-        Log.d(TAG, "processImage: ${outputFeature0.dataType} $biggest Index $index ${strings[index]}")
+        Log.d(
+            TAG,
+            "processImage: ${outputFeature0.dataType} $biggest Index $index ${strings[index]}"
+        )
         model.close()
     }
 
