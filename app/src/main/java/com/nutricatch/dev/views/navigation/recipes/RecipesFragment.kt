@@ -40,6 +40,9 @@ class RecipesFragment : Fragment() {
                 }
 
                 is ResultState.Error -> {}
+                else -> {
+
+                }
             }
         }
 

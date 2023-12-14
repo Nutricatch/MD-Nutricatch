@@ -62,12 +62,12 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.tileMyWeight.setOnClickListener {
             it.findNavController().navigate(
-                R.id.action_navigation_setting_to_bodyDetailFragment
+                R.id.action_navigation_profile_to_bodyDetailFragment
             )
         }
         binding.tileLanguages.setOnClickListener {
             it.findNavController().navigate(
-                R.id.action_navigation_setting_to_languageFragment
+                R.id.action_navigation_profile_to_languageFragment
             )
         }
 
@@ -89,7 +89,7 @@ class ProfileFragment : Fragment() {
 
         binding.tilePrivacy.setOnClickListener {
             it.findNavController().navigate(
-                R.id.action_navigation_setting_to_privacyFragment
+                R.id.action_navigation_profile_to_privacyFragment
             )
         }
 
@@ -110,7 +110,7 @@ class ProfileFragment : Fragment() {
     private fun onClickListener(title: String) {
         when (title.lowercase()) {
             "my weight" -> {
-                Navigation.createNavigateOnClickListener(R.id.action_navigation_setting_to_bodyDetailFragment)
+                Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_bodyDetailFragment)
             }
         }
     }

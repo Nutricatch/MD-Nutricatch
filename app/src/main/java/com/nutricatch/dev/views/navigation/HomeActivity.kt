@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         appBarConfiguration = AppBarConfiguration.Builder(
             R.id.navigation_home,
             R.id.navigation_camera,
-            R.id.navigation_history,
+            R.id.navigation_daily_calories,
         ).build()
 
         setSupportActionBar(binding.myToolbar)

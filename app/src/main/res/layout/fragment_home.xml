@@ -7,12 +7,11 @@
     android:layout_marginBottom="80dp"
     tools:context=".views.navigation.HomeActivity">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        app:layoutDescription="@xml/fragment_home_xml_constraintlayout_scene">
+        android:layout_marginHorizontal="24dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header_user"
@@ -71,6 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:textStyle="bold"
             android:text="@string/we_ve_picked_you_a_delicious_food"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chart" />
@@ -91,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:textStyle="bold"
             android:text="@string/we_also_have_recipe_for_you"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_food_recomm" />
@@ -116,6 +117,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
