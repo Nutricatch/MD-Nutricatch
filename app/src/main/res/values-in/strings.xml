@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NutriCatch</string>
+    <string name="onboard_headline_1">Get the exact nutrition value of everything you eat</string>
+    <string name="onboard_body_1">We are updating our food database every minute to help you track you calories.</string>
+    <string name="onboard_headline_2">Dapatkan resep menyehatkan sesuai kebutuhan</string>
+    <string name="onboard_body_2">kamu ingin membentuk badan atau menurunkan berat badan? Kami punya rahasianya untukmu</string>
+    <string name="onboard_headline_3">Dapatkan kalori harian berdasarkan berat badan kamu</string>
+    <string name="onboard_body_3">Tetapkan target dan tentukan jadwal bulananmu, sisanya biarkan kami yang bekerja</string>
+    <string name="skip">Lewati</string>
+    <string name="get_started">Ayo Mulai</string>
+    <string name="next">Selanjutnya</string>
+    <string name="login">Masuk</string>
+    <string name="register">Registrasi</string>
+    <string name="action_settings">Pengaturan</string>
+
+    <string name="title_home">Beranda</string>
+    <string name="title_history">Riwayat</string>
+    <string name="title_setting">Pengaturan</string>
+    <string name="scan_new_food">Pindai Makanan Lain</string>
+    <string name="camera">Kamera</string>
+    <string name="capture">Ambil gambar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recipes">Resep</string>
+    <string name="home_greeting">Halo, %1$s</string>
+    <string name="profile">Profil</string>
+    <string name="account">Akun</string>
+    <string name="text_placeholder">. . .</string>
+    <string name="logout">Keluar</string>
+    <string name="back_button_image">Tombol Kembali</string>
+    <string name="my_weight">Berat badan saya</string>
+    <string name="weight">Berat</string>
+    <string name="height">Tinggi</string>
+    <string name="age">Usia</string>
+    <string name="result">Hasil</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="male">Laki-laki</string>
+    <string name="female">Perempuan</string>
+    <string name="update">Perbarui</string>
+    <string name="language_options">Pilihan bahasa</string>
+    <string name="english">English</string>
+    <string name="indonesian">Bahasa Indonesia</string>
+    <string name="privacy_policy">Ketentuan dan Privasi pengguna</string>
+    <string name="dark_theme">Tema Gelap</string>
+    <string name="share_app">Bagikan Aplikasi</string>
+    <string name="contact_us">Hubungi Kami</string>
+    <string name="languages">Bahasa</string>
+    <string name="help">Bantuan</string>
+    <string name="great_day_to_control_your_calories">Hari yang bagus untuk mengontrol kalori kamu!</string>
+    <string name="we_ve_picked_you_a_delicious_food">Kami mempunyai makanan lezat untukmu!</string>
+    <string name="we_also_have_recipe_for_you">Kamu juga memiliki resep rahasia untukmu</string>
+    <string name="my_calories">Kalori Saya</string>
+    <string name="track_your_calories">Lacak Kalori Kamu</string>
+    <string name="my_eating_history">Riwayat Makan Saya</string>
+    <string name="calories_count">0 Kcal</string>
+    <string name="date_picker">Pilih Tanggal</string>
+    <string name="foods">Makanan</string>
+    <string name="privacy_policy_text">We have revamped our Terms and Conditions and Privacy Notice (earlier called Privacy Policy). The key changes are: \n\n
+For Privacy Notice, we have:\n
+NutriCatch which is a revolutionary application designed for calorie detection through camera scans. This updated Privacy Notice aims to enhance clarity and transparency regarding the collection, use, and protection of your data.\n
+Updated the disclosure on users’ legal rights.\n
+Provided a summary and redesigned the structure for better understanding.\n
+\n
+For Terms of Use, we have:\n
+Added NutriCatch Profile Terms and Conditions to provide you with seamless experience when using this app.\n
+\n
+We encourage you to read the entire Privacy Notice, NutriCatch Profile Terms, and Conditions for more information and to provide your consent by clicking the “Accept All” button below.\n
+\n
+Thank you for your trust and continued support of NutriCatch!</string>
+    <string name="calories">Kalori</string>
+    <string name="remember_me">Ingat Saya</string>
+    <string name="scan_result">Hasil Pindai</string>
+    <string name="delet_account">Ajukan Penghapusan Akun</string>
+</resources>
