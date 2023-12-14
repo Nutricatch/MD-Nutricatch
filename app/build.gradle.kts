@@ -17,7 +17,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"https://url_endpoint\"")
+        buildConfigField("String", "BASE_URL", "\"https://localhost:3000\"")
     }
 
     buildFeatures {

@@ -20,7 +20,7 @@ class UserRepository constructor(val  userPreferences: Preferences, val apiServi
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, AuthResponse::class.java)
             val errorMessage = errorBody.message.toString()
-            emit(Error(errorMessage))
+            emit(Result.Error(errorMessage))
         }
     }
 
