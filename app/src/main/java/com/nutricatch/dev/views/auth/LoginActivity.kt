@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.nutricatch.dev.data.repository.Result
+import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -34,11 +34,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             showLoading(true)
             if (result != null) {
                 when (result) {
-                    is Result.Success -> {
+                    is ResultState.Success -> {
                         showLoading(false)
                     }
 
-                    is Result.Error -> {
+                    is ResultState.Error -> {
                         showLoading(false)
                         AlertDialog.Builder(this).apply {
                             setTitle("Something is Wrong")
