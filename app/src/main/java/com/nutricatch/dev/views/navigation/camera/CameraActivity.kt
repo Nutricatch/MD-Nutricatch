@@ -184,6 +184,15 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
+    private fun restartCamera()
+    {
+        val cameraProvider = cameraProvidedFuture.get()
+        cameraProvider.unbindAll()
+        binding.btnCapture.visibility = View.VISIBLE
+        binding.btnNext.visibility = View.INVISIBLE
+        binding.btnNext.visibility = View.INVISIBLE
+    }
+
     private fun requestPermissions() {
         activityResultLauncher.launch(REQUIRED_PERMISSIONS)
     }
