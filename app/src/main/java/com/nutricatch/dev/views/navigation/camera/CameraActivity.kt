@@ -21,7 +21,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
 import com.nutricatch.dev.databinding.ActivityCameraBinding
-import com.nutricatch.dev.ml.ModelSave
+import com.nutricatch.dev.ml.SaveModel
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
@@ -77,6 +77,7 @@ class CameraActivity : AppCompatActivity() {
 
         binding.btnRetake.setOnClickListener {
             startCamera()
+            restartCamera()
         }
     }
 
@@ -146,6 +147,15 @@ class CameraActivity : AppCompatActivity() {
         binding.btnRetake.visibility = View.VISIBLE
     }
 
+    private fun restartCamera()
+    {
+        val cameraProvider = cameraProvidedFuture.get()
+        cameraProvider.unbindAll()
+        binding.btnCapture.visibility = View.VISIBLE
+        binding.btnNext.visibility = View.INVISIBLE
+        binding.btnNext.visibility = View.INVISIBLE
+    }
+
     private fun requestPermissions() {
         activityResultLauncher.launch(REQUIRED_PERMISSIONS)
     }
@@ -157,7 +167,7 @@ class CameraActivity : AppCompatActivity() {
     private fun process() {
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
         val resizeBitmap: Bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
-        val model = ModelSave.newInstance(this)
+        val model = SaveModel.newInstance(this)
 
         val bytebuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3)
         bytebuffer.order(ByteOrder.nativeOrder())
