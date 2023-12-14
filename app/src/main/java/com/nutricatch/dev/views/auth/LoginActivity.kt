@@ -32,27 +32,26 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val password = binding.passwordEt.text.toString()
         viewModel.login(email, password).observe(this) { result ->
             showLoading(true)
-            if (result != null) {
-                when (result) {
-                    is ResultState.Success -> {
-                        showLoading(false)
-                    }
 
-                    is ResultState.Error -> {
-                        showLoading(false)
-                        AlertDialog.Builder(this).apply {
-                            setTitle("Something is Wrong")
-                            setMessage(result.error)
-                            setNegativeButton("Redo") { _, _ ->
-                            }
-                            create()
-                            show()
+            when (result) {
+                is ResultState.Success<*> -> {
+                    showLoading(false)
+                }
+
+                is ResultState.Error -> {
+                    showLoading(false)
+                    AlertDialog.Builder(this).apply {
+                        setTitle("Something is Wrong")
+                        setMessage(result.error)
+                        setNegativeButton("Redo") { _, _ ->
                         }
+                        create()
+                        show()
                     }
+                }
 
-                    else -> {
+                else -> {
 
-                    }
                 }
             }
         }
