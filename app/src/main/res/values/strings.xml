@@ -82,4 +82,5 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="calories">Calories</string>
     <string name="remember_me">Remember Me</string>
     <string name="scan_result">Scan result</string>
+    <string name="delet_account">Request For Account Deletion</string>
 </resources>
