@@ -28,7 +28,7 @@
         <activity
             android:name=".views.navigation.HomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_home" />
+            android:label="HomeActivity" />
         <activity
             android:name=".views.loading.LoadingActivity"
             android:exported="false" />

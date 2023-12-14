@@ -70,6 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:clickable="true"
             android:text="@string/indonesian"
             app:layout_constraintBottom_toBottomOf="@id/ic_checklist_id"
             app:layout_constraintStart_toEndOf="@id/ic_checklist_id"
