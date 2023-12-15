@@ -22,4 +22,14 @@ class PreferencesViewModelFactory(private val preferences: Preferences) :
 
         throw IllegalArgumentException("Unknown viewModel class ${modelClass.name}")
     }
+
+    companion object {
+        @Volatile
+        private var INSTANCE: PreferencesViewModelFactory? = null
+
+        fun getInstance(preferences: Preferences): PreferencesViewModelFactory =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: PreferencesViewModelFactory(preferences)
+            }.also { INSTANCE = it }
+    }
 }

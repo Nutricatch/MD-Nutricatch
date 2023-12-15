@@ -13,15 +13,19 @@ import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
+import com.nutricatch.dev.data.prefs.Preferences
+import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentHomeBinding
+import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.HomeViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var preferences: Preferences
     private val viewModel by viewModels<HomeViewModel> {
-        HomeViewModelFactory.getInstance(requireContext())
+        HomeViewModelFactory.getInstance(requireContext(), preferences)
     }
 
     override fun onCreateView(
@@ -29,6 +33,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        preferences = Preferences.getInstance(requireContext().applicationContext.dataStore)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -75,7 +80,17 @@ class HomeFragment : Fragment() {
         val user = "John Doe"
         binding.tvUserName.text = getString(R.string.home_greeting, user)
 
-        binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
+        viewModel.token.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.headerUser.setOnClickListener {
+                    /// TODO nanti diganti dengan nampilin dialog, user harus login
+                    showToast(requireContext(), "You must login first")
+                }
+            } else {
+                binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))
+
+            }
+        }
 
         viewModel.foods.observe(viewLifecycleOwner) { result ->
             when (result) {
