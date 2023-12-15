@@ -3,7 +3,7 @@ package com.nutricatch.dev.views.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nutricatch.dev.data.prefs.Preferences
-import com.nutricatch.dev.views.splash.AppCheckViewModel
+import com.nutricatch.dev.views.app_check.AppCheckViewModel
 import com.nutricatch.dev.views.navigation.profile.ProfileViewModel
 
 class PreferencesViewModelFactory(private val preferences: Preferences) :

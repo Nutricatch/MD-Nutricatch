@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.splash
+package com.nutricatch.dev.views.app_check
 
 import android.content.Intent
 import android.os.Bundle

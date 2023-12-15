@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.splash
+package com.nutricatch.dev.views.app_check
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
