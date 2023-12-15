@@ -24,6 +24,7 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
     private val tokenKey = stringPreferencesKey(Const.TOKEN_NAME)
     private val onBoard = booleanPreferencesKey(Const.ON_BOARD)
     private val theme = intPreferencesKey(Const.THEME)
+    private val locale = stringPreferencesKey(Const.LOCALE)
 
 //    suspend fun saveToken(token: String) {
 //        dataStore.edit {
@@ -75,13 +76,20 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
         }
     }
 
-    val themeMode: Flow<Theme> = dataStore.data
-        .map { mode ->
-            when (mode[theme]) {
-                AppCompatDelegate.MODE_NIGHT_YES -> Theme.Dark
-                else -> Theme.Light
-            }
+    val themeMode: Flow<Theme> = dataStore.data.map { mode ->
+        when (mode[theme]) {
+            AppCompatDelegate.MODE_NIGHT_YES -> Theme.Dark
+            else -> Theme.Light
         }
+    }
+
+    val appLocale = dataStore.data.map {
+        it[locale]
+    }
+
+    suspend fun setLocale(localeList: String) {
+        dataStore.edit { it[locale] = localeList }
+    }
 
     companion object {
         @Volatile

@@ -13,10 +13,21 @@ class ProfileViewModel(private val preferences: Preferences) : ViewModel() {
 
     val token: LiveData<String?> = preferences.getToken().asLiveData()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    private val _locale = MutableLiveData<String>().apply {
+        viewModelScope.launch {
+            preferences.appLocale.collect {
+                value = it
+            }
+        }
     }
-    val text: LiveData<String> = _text
+
+    var locale = _locale
+
+    fun setLocale(locale: String) {
+        viewModelScope.launch {
+            preferences.setLocale(locale)
+        }
+    }
 
     fun setTheme(theme: Theme) {
         viewModelScope.launch {
