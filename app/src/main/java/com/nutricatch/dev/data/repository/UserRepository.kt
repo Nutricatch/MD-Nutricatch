@@ -45,4 +45,12 @@ class UserRepository constructor(val userPreferences: Preferences, val apiServic
         userPreferences.saveSession(userModel)
     }
 
+    companion object {
+        @Volatile
+        private var INSTANCE: UserRepository? = null
+        fun getInstance(preferences: Preferences, apiService: ApiService) =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: UserRepository(preferences, apiService)
+            }.also { INSTANCE = it }
+    }
 }
