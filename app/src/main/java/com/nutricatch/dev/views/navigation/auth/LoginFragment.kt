@@ -42,10 +42,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
         with(binding) {
             when (view) {
                 btnLogin -> {
-                    viewModel.login(
-                        emailEt.text.toString().trim(),
-                        passwordEt.text.toString().trim()
-                    )
+                    val email = emailEt.text.toString().trim()
+                    val password = passwordEt.text.toString().trim()
+                    viewModel.login(email, password).observe(viewLifecycleOwner) {
+                        /// TODO observe di sini, untuk tiap resultnya
+                    }
                 }
 
                 tbRegister -> {
