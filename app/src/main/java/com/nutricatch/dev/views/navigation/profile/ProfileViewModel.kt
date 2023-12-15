@@ -23,6 +23,12 @@ class ProfileViewModel(private val preferences: Preferences) : ViewModel() {
 
     var locale = _locale
 
+    fun logout(){
+        viewModelScope.launch {
+            preferences.deleteToken()
+        }
+    }
+
     fun setLocale(locale: String) {
         viewModelScope.launch {
             preferences.setLocale(locale)

@@ -1,6 +1,5 @@
 package com.nutricatch.dev.data.repository
 
-import android.util.Log
 import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import com.nutricatch.dev.data.ResultState
@@ -20,17 +19,16 @@ class UserRepository private constructor(
             val success = apiService.loginUser(email, password)
             emit(ResultState.Success(success))
         } catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, AuthResponse::class.java)
-            val errorMessage = errorBody.message.toString()
-            val responseCode = e.code()
-            if (responseCode == 401) {
-                emit(ResultState.Error("Wrong combination of email and password"))
-            } else {
-                emit(ResultState.Error(errorMessage))
+            when (e.code()) {
+                401 -> {
+                    emit(ResultState.Error("Wrong combination of email and password"))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
             }
         } catch (e: Exception) {
-            Log.d("TAG AUTH", "login: $e")
             emit(ResultState.Error("Unknown Error"))
         }
     }

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
@@ -19,7 +20,7 @@ import com.nutricatch.dev.utils.Theme
 import com.nutricatch.dev.views.factory.PreferencesViewModelFactory
 import kotlinx.coroutines.launch
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentProfileBinding? = null
 
@@ -93,6 +94,8 @@ class ProfileFragment : Fragment() {
             )
         }
 
+        binding.btnLogout.setOnClickListener(this)
+
     }
 
     private fun changeTheme(isChecked: Boolean) {
@@ -111,6 +114,15 @@ class ProfileFragment : Fragment() {
         when (title.lowercase()) {
             "my weight" -> {
                 Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_bodyDetailFragment)
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        when(v){
+            binding.btnLogout -> {
+                viewModel.logout()
+                findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToAppCheckActivity())
             }
         }
     }

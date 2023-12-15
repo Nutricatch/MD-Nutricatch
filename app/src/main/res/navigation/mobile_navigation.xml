@@ -61,6 +61,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_profile_to_appCheckActivity"
+            app:destination="@id/appCheckActivity" />
     </fragment>
 
     <activity
@@ -114,4 +117,9 @@
         android:name="com.nutricatch.dev.views.navigation.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
+    <activity
+        android:id="@+id/appCheckActivity"
+        android:name="com.nutricatch.dev.views.app_check.AppCheckActivity"
+        android:label="activity_loading"
+        tools:layout="@layout/activity_loading" />
 </navigation>
