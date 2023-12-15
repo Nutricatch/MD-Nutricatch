@@ -31,4 +31,9 @@ class BodyDetailFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

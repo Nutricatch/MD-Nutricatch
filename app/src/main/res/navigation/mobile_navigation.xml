@@ -17,6 +17,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_home_to_mustLoginDialogFragment"
+            app:destination="@id/mustLoginDialogFragment" />
     </fragment>
 
     <fragment
@@ -84,4 +87,9 @@
         android:name="com.nutricatch.dev.FoodRecommendationFragment"
         android:label="fragment_food_recommendation"
         tools:layout="@layout/fragment_food_recommendation" />
+    <fragment
+        android:id="@+id/mustLoginDialogFragment"
+        android:name="com.nutricatch.dev.views.navigation.dialog.MustLoginDialogFragment"
+        android:label="fragment_must_login_dialog"
+        tools:layout="@layout/fragment_must_login_dialog" />
 </navigation>

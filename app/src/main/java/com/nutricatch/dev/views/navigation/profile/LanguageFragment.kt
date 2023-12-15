@@ -16,7 +16,8 @@ import com.nutricatch.dev.utils.Const
 import com.nutricatch.dev.views.factory.PreferencesViewModelFactory
 
 class LanguageFragment : Fragment() {
-    private lateinit var binding: FragmentLanguageBinding
+    private var _binding: FragmentLanguageBinding? = null
+    private val binding get() = _binding!!
     private lateinit var preferences: Preferences
     private val viewModel by viewModels<ProfileViewModel> {
         PreferencesViewModelFactory(preferences)
@@ -28,7 +29,7 @@ class LanguageFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         preferences = Preferences.getInstance(requireActivity().dataStore)
-        binding =
+        _binding =
             FragmentLanguageBinding.inflate(LayoutInflater.from(requireContext()), container, false)
 
         viewModel.locale.observe(viewLifecycleOwner) {
@@ -66,5 +67,10 @@ class LanguageFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
