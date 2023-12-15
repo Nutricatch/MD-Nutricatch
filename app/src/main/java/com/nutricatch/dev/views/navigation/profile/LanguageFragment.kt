@@ -62,5 +62,9 @@ class LanguageFragment : Fragment() {
             AppCompatDelegate.setApplicationLocales(locale)
             requireActivity().recreate()
         }
+
+        binding.btnBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 }
