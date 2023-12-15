@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
@@ -17,7 +18,6 @@ import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentHomeBinding
 import com.nutricatch.dev.views.factory.HomeViewModelFactory
-import com.nutricatch.dev.views.navigation.dialog.MustLoginDialogFragment
 
 class HomeFragment : Fragment() {
 
@@ -80,10 +80,13 @@ class HomeFragment : Fragment() {
         val user = "John Doe"
         binding.tvUserName.text = getString(R.string.home_greeting, user)
 
+        val navController = findNavController()
         viewModel.token.observe(viewLifecycleOwner) {
             if (it == null) {
                 binding.headerUser.setOnClickListener {
-                    MustLoginDialogFragment().show(childFragmentManager, "DIALOG")
+                    val action =
+                        HomeFragmentDirections.actionNavigationHomeToMustLoginDialogFragment()
+                    navController.navigate(action)
                 }
             } else {
                 binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_home_to_navigation_setting))

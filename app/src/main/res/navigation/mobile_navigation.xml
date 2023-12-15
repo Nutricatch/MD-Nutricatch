@@ -19,7 +19,8 @@
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_navigation_home_to_mustLoginDialogFragment"
-            app:destination="@id/mustLoginDialogFragment" />
+            app:destination="@id/mustLoginDialogFragment"
+            app:popUpTo="@id/navigation_home" />
     </fragment>
 
     <fragment
@@ -87,9 +88,23 @@
         android:name="com.nutricatch.dev.FoodRecommendationFragment"
         android:label="fragment_food_recommendation"
         tools:layout="@layout/fragment_food_recommendation" />
-    <fragment
+    <dialog
         android:id="@+id/mustLoginDialogFragment"
         android:name="com.nutricatch.dev.views.navigation.dialog.MustLoginDialogFragment"
         android:label="fragment_must_login_dialog"
-        tools:layout="@layout/fragment_must_login_dialog" />
+        tools:layout="@layout/fragment_must_login_dialog" >
+        <action
+            android:id="@+id/action_mustLoginDialogFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </dialog>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.nutricatch.dev.views.auth.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.nutricatch.dev.views.navigation.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

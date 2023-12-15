@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import com.nutricatch.dev.R
 import com.nutricatch.dev.databinding.FragmentMustLoginDialogBinding
 
 class MustLoginDialogFragment : DialogFragment() {
@@ -21,6 +23,19 @@ class MustLoginDialogFragment : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         _binding = FragmentMustLoginDialogBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val navController = findNavController()
+        binding.btnDialogLogin.setOnClickListener {
+            navController.navigate(R.id.action_mustLoginDialogFragment_to_loginFragment)
+        }
+
+        binding.btnDialogCancel.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {
