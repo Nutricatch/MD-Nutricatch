@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="36dp"
-    android:background="@drawable/rounded_corner_shape"
+    android:background="@drawable/rounded_corner_shape_16"
     android:backgroundTint="?attr/colorSurface"
     tools:context=".views.navigation.dialog.MustLoginDialogFragment">
 

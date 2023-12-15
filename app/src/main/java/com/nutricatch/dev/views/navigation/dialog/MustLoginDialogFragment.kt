@@ -1,5 +1,7 @@
 package com.nutricatch.dev.views.navigation.dialog
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ class MustLoginDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         _binding = FragmentMustLoginDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
