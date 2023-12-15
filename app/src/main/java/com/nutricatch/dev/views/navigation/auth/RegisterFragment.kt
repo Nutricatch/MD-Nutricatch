@@ -35,7 +35,7 @@ class RegisterFragment : Fragment() {
     private fun register() {
         with(binding) {
             val name = namaEditText.text.toString().trim()
-            val email = emailEditText.text.toString().trim()
+            val email = emailEditText.text.toString().trim().lowercase()
             val password = passwordEditText.text.toString().trim()
 
             viewModel.register(name, email, password).observe(viewLifecycleOwner){

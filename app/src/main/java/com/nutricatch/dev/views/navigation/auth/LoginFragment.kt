@@ -4,11 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentLoginBinding
 import com.nutricatch.dev.views.factory.AuthViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLoginBinding? = null
@@ -42,10 +48,41 @@ class LoginFragment : Fragment(), View.OnClickListener {
         with(binding) {
             when (view) {
                 btnLogin -> {
-                    val email = emailEt.text.toString().trim()
+                    val email = emailEt.text.toString().trim().lowercase()
                     val password = passwordEt.text.toString().trim()
-                    viewModel.login(email, password).observe(viewLifecycleOwner) {
-                        /// TODO observe di sini, untuk tiap resultnya
+                    viewModel.login(email, password).observe(viewLifecycleOwner) { result ->
+                        showLoading(true)
+
+                        when (result) {
+                            is ResultState.Success -> {
+                                showLoading(false)
+                                lifecycleScope.launch {
+                                    if (result.data.accessToken != null) {
+                                        viewModel.saveSession(result.data.accessToken)
+                                        withContext(Dispatchers.Main) {
+                                            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
+                                        }
+                                    }
+
+                                }
+                            }
+
+                            is ResultState.Error -> {
+                                showLoading(false)
+                                AlertDialog.Builder(requireActivity()).apply {
+                                    setTitle("Something is Wrong")
+                                    setMessage(result.error)
+                                    setNegativeButton("Redo") { _, _ ->
+                                    }
+                                    create()
+                                    show()
+                                }
+                            }
+
+                            else -> {
+
+                            }
+                        }
                     }
                 }
 
@@ -56,5 +93,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 else -> {}
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
