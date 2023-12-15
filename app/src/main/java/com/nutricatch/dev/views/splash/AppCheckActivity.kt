@@ -1,6 +1,5 @@
-package com.nutricatch.dev.views.loading
+package com.nutricatch.dev.views.splash
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -18,11 +17,10 @@ import com.nutricatch.dev.views.navigation.HomeActivity
 import com.nutricatch.dev.views.on_boarding.OnBoardingActivity
 import kotlinx.coroutines.launch
 
-@SuppressLint("CustomSplashScreen")
-class LoadingActivity : AppCompatActivity() {
+class AppCheckActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoadingBinding
     private lateinit var preferences: Preferences
-    private val viewModel by viewModels<LoadingViewModel> {
+    private val viewModel by viewModels<AppCheckViewModel> {
         PreferencesViewModelFactory(preferences)
     }
 

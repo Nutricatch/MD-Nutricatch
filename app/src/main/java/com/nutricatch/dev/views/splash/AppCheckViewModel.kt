@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.loading
+package com.nutricatch.dev.views.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -7,7 +7,7 @@ import com.nutricatch.dev.data.prefs.Preferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class LoadingViewModel(private val preferences: Preferences) : ViewModel() {
+class AppCheckViewModel(private val preferences: Preferences) : ViewModel() {
     fun isOnBoard(): Flow<Boolean> {
         return preferences.isOnBoard()
     }
