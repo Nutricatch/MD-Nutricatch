@@ -32,14 +32,14 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
 //        }
 //    }
 
-    suspend fun saveSession(user: UserModel) {
+    suspend fun saveSession(token:String) {
         dataStore.edit { preferences ->
             /*
             * Save token only, if want to check is logged in,
             * use get token, if null, user is not logged in
             * if not null, user is logged in
             * */
-            preferences[tokenKey] = user.token
+            preferences[tokenKey] = token
         }
     }
 

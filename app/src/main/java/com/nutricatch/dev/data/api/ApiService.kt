@@ -21,7 +21,7 @@ interface ApiService {
     suspend fun getRecipe(@Path("id") id: Int): Recipe
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("auth/login")
     suspend fun loginUser(@Field("email")email: String, @Field("password")password: String): AuthResponse
 
     @FormUrlEncoded
