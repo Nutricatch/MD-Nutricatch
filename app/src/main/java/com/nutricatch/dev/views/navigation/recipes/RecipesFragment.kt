@@ -8,21 +8,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutricatch.dev.data.ResultState
+import com.nutricatch.dev.data.prefs.Preferences
+import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentRecipesBinding
 import com.nutricatch.dev.views.factory.HomeViewModelFactory
 
 class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     val binding get() = _binding!!
+    private lateinit var preferences: Preferences
 
     private val viewModel by viewModels<RecipeViewModel> {
-        HomeViewModelFactory.getInstance(requireContext())
+        HomeViewModelFactory.getInstance(requireContext(), preferences)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        preferences = Preferences.getInstance(requireContext().applicationContext.dataStore)
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         val root = binding.root
 

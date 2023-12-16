@@ -11,15 +11,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
+import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentProfileBinding
 import com.nutricatch.dev.utils.Theme
-import com.nutricatch.dev.views.factory.PreferencesViewModelFactory
+import com.nutricatch.dev.views.factory.UserProfileViewModelFactory
 import kotlinx.coroutines.launch
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentProfileBinding? = null
 
@@ -28,7 +30,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var preferences: Preferences
     private val viewModel by viewModels<ProfileViewModel> {
-        PreferencesViewModelFactory(preferences)
+        UserProfileViewModelFactory.getInstance(preferences, requireContext())
     }
 
     override fun onCreateView(
@@ -50,6 +52,31 @@ class ProfileFragment : Fragment() {
 
                     Theme.Light -> {
                         binding.swTheme.isChecked = false
+                    }
+                }
+            }
+        }
+
+        viewModel.userProfile.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ResultState.Loading -> {
+                    /// TODO Show Loading
+                }
+
+                is ResultState.Success -> {
+                    val user = result.data
+                    with(binding) {
+                        tvName.text = user.username
+                        tvEmail.text = user.email
+                    }
+                }
+
+                is ResultState.Error -> {
+                    /// TODO Handle error here
+                    if (result.errorCode == 401) {
+                        /// TODO navigate ke login page
+                    } else {
+                        /// TODO tampilkan error dengan toast
                     }
                 }
             }
@@ -93,6 +120,8 @@ class ProfileFragment : Fragment() {
             )
         }
 
+        binding.btnLogout.setOnClickListener(this)
+
     }
 
     private fun changeTheme(isChecked: Boolean) {
@@ -111,6 +140,15 @@ class ProfileFragment : Fragment() {
         when (title.lowercase()) {
             "my weight" -> {
                 Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_bodyDetailFragment)
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        when (v) {
+            binding.btnLogout -> {
+                viewModel.logout()
+                findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToAppCheckActivity())
             }
         }
     }

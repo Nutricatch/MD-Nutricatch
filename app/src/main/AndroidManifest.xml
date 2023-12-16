@@ -21,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NutriCatch"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".views.navigation.camera.CameraActivity"
@@ -28,18 +29,12 @@
         <activity
             android:name=".views.navigation.HomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_home" />
+            android:label="HomeActivity" />
         <activity
-            android:name=".views.loading.LoadingActivity"
+            android:name=".views.app_check.AppCheckActivity"
             android:exported="false" />
         <activity
             android:name=".views.on_boarding.OnBoardingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.auth.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.auth.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

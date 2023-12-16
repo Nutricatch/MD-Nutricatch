@@ -1,48 +1,43 @@
 package com.nutricatch.dev.data.repository
 
 import androidx.lifecycle.liveData
-import com.google.gson.Gson
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.api.ApiService
-import com.nutricatch.dev.data.prefs.Preferences
-import com.nutricatch.dev.data.prefs.UserModel
-import com.nutricatch.dev.data.response.AuthResponse
 import retrofit2.HttpException
 
-class UserRepository constructor(val userPreferences: Preferences, val apiService: ApiService) {
-    //Auth Method
-    fun login(email: String, password: String) = liveData {
+class UserRepository private constructor(private val apiService: ApiService) {
+    /*
+    *  get user profile
+    * */
+
+    fun getProfile() = liveData {
         emit(ResultState.Loading)
+
         try {
-            val success = apiService.loginUser(email, password)
-            emit(ResultState.Success(success))
+            val userResponse = apiService.getProfile()
+            emit(ResultState.Success(userResponse))
         } catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, AuthResponse::class.java)
-            val errorMessage = errorBody.message.toString()
-            emit(ResultState.Error(errorMessage))
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
         } catch (e: Exception) {
             emit(ResultState.Error("Unknown Error"))
         }
     }
 
-    fun register(name: String, email: String, password: String) = liveData {
-        emit(ResultState.Loading)
-        try {
-            val success = apiService.registerUser(name, email, password)
-            emit(ResultState.Success(success))
-        } catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, AuthResponse::class.java)
-            val errorMessage = errorBody.message.toString()
-            emit(ResultState.Error(errorMessage))
-        } catch (e: Exception) {
-            emit(ResultState.Error("Unknown Error"))
-        }
+    companion object {
+        @Volatile
+        private var INSTANCE: UserRepository? = null
+        fun getInstance(apiService: ApiService) =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: UserRepository(apiService)
+            }.also { INSTANCE = it }
     }
-
-    suspend fun saveSession(userModel: UserModel) {
-        userPreferences.saveSession(userModel)
-    }
-
 }

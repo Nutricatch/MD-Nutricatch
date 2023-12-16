@@ -1,12 +1,13 @@
-package com.nutricatch.dev.views.loading
+package com.nutricatch.dev.views.app_check
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityLoadingBinding
@@ -14,12 +15,12 @@ import com.nutricatch.dev.utils.Theme
 import com.nutricatch.dev.views.factory.PreferencesViewModelFactory
 import com.nutricatch.dev.views.navigation.HomeActivity
 import com.nutricatch.dev.views.on_boarding.OnBoardingActivity
+import kotlinx.coroutines.launch
 
-@SuppressLint("CustomSplashScreen")
-class LoadingActivity : AppCompatActivity() {
+class AppCheckActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoadingBinding
     private lateinit var preferences: Preferences
-    private val viewModel by viewModels<LoadingViewModel> {
+    private val viewModel by viewModels<AppCheckViewModel> {
         PreferencesViewModelFactory(preferences)
     }
 
@@ -37,6 +38,17 @@ class LoadingActivity : AppCompatActivity() {
                     Theme.Light -> AppCompatDelegate.MODE_NIGHT_NO
                 }
             )
+        }
+
+        var localeList: String?
+        lifecycleScope.launch {
+            preferences.appLocale.collect {
+                localeList = it
+                if (localeList != null) {
+                    val locale = LocaleListCompat.forLanguageTags(localeList)
+                    AppCompatDelegate.setApplicationLocales(locale)
+                }
+            }
         }
 
         viewModel.isOnBoard().asLiveData().observe(this) { isOnBoard ->
