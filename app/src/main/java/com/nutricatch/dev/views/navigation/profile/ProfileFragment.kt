@@ -46,9 +46,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         lifecycleScope.launch {
-            preferences.themeMode.collect { theme ->
+            viewModel.theme.collect { theme ->
                 Log.d("TAG", "onViewCreated: Theme changed $theme")
                 when (theme) {
                     Theme.Dark -> {

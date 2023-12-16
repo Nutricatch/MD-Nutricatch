@@ -48,6 +48,17 @@ interface ApiService {
     suspend fun getProfile(): UserResponse
 
     @GET("user-health/health")
-    suspend fun getHealthData():HealthResponse
+    suspend fun getHealthData(): HealthResponse
+
+    @FormUrlEncoded
+    @POST("/user-health/update")
+    suspend fun updateHealthData(
+        @Field("weight") weight: Double,
+        @Field("height") height: Double,
+        @Field("age") age: Double,
+        @Field("gender") gender: String,
+        @Field("fitnessGoal") fitnessGoal: String,
+        @Field("activityLevel") activityLevel: String,
+    ): HealthResponse
 
 }
