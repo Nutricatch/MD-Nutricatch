@@ -31,11 +31,7 @@ class BodyDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentBodyDetailBinding.inflate(
-            LayoutInflater.from(requireContext()),
-            container,
-            false
-        )
+        _binding = FragmentBodyDetailBinding.inflate(inflater, container, false)
 
         preferences = Preferences.getInstance(requireContext().dataStore)
 
@@ -103,7 +99,7 @@ class BodyDetailFragment : Fragment() {
             val fitnessGoal: FitnessGoal = FitnessGoal.WeightGain
             val activityLevel: ActivityLevel = ActivityLevel.SEDENTARY
 
-            viewModel.updateHealthData(weight, height, age,gender, fitnessGoal, activityLevel)
+            viewModel.updateHealthData(weight, height, age, gender, fitnessGoal, activityLevel)
                 .observe(viewLifecycleOwner) { result ->
                     when (result) {
                         is ResultState.Loading -> {
