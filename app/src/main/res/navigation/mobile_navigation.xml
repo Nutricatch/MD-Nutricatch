@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_daily_calories"
-        android:name="com.nutricatch.dev.views.navigation.dailyCaloriesFragment.DailyCaloriesFragment"
+        android:name="com.nutricatch.dev.views.navigation.daily_calories.DailyCaloriesFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_daily_calories" />
 
