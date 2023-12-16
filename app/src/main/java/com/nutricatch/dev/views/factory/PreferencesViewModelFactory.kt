@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.views.app_check.AppCheckViewModel
-import com.nutricatch.dev.views.navigation.profile.ProfileViewModel
 
 class PreferencesViewModelFactory(private val preferences: Preferences) :
     ViewModelProvider.NewInstanceFactory() {
@@ -13,10 +12,6 @@ class PreferencesViewModelFactory(private val preferences: Preferences) :
         when {
             modelClass.isAssignableFrom(AppCheckViewModel::class.java) -> {
                 return AppCheckViewModel(preferences) as T
-            }
-
-            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
-                return ProfileViewModel(preferences) as T
             }
         }
 

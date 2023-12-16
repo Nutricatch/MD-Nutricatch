@@ -1,5 +1,6 @@
 package com.nutricatch.dev.data.api
 
+import com.nutricatch.dev.data.api.response.UserResponse
 import com.nutricatch.dev.data.response.AuthResponse
 import com.nutricatch.dev.model.LatestPostResponse
 import com.nutricatch.dev.model.Recipe
@@ -20,13 +21,29 @@ interface ApiService {
     @GET("recipe/{id}")
     suspend fun getRecipe(@Path("id") id: Int): Recipe
 
+
+    /*
+    *   Auth Section
+    * */
     @FormUrlEncoded
     @POST("auth/login")
-    suspend fun loginUser(@Field("email")email: String, @Field("password")password: String): AuthResponse
+    suspend fun loginUser(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): AuthResponse
 
     @FormUrlEncoded
     @POST("register")
-    suspend fun registerUser(@Field("name")name: String, @Field("email")email: String, @Field("password")password: String): AuthResponse
+    suspend fun registerUser(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): AuthResponse
 
+    /*
+    *   User Profile and health
+    * */
+    @GET("user-health/profile")
+    suspend fun getProfile(): UserResponse
 
 }

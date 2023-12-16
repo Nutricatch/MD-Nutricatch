@@ -4,6 +4,7 @@ import android.content.Context
 import com.nutricatch.dev.data.api.ApiConfig
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
+import com.nutricatch.dev.data.repository.AuthRepository
 import com.nutricatch.dev.data.repository.RecommendationRepository
 import com.nutricatch.dev.data.repository.UserRepository
 import kotlinx.coroutines.flow.first
@@ -18,10 +19,17 @@ object Injection {
         return RecommendationRepository.getInstance(apiService)
     }
 
-    fun provideAuthRepository(context: Context): UserRepository {
+    fun provideAuthRepository(context: Context): AuthRepository {
         val pref = Preferences.getInstance(context.dataStore)
         val token = runBlocking { pref.getToken().first() }
         val apiService = ApiConfig.getApiService(token)
-        return UserRepository.getInstance(pref, apiService)
+        return AuthRepository.getInstance(pref, apiService)
+    }
+
+    fun provideUserRepository(context: Context) :UserRepository{
+        val pref = Preferences.getInstance(context.dataStore)
+        val token = runBlocking { pref.getToken().first() }
+        val apiService = ApiConfig.getApiService(token)
+        return UserRepository.getInstance(apiService)
     }
 }
