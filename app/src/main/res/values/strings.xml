@@ -78,4 +78,6 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="overweight">Overweight</string>
     <string name="slightly_overweight">Slightly Overweight</string>
     <string name="success_update_data">Success update data</string>
+    <string name="track_your_calories_journey1">Track Your </string>
+    <string name="track_your_calories_journey2">Calories Journey</string>
 </resources>

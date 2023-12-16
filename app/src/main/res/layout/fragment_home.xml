@@ -58,54 +58,60 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/tv_v_track_journey"
+            style="@style/Theme.NutriCatch.TextStyle.Headline.Medium.Bold"
+            android:layout_marginTop="32dp"
+            android:text="@string/track_your_calories_journey1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_user" />
+
+        <TextView
+            android:id="@+id/tv_v_track_journey_2"
+            style="@style/Theme.NutriCatch.TextStyle.Headline.Medium.Bold"
+            android:text="@string/track_your_calories_journey2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_v_track_journey" />
+
         <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="256dp"
             android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/header_user" />
+            app:layout_constraintBottom_toTopOf="@id/tv_food_recommendation"
+            app:layout_constraintTop_toBottomOf="@id/tv_v_track_journey_2" />
 
         <TextView
             android:id="@+id/tv_food_recommendation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Theme.NutriCatch.TextStyle.Headline.Small"
             android:layout_marginTop="24dp"
-            android:textStyle="bold"
             android:text="@string/we_ve_picked_you_a_delicious_food"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_food_recomm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_food_recommendation"
-            tools:listitem="@layout/recommendation_item" />
-
-        <TextView
-            android:id="@+id/tv_recipe_recommendation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:textStyle="bold"
-            android:text="@string/we_also_have_recipe_for_you"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_food_recomm" />
+            app:layout_constraintTop_toBottomOf="@id/chart" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recipe_recomm"
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/imageSlider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:nestedScrollingEnabled="false"
+            android:layout_height="256dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_food_recommendation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipe_recommendation"
-            tools:listitem="@layout/recommendation_item" />
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="1"
+            app:sliderStartAutoCycle="true" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
