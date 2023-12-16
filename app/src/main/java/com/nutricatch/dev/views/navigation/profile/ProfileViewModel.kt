@@ -10,7 +10,10 @@ import com.nutricatch.dev.data.repository.UserRepository
 import com.nutricatch.dev.utils.Theme
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(private val preferences: Preferences, private val userRepository: UserRepository) : ViewModel() {
+class ProfileViewModel(
+    private val preferences: Preferences,
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     val token: LiveData<String?> = preferences.getToken().asLiveData()
 
@@ -22,11 +25,13 @@ class ProfileViewModel(private val preferences: Preferences, private val userRep
         }
     }
 
-    var locale = _locale
+    val locale: LiveData<String> = _locale
 
     val userProfile = userRepository.getProfile()
 
-    fun logout(){
+    val userHealthData = userRepository.getUserHealth()
+
+    fun logout() {
         viewModelScope.launch {
             preferences.deleteToken()
         }

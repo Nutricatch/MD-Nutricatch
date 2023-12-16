@@ -1,5 +1,6 @@
 package com.nutricatch.dev.data.api
 
+import com.nutricatch.dev.data.api.response.HealthResponse
 import com.nutricatch.dev.data.api.response.UserResponse
 import com.nutricatch.dev.data.response.AuthResponse
 import com.nutricatch.dev.model.LatestPostResponse
@@ -45,5 +46,8 @@ interface ApiService {
     * */
     @GET("user-health/profile")
     suspend fun getProfile(): UserResponse
+
+    @GET("user-health/health")
+    suspend fun getHealthData():HealthResponse
 
 }

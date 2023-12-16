@@ -32,6 +32,28 @@ class UserRepository private constructor(private val apiService: ApiService) {
         }
     }
 
+    fun getUserHealth() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val userHeathData = apiService.getHealthData()
+            emit(ResultState.Success(userHeathData))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: UserRepository? = null
