@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NutriCatch</string>
+    <string name="app_name" translatable="false">NutriCatch</string>
     <string name="onboard_headline_1">Get the exact nutrition value of everything you eat</string>
     <string name="onboard_body_1">We are updating our food database every minute to help you track you calories.</string>
     <string name="onboard_headline_2">Get all the healthy recipes that you need</string>

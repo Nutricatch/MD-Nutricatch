@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NutriCatch</string>
-    <string name="onboard_headline_1">Get the exact nutrition value of everything you eat</string>
-    <string name="onboard_body_1">We are updating our food database every minute to help you track you calories.</string>
-    <string name="onboard_headline_2">Dapatkan resep menyehatkan sesuai kebutuhan</string>
+    <string name="onboard_headline_1">Dapatkan nilai nutrisi yang tepat dari apapun yang kamu makan</string>
+    <string name="onboard_body_1">Kami memperbarui database setiap menit untuk membantu kamu melacak kalori</string>
+    <string name="onboard_headline_2">Dapatkan resep menyehatkan sesuai kebutuhan kamu</string>
     <string name="onboard_body_2">kamu ingin membentuk badan atau menurunkan berat badan? Kami punya rahasianya untukmu</string>
     <string name="onboard_headline_3">Dapatkan kalori harian berdasarkan berat badan kamu</string>
     <string name="onboard_body_3">Tetapkan target dan tentukan jadwal bulananmu, sisanya biarkan kami yang bekerja</string>
@@ -72,4 +71,11 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="remember_me">Ingat Saya</string>
     <string name="scan_result">Hasil Pindai</string>
     <string name="delet_account">Request For Account Deletion</string>
+    <string name="cancel">Batalkan</string>
+    <string name="underweight">Kurus</string>
+    <string name="extremely_overweight">Sangat Gemuk/Obesitas</string>
+    <string name="slightly_underweight">Cukup Kurus</string>
+    <string name="overweight">Gemuk</string>
+    <string name="slightly_overweight">Cukup Gemuk</string>
+    <string name="success_update_data">Sukses perbarui data</string>
 </resources>
