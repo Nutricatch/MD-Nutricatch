@@ -111,6 +111,9 @@
         <action
             android:id="@+id/action_loginFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_loginFragment_to_webViewLoginFragment"
+            app:destination="@id/webViewLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -122,4 +125,9 @@
         android:name="com.nutricatch.dev.views.app_check.AppCheckActivity"
         android:label="activity_loading"
         tools:layout="@layout/activity_loading" />
+    <fragment
+        android:id="@+id/webViewLoginFragment"
+        android:name="com.nutricatch.dev.views.navigation.auth.WebViewLoginFragment"
+        android:label="fragment_web_view_login"
+        tools:layout="@layout/fragment_web_view_login" />
 </navigation>

@@ -18,7 +18,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"http://192.168.29.22:3000\"")
+        buildConfigField("String", "BASE_URL", "\"https://bcbc-120-188-95-240.ngrok-free.app\"")
     }
 
     buildFeatures {
