@@ -117,11 +117,19 @@ class HomeFragment : Fragment() {
         }
 
         val sliderView = binding.imageSlider
-        sliderView.setSliderAdapter(RecommendationSliderAdapter())
+        sliderView.setSliderAdapter(RecommendationSliderAdapter(::onClickListener))
         sliderView.setIndicatorAnimation(IndicatorAnimationType.SCALE)
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
         sliderView.scrollTimeInSec = 2
         sliderView.startAutoCycle()
+    }
+
+    private fun onClickListener(position: Int) {
+        if (position == 0) {
+            findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToNavigationRecipe())
+        } else {
+            findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToFoodRecommendationFragment())
+        }
     }
 
     override fun onDestroyView() {
