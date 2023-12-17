@@ -8,7 +8,7 @@ import com.nutricatch.dev.data.api.response.FitnessGoal
 import com.nutricatch.dev.data.api.response.Gender
 import retrofit2.HttpException
 
-class UserRepository private constructor(private val apiService: ApiService) {
+class UserRepository (private val apiService: ApiService) {
     /*
     *  get user profile
     * */

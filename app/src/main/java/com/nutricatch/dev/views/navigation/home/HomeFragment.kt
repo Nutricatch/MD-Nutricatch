@@ -12,6 +12,7 @@ import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.nutricatch.dev.data.ResultState
+import com.nutricatch.dev.data.injection.Injection
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentHomeBinding
@@ -26,7 +27,10 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var preferences: Preferences
     private val viewModel by viewModels<HomeViewModel> {
-        HomeViewModelFactory.getInstance(requireContext(), preferences)
+        HomeViewModelFactory(
+            Injection.provideUserRepository(requireContext()),
+            preferences
+        )
     }
 
     override fun onCreateView(
@@ -95,10 +99,10 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModel.foods.observe(viewLifecycleOwner) { result ->
+        viewModel.userData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Success -> {
-
+                    binding.tvUserName.text = result.data.username
                 }
 
                 is ResultState.Loading -> {
@@ -108,23 +112,6 @@ class HomeFragment : Fragment() {
                 is ResultState.Error -> {
                     // showLoading(false)
                     // handle error
-                }
-            }
-        }
-
-        viewModel.recipes.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is ResultState.Success -> {
-
-                }
-
-                is ResultState.Loading -> {
-//                    showLoading(true)
-                }
-
-                is ResultState.Error -> {
-//                    showLoading(false)
-
                 }
             }
         }
