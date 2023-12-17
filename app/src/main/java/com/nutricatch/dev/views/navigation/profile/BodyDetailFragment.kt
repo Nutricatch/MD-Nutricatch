@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -44,10 +45,11 @@ class BodyDetailFragment : Fragment() {
         viewModel.userHealthData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Loading -> {
-                    /// TODO Show Loading
+                    showLoading(true)
                 }
 
                 is ResultState.Success -> {
+                    showLoading(false)
                     val healthResponse = result.data
                     with(binding) {
                         if (healthResponse.age != null) {
@@ -69,11 +71,13 @@ class BodyDetailFragment : Fragment() {
                 }
 
                 is ResultState.Error -> {
+                    showLoading(false)
                     /// TODO Handle error here
                     if (result.errorCode == 401) {
                         /// TODO navigate ke login page
                     } else {
                         /// TODO tampilkan error dengan toast
+                        Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -104,19 +108,23 @@ class BodyDetailFragment : Fragment() {
                     when (result) {
                         is ResultState.Loading -> {
                             /// TODO Show Loading
+                            showLoading(true)
                         }
 
                         is ResultState.Success -> {
+                            showLoading(false)
                             showToast(requireContext(), getString(R.string.success_update_data))
                             requireActivity().onBackPressedDispatcher.onBackPressed()
                         }
 
                         is ResultState.Error -> {
+                            showLoading(false)
                             /// TODO Handle error here
                             if (result.errorCode == 401) {
                                 /// TODO navigate ke login page
                             } else {
                                 /// TODO tampilkan error dengan toast
+                                Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -169,5 +177,9 @@ class BodyDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
