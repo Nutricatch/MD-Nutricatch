@@ -96,6 +96,10 @@ class CameraActivity : AppCompatActivity() {
         binding.btnPickImage.setOnClickListener {
             startGallery()
         }
+
+        binding.btnNext.setOnClickListener{
+            imageCapture
+        }
     }
 
     override fun onRestart() {

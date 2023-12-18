@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.navigation.dailyCaloriesFragment
+package com.nutricatch.dev.views.navigation.daily_calories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

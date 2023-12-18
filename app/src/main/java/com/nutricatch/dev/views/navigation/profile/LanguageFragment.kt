@@ -1,7 +1,6 @@
 package com.nutricatch.dev.views.navigation.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,14 @@ import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentLanguageBinding
 import com.nutricatch.dev.utils.Const
-import com.nutricatch.dev.views.factory.PreferencesViewModelFactory
+import com.nutricatch.dev.views.factory.UserProfileViewModelFactory
 
 class LanguageFragment : Fragment() {
     private var _binding: FragmentLanguageBinding? = null
     private val binding get() = _binding!!
     private lateinit var preferences: Preferences
     private val viewModel by viewModels<ProfileViewModel> {
-        PreferencesViewModelFactory(preferences)
+        UserProfileViewModelFactory.getInstance(preferences, requireContext())
     }
 
     override fun onCreateView(
@@ -30,10 +29,9 @@ class LanguageFragment : Fragment() {
         // Inflate the layout for this fragment
         preferences = Preferences.getInstance(requireActivity().dataStore)
         _binding =
-            FragmentLanguageBinding.inflate(LayoutInflater.from(requireContext()), container, false)
+            FragmentLanguageBinding.inflate(inflater, container, false)
 
         viewModel.locale.observe(viewLifecycleOwner) {
-            Log.d("TAG", "onCreateView: $it")
             if (it == Const.LOCALE_EN) {
                 binding.icChecklistId.visibility = View.INVISIBLE
                 binding.icChecklist.visibility = View.VISIBLE

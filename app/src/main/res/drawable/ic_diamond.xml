@@ -1,0 +1,41 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="128dp"
+    android:height="128dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M16,3L20.999,10H11L16,3Z" />
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M10.999,10L6,3L1,10H10.999Z" />
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M30.999,10L26,3L21,10H30.999Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M11,10L16,31L21,10H11Z"
+        android:strokeWidth="2"
+        android:strokeColor="?attr/background"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M16,31L1,10H11L16,31Z" />
+    <path
+        android:fillColor="?attr/colorPrimary"
+        android:pathData="M16,31L21,10H31L16,31Z" />
+    <path
+        android:fillColor="?attr/colorSecondaryContainer"
+        android:pathData="M10.999,10L6,3H15.999L10.999,10Z" />
+    <path
+        android:fillColor="?attr/colorSecondaryContainer"
+        android:pathData="M20.999,10L16,3H25.999L20.999,10L16,31L10.999,10L20.999,10Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M6,3L1,10M6,3H26M6,3L11,10M1,10L16,31M1,10H31M16,31L31,10M16,31L21,10M16,31L11,10M31,10L26,3M26,3L21,10M21,10L16,3L11,10"
+        android:strokeWidth="2"
+        android:strokeColor="?attr/background"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

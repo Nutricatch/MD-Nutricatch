@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NutriCatch</string>
+    <string name="app_name" translatable="false">NutriCatch</string>
     <string name="onboard_headline_1">Get the exact nutrition value of everything you eat</string>
     <string name="onboard_body_1">We are updating our food database every minute to help you track you calories.</string>
     <string name="onboard_headline_2">Get all the healthy recipes that you need</string>
@@ -72,4 +72,12 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="scan_result">Scan result</string>
     <string name="delet_account">Request For Account Deletion</string>
     <string name="cancel">Cancel</string>
+    <string name="underweight">Underweight</string>
+    <string name="extremely_overweight">Extremely Overweight</string>
+    <string name="slightly_underweight">Slightly Underweight</string>
+    <string name="overweight">Overweight</string>
+    <string name="slightly_overweight">Slightly Overweight</string>
+    <string name="success_update_data">Success update data</string>
+    <string name="track_your_calories_journey1">Track Your </string>
+    <string name="track_your_calories_journey2">Calories Journey</string>
 </resources>

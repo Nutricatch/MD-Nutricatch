@@ -5,12 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
@@ -42,8 +41,14 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         preferences = Preferences.getInstance(requireContext().dataStore)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         lifecycleScope.launch {
-            preferences.themeMode.collect { theme ->
+            viewModel.theme.collect { theme ->
                 Log.d("TAG", "onViewCreated: Theme changed $theme")
                 when (theme) {
                     Theme.Dark -> {
@@ -77,48 +82,27 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         /// TODO navigate ke login page
                     } else {
                         /// TODO tampilkan error dengan toast
+                        Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
 
-        return binding.root
-    }
+        binding.tileMyWeight.setOnClickListener(this)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.tileMyWeight.setOnClickListener {
-            it.findNavController().navigate(
-                R.id.action_navigation_profile_to_bodyDetailFragment
-            )
-        }
-        binding.tileLanguages.setOnClickListener {
-            it.findNavController().navigate(
-                R.id.action_navigation_profile_to_languageFragment
-            )
-        }
+        binding.tileLanguages.setOnClickListener(this)
 
-        binding.tileShare.setOnClickListener {
-            /// TODO implement share with intent explicit
-        }
+        binding.tileShare.setOnClickListener(this)
 
         binding.swTheme.setOnCheckedChangeListener { _, isChecked ->
             changeTheme(isChecked)
         }
 
-        binding.tileContact.setOnClickListener {
-            /// TODO implement intent to email
-        }
+        binding.tileContact.setOnClickListener(this)
 
-        binding.tileHelp.setOnClickListener {
-            /// TODO implement navigate to help page
-        }
+        binding.tileHelp.setOnClickListener(this)
 
-        binding.tilePrivacy.setOnClickListener {
-            it.findNavController().navigate(
-                R.id.action_navigation_profile_to_privacyFragment
-            )
-        }
+        binding.tilePrivacy.setOnClickListener(this)
 
         binding.btnLogout.setOnClickListener(this)
 
@@ -136,19 +120,43 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun onClickListener(title: String) {
-        when (title.lowercase()) {
-            "my weight" -> {
-                Navigation.createNavigateOnClickListener(R.id.action_navigation_profile_to_bodyDetailFragment)
-            }
-        }
-    }
-
     override fun onClick(v: View) {
         when (v) {
             binding.btnLogout -> {
                 viewModel.logout()
-                findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToAppCheckActivity())
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionNavigationProfileToAppCheckActivity()
+                )
+            }
+
+            binding.tileMyWeight -> {
+                findNavController().navigate(
+                    R.id.action_navigation_profile_to_bodyDetailFragment
+                )
+            }
+
+            binding.tileLanguages -> {
+                findNavController().navigate(
+                    R.id.action_navigation_profile_to_languageFragment
+                )
+            }
+
+            binding.tileShare -> {
+                /// TODO implement share with intent explicit
+            }
+
+            binding.tileContact -> {
+                /// TODO implement intent to email
+            }
+
+            binding.tileHelp -> {
+                /// TODO implement navigate to help page
+            }
+
+            binding.tilePrivacy -> {
+                findNavController().navigate(
+                    R.id.action_navigation_profile_to_privacyFragment
+                )
             }
         }
     }

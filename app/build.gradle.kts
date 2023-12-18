@@ -54,8 +54,10 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     // Custom View
-    /// Dot Indicator
-    implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation("com.tbuonomo:dotsindicator:5.0") /// Dot Indicator
+    implementation ("com.github.smarteist:autoimageslider:1.4.0") /// Auto Image slider
+
+    /// TFLite
     implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")

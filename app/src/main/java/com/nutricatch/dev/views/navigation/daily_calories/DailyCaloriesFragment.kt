@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.navigation.dailyCaloriesFragment
+package com.nutricatch.dev.views.navigation.daily_calories
 
 import android.os.Bundle
 import android.view.LayoutInflater
