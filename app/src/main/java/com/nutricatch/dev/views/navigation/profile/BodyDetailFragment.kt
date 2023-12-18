@@ -75,6 +75,7 @@ class BodyDetailFragment : Fragment() {
                     /// TODO Handle error here
                     if (result.errorCode == 401) {
                         /// TODO navigate ke login page
+
                     } else {
                         /// TODO tampilkan error dengan toast
                         Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
