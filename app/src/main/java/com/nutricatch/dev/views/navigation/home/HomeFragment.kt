@@ -47,11 +47,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val aaChartView = binding.chart
-        val label: Array<String> = arrayOf("a", "b", "c", "d", "e", "f", "g")
-        val chartData: Array<Any> = arrayOf(2000, 1950, 2050, 1850, 1880, 2110, 2202)
+        val label: Array<String> = arrayOf("Carbs", "Fat", "Protein")
+        val chartData: Array<Any> = arrayOf(20,50, 80)
         val aaChartModel: AAChartModel = AAChartModel()
             //nentuin jenis chart, ada banyak macem
-            .chartType(AAChartType.Spline)
+            .chartType(AAChartType.Column)
             //title, ilangin title biar muncul lebih besar
             .title("")
             .dataLabelsEnabled(false)
