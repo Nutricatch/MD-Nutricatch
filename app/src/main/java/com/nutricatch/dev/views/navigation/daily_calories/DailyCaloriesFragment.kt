@@ -29,6 +29,16 @@ class DailyCaloriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.caloriesProgress.progress = 60
+
+        //TODO Handle Warning kalau lebih kalori jika udah dapet fungsi
+//        if ()
+//        {
+//            binding.warningTv.visibility = View.VISIBLE
+//        }
+//        else if ()
+//        {
+//            binding.warningTv.visibility = View.INVISIBLE
+//        }
     }
 
     override fun onDestroyView() {
