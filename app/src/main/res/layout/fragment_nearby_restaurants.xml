@@ -7,11 +7,22 @@
     android:paddingHorizontal="24dp"
     tools:context=".views.navigation.food_recommendation.FoodRecommendationFragment">
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_map_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/map_view"
+        app:icon="@drawable/ic_map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/tv_text_my_eating"
         style="@style/Theme.NutriCatch.TextStyle.Headline.Medium.Bold"
         android:layout_marginTop="64dp"
-        android:text="Delicious food, only for you 😉"
+        android:text="@string/delicious_food_only_for_you"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
