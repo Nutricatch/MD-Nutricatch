@@ -2,6 +2,7 @@ package com.nutricatch.dev.data.api
 
 import com.nutricatch.dev.data.api.response.DailyIntakeResponse
 import com.nutricatch.dev.data.api.response.HealthResponse
+import com.nutricatch.dev.data.api.response.RestaurantResponseItem
 import com.nutricatch.dev.data.api.response.UserResponse
 import com.nutricatch.dev.data.response.AuthResponse
 import com.nutricatch.dev.model.LatestPostResponse
@@ -11,10 +12,10 @@ import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("latest_post")
@@ -60,7 +61,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST
-    suspend fun insertNewFood(@Part foodImage:MultipartBody.Part): DailyIntakeResponse
+    suspend fun insertNewFood(@Part foodImage: MultipartBody.Part): DailyIntakeResponse
 
     @FormUrlEncoded
     @POST("/user-health/update")
@@ -73,4 +74,9 @@ interface ApiService {
         @Field("activityLevel") activityLevel: String,
     ): HealthResponse
 
+    @GET("/restaurants/search")
+    suspend fun getNearbyRestaurants(
+        @Query("latitude") lat: Double,
+        @Query("longitude") lng: Double
+    ): MutableList<RestaurantResponseItem>
 }

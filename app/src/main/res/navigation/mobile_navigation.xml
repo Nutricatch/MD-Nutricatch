@@ -102,9 +102,9 @@
         tools:layout="@layout/fragment_privacy" />
     <fragment
         android:id="@+id/foodRecommendationFragment"
-        android:name="com.nutricatch.dev.FoodRecommendationFragment"
+        android:name="com.nutricatch.dev.views.navigation.food_recommendation.FoodRecommendationFragment"
         android:label="fragment_food_recommendation"
-        tools:layout="@layout/fragment_food_recommendation" />
+        tools:layout="@layout/fragment_nearby_restaurants" />
     <dialog
         android:id="@+id/mustLoginDialogFragment"
         android:name="com.nutricatch.dev.views.navigation.dialog.MustLoginDialogFragment"
