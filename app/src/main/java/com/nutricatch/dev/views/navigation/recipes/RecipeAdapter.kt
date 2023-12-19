@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.nutricatch.dev.databinding.RecommendationItemBinding
+import com.nutricatch.dev.databinding.RecipeItemBinding
 import com.nutricatch.dev.model.Recipe
 
 class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.ViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            RecommendationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RecipeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -21,7 +21,7 @@ class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.ViewHolder>(DIFF_CALLBAC
         holder.bind(recipe)
     }
 
-    class ViewHolder(val binding: RecommendationItemBinding) :
+    class ViewHolder(val binding: RecipeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
             binding.tvName.text = recipe.title

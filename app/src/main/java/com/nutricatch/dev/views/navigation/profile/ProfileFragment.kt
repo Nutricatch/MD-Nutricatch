@@ -152,6 +152,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
             binding.tileContact -> {
                 // TODO implement intent to email
+                findNavController().navigate(R.id.action_navigation_profile_to_contactUsFragment)
             }
 
             binding.tileHelp -> {

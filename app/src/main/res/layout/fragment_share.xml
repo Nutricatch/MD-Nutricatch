@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ShareFragment"
+    tools:context=".views.navigation.profile.ShareFragment"
     android:paddingHorizontal="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +55,15 @@
             android:text="@string/share_nutricatch"
             android:textStyle="bold"
             style="@style/ButtonStyle"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/share_app"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shareButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
