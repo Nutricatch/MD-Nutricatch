@@ -117,7 +117,11 @@
         android:id="@+id/foodRecommendationFragment"
         android:name="com.nutricatch.dev.views.navigation.food_recommendation.FoodRecommendationFragment"
         android:label="fragment_food_recommendation"
-        tools:layout="@layout/fragment_nearby_restaurants" />
+        tools:layout="@layout/fragment_nearby_restaurants" >
+        <action
+            android:id="@+id/action_foodRecommendationFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
     <dialog
         android:id="@+id/mustLoginDialogFragment"
         android:name="com.nutricatch.dev.views.navigation.dialog.MustLoginDialogFragment"
@@ -171,4 +175,9 @@
         android:name="com.nutricatch.dev.views.navigation.profile.ContactUsFragment"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.nutricatch.dev.views.navigation.restaurant.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

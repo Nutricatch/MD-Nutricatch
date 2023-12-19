@@ -5,12 +5,10 @@ import com.nutricatch.dev.data.api.response.HealthResponse
 import com.nutricatch.dev.data.api.response.RestaurantResponseItem
 import com.nutricatch.dev.data.api.response.UserResponse
 import com.nutricatch.dev.data.response.AuthResponse
-import com.nutricatch.dev.data.response.ContactUsResponse
 import com.nutricatch.dev.model.LatestPostResponse
 import com.nutricatch.dev.model.Recipe
 import com.nutricatch.dev.model.RecipeListResponse
 import okhttp3.MultipartBody
-import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -76,13 +74,9 @@ interface ApiService {
         @Field("activityLevel") activityLevel: String,
     ): HealthResponse
 
-<<<<<<< HEAD
-
-=======
     @GET("/restaurants/search")
     suspend fun getNearbyRestaurants(
         @Query("latitude") lat: Double,
         @Query("longitude") lng: Double
     ): MutableList<RestaurantResponseItem>
->>>>>>> 93690bb81aa382d18c0a72ba0f89ce80d97712df
 }
