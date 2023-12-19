@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.api.response.ActivityLevel
@@ -74,8 +75,8 @@ class BodyDetailFragment : Fragment() {
                     showLoading(false)
                     /// TODO Handle error here
                     if (result.errorCode == 401) {
-                        /// TODO navigate ke login page
-
+                        //TODO navigate ke login page
+                       findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
                     } else {
                         /// TODO tampilkan error dengan toast
                         Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
@@ -123,6 +124,7 @@ class BodyDetailFragment : Fragment() {
                             /// TODO Handle error here
                             if (result.errorCode == 401) {
                                 /// TODO navigate ke login page
+                                findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
                             } else {
                                 /// TODO tampilkan error dengan toast
                                 Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()

@@ -66,9 +66,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             when (result) {
                 is ResultState.Loading -> {
                     /// TODO Show Loading
+                    showLoading(true)
                 }
 
                 is ResultState.Success -> {
+                    showLoading(false)
                     val user = result.data
                     with(binding) {
                         tvName.text = user.username
@@ -77,9 +79,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 }
 
                 is ResultState.Error -> {
+                    showLoading(false)
                     /// TODO Handle error here
                     if (result.errorCode == 401) {
                         /// TODO navigate ke login page
+                        findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToLoginFragment())
                     } else {
                         /// TODO tampilkan error dengan toast
                         Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
@@ -142,15 +146,16 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             }
 
             binding.tileShare -> {
-                /// TODO implement share with intent explicit
+                // TODO implement share with intent explicit
+                findNavController().navigate(R.id.action_navigation_profile_to_shareFragment)
             }
 
             binding.tileContact -> {
-                /// TODO implement intent to email
+                // TODO implement intent to email
             }
 
             binding.tileHelp -> {
-                /// TODO implement navigate to help page
+                // TODO implement navigate to help page
             }
 
             binding.tilePrivacy -> {
@@ -164,5 +169,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
