@@ -115,9 +115,9 @@
         tools:layout="@layout/fragment_privacy" />
     <fragment
         android:id="@+id/foodRecommendationFragment"
-        android:name="com.nutricatch.dev.FoodRecommendationFragment"
+        android:name="com.nutricatch.dev.views.navigation.food_recommendation.FoodRecommendationFragment"
         android:label="fragment_food_recommendation"
-        tools:layout="@layout/fragment_food_recommendation" />
+        tools:layout="@layout/fragment_nearby_restaurants" />
     <dialog
         android:id="@+id/mustLoginDialogFragment"
         android:name="com.nutricatch.dev.views.navigation.dialog.MustLoginDialogFragment"
@@ -146,7 +146,11 @@
         android:id="@+id/registerFragment"
         android:name="com.nutricatch.dev.views.navigation.auth.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
     <activity
         android:id="@+id/appCheckActivity"
         android:name="com.nutricatch.dev.views.app_check.AppCheckActivity"

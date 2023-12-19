@@ -6,7 +6,7 @@ import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.data.repository.AuthRepository
 import com.nutricatch.dev.data.repository.RecipesRepository
-import com.nutricatch.dev.data.repository.RecommendationRepository
+import com.nutricatch.dev.data.repository.RestaurantRepository
 import com.nutricatch.dev.data.repository.UserRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -15,13 +15,6 @@ object Injection {
 
     fun updateToken(token: String) {
 
-    }
-
-    fun provideRecommendationRepository(context: Context): RecommendationRepository {
-        val pref = Preferences.getInstance(context.dataStore)
-        val token = runBlocking { pref.getToken().first() }
-        val apiService = ApiConfig.getApiService(token)
-        return RecommendationRepository.getInstance(apiService)
     }
 
     fun provideRecipeRepository(context: Context): RecipesRepository {
@@ -43,5 +36,10 @@ object Injection {
         val token = runBlocking { pref.getToken().first() }
         val apiService = ApiConfig.getApiService(token)
         return UserRepository(apiService)
+    }
+
+    fun provideRestaurantRepository(context: Context): RestaurantRepository {
+        val preferences = Preferences.getInstance(context.dataStore)
+        return RestaurantRepository(preferences)
     }
 }

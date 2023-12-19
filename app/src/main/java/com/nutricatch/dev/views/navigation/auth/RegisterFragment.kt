@@ -8,7 +8,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentRegisterBinding
@@ -46,31 +45,30 @@ class RegisterFragment : Fragment() {
             val email = emailEditText.text.toString().trim().lowercase()
             val password = passwordEditText.text.toString().trim()
 
-            viewModel.register(name, email, password).observe(viewLifecycleOwner){result->
+            viewModel.register(name, email, password).observe(viewLifecycleOwner) { result ->
                 showLoading(true)
                 /// TODO observe di sini, untuk tiap resultnya
-                when(result)
-                {
-                    is ResultState.Success->{
+                when (result) {
+                    is ResultState.Success -> {
                         showLoading(false)
                         AlertDialog.Builder(requireActivity()).apply {
                             setTitle("Welcome To Nutri Catch")
                             setMessage(result.data.message)
-                            setPositiveButton("Great!"){_,_ ->
+                            setPositiveButton("Great!") { _, _ ->
+                                lifecycleScope.launch {
+                                    if (result.data.accessToken != null) {
+                                        viewModel.saveSession(result.data.accessToken)
+                                        withContext(Dispatchers.Main) {
+                                            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToNavigationHome())
+                                        }
+                                    }
+                                }
                             }
                             create()
                             show()
                         }
-                        lifecycleScope.launch {
-                            if (result.data.accessToken !=null)
-                            {
-                                viewModel.saveSession(result.data.accessToken)
-                                withContext(Dispatchers.Main){
-                                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
-                                }
-                            }
-                        }
                     }
+
                     is ResultState.Error -> {
                         showLoading(false)
                         AlertDialog.Builder(requireActivity()).apply {
@@ -82,7 +80,8 @@ class RegisterFragment : Fragment() {
                             show()
                         }
                     }
-                    else->{
+
+                    else -> {
 
                     }
                 }
@@ -92,6 +91,7 @@ class RegisterFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
     }
 
     private fun showLoading(isLoading: Boolean) {
