@@ -4,10 +4,12 @@ import com.nutricatch.dev.data.api.response.DailyIntakeResponse
 import com.nutricatch.dev.data.api.response.HealthResponse
 import com.nutricatch.dev.data.api.response.UserResponse
 import com.nutricatch.dev.data.response.AuthResponse
+import com.nutricatch.dev.data.response.ContactUsResponse
 import com.nutricatch.dev.model.LatestPostResponse
 import com.nutricatch.dev.model.Recipe
 import com.nutricatch.dev.model.RecipeListResponse
 import okhttp3.MultipartBody
+import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -72,5 +74,6 @@ interface ApiService {
         @Field("fitnessGoal") fitnessGoal: String,
         @Field("activityLevel") activityLevel: String,
     ): HealthResponse
+
 
 }
