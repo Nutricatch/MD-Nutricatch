@@ -78,4 +78,10 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="overweight">Gemuk</string>
     <string name="slightly_overweight">Cukup Gemuk</string>
     <string name="success_update_data">Sukses perbarui data</string>
+    <string name="track_your_calories_journey1">Lacak Perjalanan </string>
+    <string name="track_your_calories_journey2">Kalori Anda</string>
+    <string name="or">atau</string>
+    <string name="login_with_google">Login dengan Google</string>
+    <string name="share_nutricatch">Bagikan NutriCatch</string>
+    <string name="share_nutricatch_content">Yuk ajak temanmu mencoba NutriCatch agar mereka juga ikut merasakan nikmatnya terbantu mengontrol asupan makanan sehari-hari dengan NutriCatch.</string>
 </resources>

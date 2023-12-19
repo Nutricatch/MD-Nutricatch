@@ -78,6 +78,12 @@
         <action
             android:id="@+id/action_navigation_profile_to_appCheckActivity"
             app:destination="@id/appCheckActivity" />
+        <action
+            android:id="@+id/action_navigation_profile_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_shareFragment"
+            app:destination="@id/shareFragment" />
     </fragment>
 
     <activity
@@ -89,7 +95,11 @@
         android:id="@+id/bodyDetailFragment"
         android:name="com.nutricatch.dev.views.navigation.profile.BodyDetailFragment"
         android:label="fragment_body_detail"
-        tools:layout="@layout/fragment_body_detail" />
+        tools:layout="@layout/fragment_body_detail" >
+        <action
+            android:id="@+id/action_bodyDetailFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/languageFragment"
         android:name="com.nutricatch.dev.views.navigation.profile.LanguageFragment"
@@ -144,4 +154,9 @@
         android:name="com.nutricatch.dev.views.navigation.auth.WebViewLoginFragment"
         android:label="fragment_web_view_login"
         tools:layout="@layout/fragment_web_view_login" />
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.nutricatch.dev.ShareFragment"
+        android:label="fragment_share"
+        tools:layout="@layout/fragment_share" />
 </navigation>
