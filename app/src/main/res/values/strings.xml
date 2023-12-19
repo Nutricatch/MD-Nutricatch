@@ -83,5 +83,11 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="or">or</string>
     <string name="login_with_google">Login With Google</string>
     <string name="share_nutricatch">Share NutriCatch</string>
-    <string name="share_nutricatch_content">Let's invite your friends to try NutriCatch so they can also feel the pleasure of being helped to control their daily food intake with NutriCatch.</string>
+    <string name="share_nutricatch_content">Let\'s invite your friends to try NutriCatch so they can also feel the pleasure of being helped to control their daily food intake with NutriCatch.</string>
+    <string name="name">Name</string>
+    <string name="enter_your_message">Enter Your Message</string>
+    <string name="send_your_message">Send Your Message</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="message">Message</string>
 </resources>

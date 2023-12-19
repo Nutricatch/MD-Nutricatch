@@ -84,4 +84,10 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="login_with_google">Login dengan Google</string>
     <string name="share_nutricatch">Bagikan NutriCatch</string>
     <string name="share_nutricatch_content">Yuk ajak temanmu mencoba NutriCatch agar mereka juga ikut merasakan nikmatnya terbantu mengontrol asupan makanan sehari-hari dengan NutriCatch.</string>
+    <string name="name">Nama</string>
+    <string name="enter_your_message">Masukan Pesanmu</string>
+    <string name="send_your_message">Kirimkan Pesanmu</string>
+    <string name="enter_your_name">Masukkan Nama</string>
+    <string name="enter_your_email">Masukkan Email</string>
+    <string name="message">Pesan</string>
 </resources>
