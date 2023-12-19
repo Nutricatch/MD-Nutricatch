@@ -39,7 +39,7 @@ interface ApiService {
     ): AuthResponse
 
     @FormUrlEncoded
-    @POST("register")
+    @POST("auth/register")
     suspend fun registerUser(
         @Field("name") name: String,
         @Field("email") email: String,
