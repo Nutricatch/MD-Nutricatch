@@ -5,18 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nutricatch.dev.data.injection.Injection
 import com.nutricatch.dev.data.prefs.Preferences
-import com.nutricatch.dev.data.repository.UserRepository
-import com.nutricatch.dev.views.navigation.home.HomeViewModel
+import com.nutricatch.dev.data.repository.RecipesRepository
+import com.nutricatch.dev.views.navigation.recipes.RecipeViewModel
 
-class HomeViewModelFactory(
-    private val userRepository: UserRepository,
-    private val preferences: Preferences
-) :
+class RecipesViewModelFactory(private val recipesRepository: RecipesRepository) :
     ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(userRepository, preferences) as T
+        if (modelClass.isAssignableFrom(RecipeViewModel::class.java)) {
+            return RecipeViewModel(recipesRepository) as T
         }
 
         throw IllegalArgumentException("Unknown viewModel class ${modelClass.name}")

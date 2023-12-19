@@ -1,15 +1,19 @@
 package com.nutricatch.dev.data.api
 
+import com.nutricatch.dev.data.api.response.DailyIntakeResponse
 import com.nutricatch.dev.data.api.response.HealthResponse
 import com.nutricatch.dev.data.api.response.UserResponse
 import com.nutricatch.dev.data.response.AuthResponse
 import com.nutricatch.dev.model.LatestPostResponse
 import com.nutricatch.dev.model.Recipe
 import com.nutricatch.dev.model.RecipeListResponse
+import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
@@ -49,6 +53,14 @@ interface ApiService {
 
     @GET("user-health/health")
     suspend fun getHealthData(): HealthResponse
+
+    //TODO Buat fungsi API Service untuk get daily Calories dan Post new food
+    @GET("user")
+    suspend fun getDailyIntake(): DailyIntakeResponse
+
+    @FormUrlEncoded
+    @POST
+    suspend fun insertNewFood(@Part foodImage:MultipartBody.Part): DailyIntakeResponse
 
     @FormUrlEncoded
     @POST("/user-health/update")

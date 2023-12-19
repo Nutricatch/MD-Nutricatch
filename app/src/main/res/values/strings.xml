@@ -80,4 +80,6 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="success_update_data">Success update data</string>
     <string name="track_your_calories_journey1">Track Your </string>
     <string name="track_your_calories_journey2">Calories Journey</string>
+    <string name="or">or</string>
+    <string name="login_with_google">Login With Google</string>
 </resources>

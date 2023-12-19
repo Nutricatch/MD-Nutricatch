@@ -11,7 +11,8 @@ private val imagesUrl = arrayOf(
     "https://drive.google.com/uc?id=1WzBDOYi-OyHPk1garLIGjn9_DAdAGeyT&export=download"
 )
 
-class RecommendationSliderAdapter : SliderViewAdapter<RecommendationSliderAdapter.ViewHolder>() {
+class RecommendationSliderAdapter(private val onClick: (position: Int) -> Unit) :
+    SliderViewAdapter<RecommendationSliderAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: SliderItemBinding) :
         SliderViewAdapter.ViewHolder(binding.root) {
         fun bind(imageUrl: String) {
@@ -29,5 +30,8 @@ class RecommendationSliderAdapter : SliderViewAdapter<RecommendationSliderAdapte
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val image = imagesUrl[position]
         viewHolder.bind(image)
+        viewHolder.itemView.setOnClickListener {
+            onClick(position)
+        }
     }
 }
