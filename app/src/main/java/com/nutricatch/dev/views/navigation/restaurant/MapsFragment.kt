@@ -20,8 +20,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.api.response.RestaurantResponseItem
 import com.nutricatch.dev.databinding.FragmentMapsBinding
-import com.nutricatch.dev.utils.Const.COARSE_LOCATION_PERMISSION
-import com.nutricatch.dev.utils.Const.FINE_LOCATION_PERMISSION
+import com.nutricatch.dev.utils.Permissions.COARSE_LOCATION_PERMISSION
+import com.nutricatch.dev.utils.Permissions.FINE_LOCATION_PERMISSION
 import com.nutricatch.dev.views.factory.RestaurantViewModelFactory
 import com.nutricatch.dev.views.navigation.food_recommendation.RestaurantViewModel
 

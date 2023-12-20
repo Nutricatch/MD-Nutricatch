@@ -1,6 +1,5 @@
 package com.nutricatch.dev.views.navigation.camera
 
-import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -21,8 +20,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.common.util.concurrent.ListenableFuture
+import com.nutricatch.dev.R
 import com.nutricatch.dev.databinding.ActivityCameraBinding
 import com.nutricatch.dev.helper.MLHelper
+import com.nutricatch.dev.helper.foodLabelsMap
+import com.nutricatch.dev.utils.Permissions
 import com.nutricatch.dev.utils.showToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,10 +45,19 @@ class CameraActivity : AppCompatActivity() {
         if (uri != null) {
             stopCamera()
             this.uri = uri
-            val result = mlHelper.processImage(this, uri)
-            showToast(this, result)
-            showPreviewImage(this.uri!!)
-            showRetakeButton()
+            /*
+            * Show scan result here
+            * */
+
+            val resultLabel = mlHelper.processImage(this, uri)
+            val result = foodLabelsMap[resultLabel.label]
+            if (resultLabel.isRecognized) {
+                showSuccessCard(result ?: "unknown food, we will update it immediately")
+                showPreviewImage(this.uri!!)
+            } else {
+                showToast(this, "Food is not recognized, try again")
+                startCamera()
+            }
         }
     }
 
@@ -89,24 +100,27 @@ class CameraActivity : AppCompatActivity() {
 
         binding.btnRetake.setOnClickListener {
             startCamera()
-            hideRetakeButton()
+            showCaptureButton()
             hidePreviewImage()
+            hideSuccessCard()
         }
 
         binding.btnPickImage.setOnClickListener {
             startGallery()
         }
 
-        binding.btnNext.setOnClickListener{
-            
+        binding.btnNext.setOnClickListener {
+            imageCapture
+            hideSuccessCard()
         }
     }
 
     override fun onRestart() {
         super.onRestart()
         startCamera()
-        hideRetakeButton()
+        showCaptureButton()
         hidePreviewImage()
+        hideSuccessCard()
     }
 
     private fun startGallery() {
@@ -125,12 +139,20 @@ class CameraActivity : AppCompatActivity() {
 
                 override fun onCaptureSuccess(image: ImageProxy) {
                     super.onCaptureSuccess(image)
-                    val result = mlHelper.processImageProxy(this@CameraActivity, image)
+                    val resultLabel = mlHelper.processImageProxy(this@CameraActivity, image)
+                    val result = foodLabelsMap[resultLabel.label]
                     lifecycleScope.launch {
                         withContext(Dispatchers.Main) {
-                            showToast(this@CameraActivity, result)
                             stopCamera()
-                            showRetakeButton()
+                            if (resultLabel.isRecognized) {
+                                showSuccessCard(
+                                    result ?: "unknown food, we will update it immediately"
+                                )
+                            } else {
+                                showToast(this@CameraActivity, "Food is not recognized, try again")
+                                startCamera()
+                                showCaptureButton()
+                            }
                         }
                     }
                 }
@@ -168,33 +190,19 @@ class CameraActivity : AppCompatActivity() {
     private fun stopCamera() {
         val cameraProvider = cameraProvidedFuture.get()
         cameraProvider.unbindAll()
-        showRetakeButton()
+        hideCaptureButton()
     }
 
-    private fun showRetakeButton() {
+    private fun hideCaptureButton() {
         with(binding) {
-            btnRetake.visibility = View.VISIBLE
-            btnNext.visibility = View.VISIBLE
             btnCapture.visibility = View.GONE
         }
     }
 
-    private fun hideRetakeButton() {
+    private fun showCaptureButton() {
         with(binding) {
-            btnRetake.visibility = View.GONE.also {
-                btnNext.visibility = it
-            }
             btnCapture.visibility = View.VISIBLE
         }
-    }
-
-    private fun restartCamera()
-    {
-        val cameraProvider = cameraProvidedFuture.get()
-        cameraProvider.unbindAll()
-        binding.btnCapture.visibility = View.VISIBLE
-        binding.btnNext.visibility = View.INVISIBLE
-        binding.btnNext.visibility = View.INVISIBLE
     }
 
     private fun requestPermissions() {
@@ -214,19 +222,27 @@ class CameraActivity : AppCompatActivity() {
     private fun hidePreviewImage() {
         binding.viewFinder.visibility = View.VISIBLE
         binding.imgPreview.visibility = View.GONE
-        hideRetakeButton()
+        showCaptureButton()
+    }
+
+    private fun showSuccessCard(label: String) {
+        binding.cardConfirmation.visibility = View.VISIBLE
+        binding.tvConfirmation.text = getString(R.string.confirmation_text, label)
+    }
+
+    private fun hideSuccessCard() {
+        binding.cardConfirmation.visibility = View.GONE
     }
 
     companion object {
         private const val TAG = "CameraXApp"
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private val mlHelper = MLHelper()
         private val REQUIRED_PERMISSIONS =
             mutableListOf(
-                Manifest.permission.CAMERA
+                Permissions.CAMERA_PERMISSION
             ).apply {
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                    add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    add(Permissions.EXTERNAL_STORAGE)
                 }
             }.toTypedArray()
     }

@@ -14,9 +14,14 @@ object Const {
     const val LOCALE_ID = "in-ID"
     const val LOCALE_EN = "en-US"
 
+}
+
+object Permissions{
     /*
     * Permission Related
     * */
     const val FINE_LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION
     const val COARSE_LOCATION_PERMISSION = Manifest.permission.ACCESS_COARSE_LOCATION
+    const val CAMERA_PERMISSION = Manifest.permission.CAMERA
+    const val EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE
 }

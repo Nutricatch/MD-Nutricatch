@@ -96,4 +96,7 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="must_activate_gps">You must activate gps to use this feature . . .</string>
     <string name="cannot_get_location">Tidak dapat mengambil lokasi</string>
     <string name="location_retrieved">Berhasil mendapatkan lokasi</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="confirmation_text">Wow, looks tasty! Is this a %1$s?</string>
 </resources>
