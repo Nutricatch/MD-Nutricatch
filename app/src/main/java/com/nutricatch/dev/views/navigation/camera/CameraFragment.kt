@@ -1,11 +1,9 @@
 package com.nutricatch.dev.views.navigation.camera
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +25,7 @@ import com.nutricatch.dev.helper.MLHelper
 import com.nutricatch.dev.helper.foodLabelsMap
 import com.nutricatch.dev.utils.Permissions
 import com.nutricatch.dev.utils.createCustomTempFile
+import com.nutricatch.dev.utils.getRealPathFromUri
 import com.nutricatch.dev.utils.showToast
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -41,6 +40,7 @@ class CameraFragment : Fragment() {
     private lateinit var cameraProvidedFuture: ListenableFuture<ProcessCameraProvider>
     private var uri: Uri? = null
     private var isFromGallery = false
+    private var label = ""
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -56,6 +56,11 @@ class CameraFragment : Fragment() {
             val result = foodLabelsMap[resultLabel.label]
             Log.d(TAG, "result: $result")
             if (resultLabel.isRecognized) {
+                /*
+                * Set data to send to nutrient fragment
+                * */
+                label = resultLabel.label
+
                 isFromGallery = true
                 showSuccessCard(result ?: "unknown food, we will update it immediately")
                 showPreviewImage(this.uri!!)
@@ -119,7 +124,8 @@ class CameraFragment : Fragment() {
 
         binding.btnNext.setOnClickListener {
             hideSuccessCard()
-            val action = CameraFragmentDirections.actionCameraFragmentToFoodDetailFragment("$uri")
+            val action =
+                CameraFragmentDirections.actionCameraFragmentToFoodDetailFragment("$uri", label)
             action.isfromGallery = isFromGallery
             findNavController().navigate(action)
         }
@@ -147,6 +153,12 @@ class CameraFragment : Fragment() {
                     if (uri != null) {
                         val resultLabel = mlHelper.processImage(requireContext(), uri!!)
                         val result = foodLabelsMap[resultLabel.label]
+
+                        /*
+                        * Set data to send to nutrient fragment
+                        * */
+                        label = resultLabel.label
+
                         stopCamera()
                         if (resultLabel.isRecognized) {
                             isFromGallery = false
@@ -162,29 +174,6 @@ class CameraFragment : Fragment() {
                     }
                 }
 
-//                override fun onCaptureSuccess(image: ImageProxy) {
-//                    super.onCaptureSuccess(image)
-//                    val resultLabel = mlHelper.processImageProxy(requireContext(), image)
-//                    val result = foodLabelsMap[resultLabel.label]
-//                    lifecycleScope.launch {
-//                        withContext(Dispatchers.Main) {
-//                            stopCamera()
-//                            if (resultLabel.isRecognized) {
-//                                isFromGallery = false
-//                                showSuccessCard(
-//                                    result ?: "unknown food, we will update it immediately"
-//                                )
-//                            } else {
-//                                showToast(requireContext(), "Food is not recognized, try again")
-//                                startCamera()
-//                                showCaptureButton()
-//                                val filePath = getRealPathFromUri(requireContext(), uri!!)
-//                                File(filePath).delete()
-//                            }
-//                        }
-//                    }
-//                }
-
                 override fun onError(exception: ImageCaptureException) {
                     val msg = "Something error"
                     showToast(requireContext(), msg)
@@ -192,17 +181,6 @@ class CameraFragment : Fragment() {
                 }
 
             })
-    }
-
-    fun getRealPathFromUri(context: Context, uri: Uri): String? {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = context.contentResolver.query(uri, projection, null, null, null)
-        cursor?.use {
-            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            it.moveToFirst()
-            return it.getString(columnIndex)
-        }
-        return null
     }
 
     private fun startCamera() {

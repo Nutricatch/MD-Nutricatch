@@ -5,6 +5,7 @@ import com.nutricatch.dev.data.api.ApiConfig
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.data.repository.AuthRepository
+import com.nutricatch.dev.data.repository.FoodsRepository
 import com.nutricatch.dev.data.repository.RecipesRepository
 import com.nutricatch.dev.data.repository.RestaurantRepository
 import com.nutricatch.dev.data.repository.UserRepository
@@ -41,5 +42,10 @@ object Injection {
     fun provideRestaurantRepository(context: Context): RestaurantRepository {
         val preferences = Preferences.getInstance(context.dataStore)
         return RestaurantRepository(preferences)
+    }
+
+    fun provideFoodsRepository(context: Context): FoodsRepository {
+        val preferences = Preferences.getInstance(context.dataStore)
+        return FoodsRepository(preferences)
     }
 }

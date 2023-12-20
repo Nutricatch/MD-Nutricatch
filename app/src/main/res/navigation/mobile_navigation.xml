@@ -189,7 +189,22 @@
     </fragment>
     <fragment
         android:id="@+id/foodDetailFragment"
-        android:name="com.nutricatch.dev.FoodDetailFragment"
+        android:name="com.nutricatch.dev.views.navigation.food_detail.FoodNutrientFragment"
         android:label="fragment_food_detail"
-        tools:layout="@layout/fragment_food_detail" />
+        tools:layout="@layout/fragment_food_detail" >
+        <argument
+            android:name="imageUri"
+            app:argType="string" />
+        <argument
+            android:name="isfromGallery"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_foodDetailFragment_to_navigation_daily_calories"
+            app:destination="@id/navigation_daily_calories"
+            app:popUpTo="@id/navigation_home" />
+        <argument
+            android:name="label"
+            app:argType="string" />
+    </fragment>
 </navigation>

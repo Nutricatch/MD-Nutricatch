@@ -1,6 +1,7 @@
 package com.nutricatch.dev.data.api
 
 import com.nutricatch.dev.data.api.response.DailyIntakeResponse
+import com.nutricatch.dev.data.api.response.FoodsResponseItem
 import com.nutricatch.dev.data.api.response.HealthResponse
 import com.nutricatch.dev.data.api.response.RestaurantResponseItem
 import com.nutricatch.dev.data.api.response.UserResponse
@@ -79,4 +80,9 @@ interface ApiService {
         @Query("latitude") lat: Double,
         @Query("longitude") lng: Double
     ): MutableList<RestaurantResponseItem>
+
+    @GET("/foods/{name}")
+    suspend fun getFoodNutrient(
+        @Path("name") name: String
+    ): FoodsResponseItem
 }

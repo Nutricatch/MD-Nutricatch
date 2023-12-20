@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="rectangle"
+    tools:tint="?attr/colorSurface">
+
+    <!-- Specify individual corners for the top -->
+    <corners android:topLeftRadius="50dp" android:topRightRadius="50dp"/>
+</shape>
