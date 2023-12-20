@@ -1,6 +1,5 @@
 package com.nutricatch.dev.views.navigation
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,7 @@ import com.nutricatch.dev.R
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityHomeBinding
-import com.nutricatch.dev.views.navigation.camera.CameraActivity
+import com.nutricatch.dev.views.navigation.home.HomeFragmentDirections
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -54,17 +53,11 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
                 .also { binding.fabScan.isVisible = it }
         }
 
-        binding.fabScan.setOnClickListener(this)
+        binding.fabScan.setOnClickListener {
+            navController.navigate(HomeFragmentDirections.actionNavigationHomeToCameraFragment())
+        }
 
         binding.navView.menu.getItem(1).isEnabled = false
 
-    }
-
-    override fun onClick(v: View) {
-        when (v) {
-            binding.fabScan -> {
-                startActivity(Intent(this, CameraActivity::class.java))
-            }
-        }
     }
 }

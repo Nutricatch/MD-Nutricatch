@@ -1,59 +1,255 @@
 package com.nutricatch.dev.views.navigation.camera
 
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.common.util.concurrent.ListenableFuture
 import com.nutricatch.dev.R
+import com.nutricatch.dev.databinding.FragmentCameraBinding
+import com.nutricatch.dev.helper.MLHelper
+import com.nutricatch.dev.helper.foodLabelsMap
+import com.nutricatch.dev.utils.Permissions
+import com.nutricatch.dev.utils.showToast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
-
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CameraFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CameraFragment : Fragment() {
+    private var _binding: FragmentCameraBinding? = null
+    private val binding get() = _binding!!
 
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var executorService: ExecutorService
+    private var imageCapture: ImageCapture? = null
+    private lateinit var cameraProvidedFuture: ListenableFuture<ProcessCameraProvider>
+    private var uri: Uri? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri != null) {
+            stopCamera()
+            this.uri = uri
+            /*
+            * Show scan result here
+            * */
+
+            val resultLabel = mlHelper.processImage(requireContext(), uri)
+            val result = foodLabelsMap[resultLabel.label]
+            Log.d(TAG, "result: $result")
+            if (resultLabel.isRecognized) {
+                showSuccessCard(result ?: "unknown food, we will update it immediately")
+                showPreviewImage(this.uri!!)
+            } else {
+                showToast(requireContext(), "Food is not recognized, try again")
+                startCamera()
+            }
         }
     }
+
+    private val activityResultLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permission ->
+            // Handle Permission granted/rejected
+            var permissionGranted = true
+            permission.entries.forEach {
+                if (it.key in REQUIRED_PERMISSIONS && !it.value) permissionGranted = false
+            }
+            if (!permissionGranted) {
+                showToast(requireContext(), "Permission request denied")
+            } else {
+                startCamera()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_camera, container, false)
+        _binding = FragmentCameraBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        cameraProvidedFuture = ProcessCameraProvider.getInstance(requireContext())
+        executorService = Executors.newSingleThreadExecutor()
+
+        // Request Camera Permission
+        if (allPermissionGranted()) {
+            startCamera()
+        } else {
+            requestPermissions()
+        }
+
+        binding.btnCapture.setOnClickListener {
+            capture()
+        }
+
+        binding.btnRetake.setOnClickListener {
+            startCamera()
+            showCaptureButton()
+            hidePreviewImage()
+            hideSuccessCard()
+        }
+
+        binding.btnPickImage.setOnClickListener {
+            startGallery()
+        }
+
+        binding.btnNext.setOnClickListener {
+            hideSuccessCard()
+            findNavController().navigate(CameraFragmentDirections.actionCameraFragmentToFoodDetailFragment())
+        }
+
+    }
+
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private fun capture() {
+        // get a stable reference of modifiable image capture
+        val imageCapture = imageCapture ?: return
+
+        // Set up image capture listener, which is triggered after photo has
+        // been taken
+        imageCapture.takePicture(executorService,
+            object : ImageCapture.OnImageSavedCallback, ImageCapture.OnImageCapturedCallback() {
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {}
+
+                override fun onCaptureSuccess(image: ImageProxy) {
+                    super.onCaptureSuccess(image)
+                    val resultLabel = mlHelper.processImageProxy(requireContext(), image)
+                    val result = foodLabelsMap[resultLabel.label]
+                    lifecycleScope.launch {
+                        withContext(Dispatchers.Main) {
+                            stopCamera()
+                            if (resultLabel.isRecognized) {
+                                showSuccessCard(
+                                    result ?: "unknown food, we will update it immediately"
+                                )
+                            } else {
+                                showToast(requireContext(), "Food is not recognized, try again")
+                                startCamera()
+                                showCaptureButton()
+                            }
+                        }
+                    }
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    val msg = "Something error"
+                    showToast(requireContext(), msg)
+                    Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
+                }
+
+            })
+    }
+
+    private fun startCamera() {
+        cameraProvidedFuture.addListener({
+            val cameraProvider = cameraProvidedFuture.get()
+            val preview = Preview.Builder().build()
+                .also { it.setSurfaceProvider(binding.viewFinder.surfaceProvider) }
+            imageCapture = ImageCapture.Builder().build()
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            try {
+                // unbind camera before rebinding
+                cameraProvider.unbindAll()
+
+                // bind camera
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
+            } catch (e: Exception) {
+                Log.e(TAG, "Use Case Binding Failed", e)
+            }
+        }, ContextCompat.getMainExecutor(requireContext()))
+
+    }
+
+    private fun stopCamera() {
+        val cameraProvider = cameraProvidedFuture.get()
+        cameraProvider.unbindAll()
+        hideCaptureButton()
+    }
+
+    private fun hideCaptureButton() {
+        with(binding) {
+            btnCapture.visibility = View.GONE
+        }
+    }
+
+    private fun showCaptureButton() {
+        with(binding) {
+            btnCapture.visibility = View.VISIBLE
+        }
+    }
+
+    private fun requestPermissions() {
+        activityResultLauncher.launch(REQUIRED_PERMISSIONS)
+    }
+
+    private fun allPermissionGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun showPreviewImage(uri: Uri) {
+        binding.imgPreview.setImageURI(uri)
+        binding.viewFinder.visibility = View.INVISIBLE
+        binding.imgPreview.visibility = View.VISIBLE
+    }
+
+    private fun hidePreviewImage() {
+        binding.viewFinder.visibility = View.VISIBLE
+        binding.imgPreview.visibility = View.GONE
+        showCaptureButton()
+    }
+
+    private fun showSuccessCard(label: String) {
+        binding.cardConfirmation.visibility = View.VISIBLE
+        binding.tvConfirmation.text = getString(R.string.confirmation_text, label)
+    }
+
+    private fun hideSuccessCard() {
+        binding.cardConfirmation.visibility = View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CameraFragment.
-         */
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CameraFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        private const val TAG = "CameraXApp"
+        private val mlHelper = MLHelper()
+        private val REQUIRED_PERMISSIONS =
+            mutableListOf(
+                Permissions.CAMERA_PERMISSION
+            ).apply {
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+                    add(Permissions.EXTERNAL_STORAGE)
                 }
-            }
+            }.toTypedArray()
     }
+
 }

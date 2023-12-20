@@ -35,6 +35,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_home_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
 
     <fragment
@@ -89,16 +92,11 @@
             app:destination="@id/contactUsFragment" />
     </fragment>
 
-    <activity
-        android:id="@+id/cameraActivity"
-        android:name="com.nutricatch.dev.views.navigation.camera.CameraActivity"
-        android:label="activity_camera"
-        tools:layout="@layout/activity_camera" />
     <fragment
         android:id="@+id/bodyDetailFragment"
         android:name="com.nutricatch.dev.views.navigation.profile.BodyDetailFragment"
         android:label="fragment_body_detail"
-        tools:layout="@layout/fragment_body_detail" >
+        tools:layout="@layout/fragment_body_detail">
         <action
             android:id="@+id/action_bodyDetailFragment_to_loginFragment2"
             app:destination="@id/loginFragment" />
@@ -117,7 +115,7 @@
         android:id="@+id/foodRecommendationFragment"
         android:name="com.nutricatch.dev.views.navigation.food_recommendation.FoodRecommendationFragment"
         android:label="fragment_food_recommendation"
-        tools:layout="@layout/fragment_nearby_restaurants" >
+        tools:layout="@layout/fragment_nearby_restaurants">
         <action
             android:id="@+id/action_foodRecommendationFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
@@ -150,7 +148,7 @@
         android:id="@+id/registerFragment"
         android:name="com.nutricatch.dev.views.navigation.auth.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
@@ -180,4 +178,18 @@
         android:name="com.nutricatch.dev.views.navigation.restaurant.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.nutricatch.dev.views.navigation.camera.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_foodDetailFragment"
+            app:destination="@id/foodDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodDetailFragment"
+        android:name="com.nutricatch.dev.FoodDetailFragment"
+        android:label="fragment_food_detail"
+        tools:layout="@layout/fragment_food_detail" />
 </navigation>
