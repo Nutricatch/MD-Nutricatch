@@ -29,7 +29,7 @@ import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentNearbyRestaurantsBinding
-import com.nutricatch.dev.utils.Const
+import com.nutricatch.dev.utils.Permissions
 import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.RestaurantViewModelFactory
 import java.util.concurrent.TimeUnit
@@ -50,11 +50,11 @@ class FoodRecommendationFragment : Fragment(), View.OnClickListener {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         when {
-            permissions[Const.FINE_LOCATION_PERMISSION] ?: false -> {
+            permissions[Permissions.FINE_LOCATION_PERMISSION] ?: false -> {
                 getMyLocation()
             }
 
-            permissions[Const.COARSE_LOCATION_PERMISSION] ?: false -> {
+            permissions[Permissions.COARSE_LOCATION_PERMISSION] ?: false -> {
                 getMyLocation()
             }
         }
@@ -119,7 +119,7 @@ class FoodRecommendationFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getMyLocation() {
-        if (checkPermission(Const.FINE_LOCATION_PERMISSION) && checkPermission(Const.COARSE_LOCATION_PERMISSION)) {
+        if (checkPermission(Permissions.FINE_LOCATION_PERMISSION) && checkPermission(Permissions.COARSE_LOCATION_PERMISSION)) {
             fusedLocationClient.getCurrentLocation(
                 Priority.PRIORITY_HIGH_ACCURACY,
                 object : CancellationToken() {
@@ -159,7 +159,7 @@ class FoodRecommendationFragment : Fragment(), View.OnClickListener {
                 }
 
         } else {
-            requestPermissionLauncher.launch(arrayOf(Const.FINE_LOCATION_PERMISSION))
+            requestPermissionLauncher.launch(arrayOf(Permissions.FINE_LOCATION_PERMISSION))
         }
     }
 
