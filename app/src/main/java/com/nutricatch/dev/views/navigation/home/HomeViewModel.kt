@@ -15,4 +15,6 @@ class HomeViewModel(private val repository: UserRepository, preferences: Prefere
 
     val dailyIntake = repository2.getDailyIntake()
 
+    val diamonds = repository.getDiamonds()
+
 }

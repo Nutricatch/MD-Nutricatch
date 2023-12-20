@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -17,6 +16,7 @@ import com.nutricatch.dev.data.injection.Injection
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentHomeBinding
+import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.HomeViewModelFactory
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -68,11 +68,12 @@ class HomeFragment : Fragment() {
 
                 is ResultState.Error -> {
                     showLoading(false)
-                    Toast.makeText(
-                        context,
-                        "There is something wrong when loading your data",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast(requireContext(), "${result.error} ${result.errorCode}")
+//                    Toast.makeText(
+//                        context,
+//                        "There is something wrong when loading your data",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
             }
 
@@ -110,12 +111,29 @@ class HomeFragment : Fragment() {
         //drawing AAchart
         aaChartView.aa_drawChartWithChartModel(aaChartModel)
 
-
-        /// nanti, ubah jadi observe ke viewmodel
-        val user = "John Doe"
-        binding.tvUserName.text = getString(com.nutricatch.dev.R.string.home_greeting, user)
+        binding.vGroupDiamond.setOnClickListener {
+            /// TODO show dialog to buy a diamond, if less than 5, show ads button
+        }
 
         val navController = findNavController()
+
+        viewModel.diamonds.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ResultState.Success -> {
+                    binding.tvDiamondCount.text = "${result.data}"
+                }
+
+                is ResultState.Loading -> {
+                    // showLoading(true)
+                }
+
+                is ResultState.Error -> {
+                    // showLoading(false)
+                    // handle error
+                }
+            }
+        }
+
         viewModel.token.observe(viewLifecycleOwner) {
             if (it == null) {
                 binding.headerUser.setOnClickListener {

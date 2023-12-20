@@ -8,7 +8,7 @@ import com.nutricatch.dev.data.api.response.FitnessGoal
 import com.nutricatch.dev.data.api.response.Gender
 import retrofit2.HttpException
 
-class UserRepository (private val apiService: ApiService) {
+class UserRepository(private val apiService: ApiService) {
     /*
     *  get user profile
     * */
@@ -79,6 +79,28 @@ class UserRepository (private val apiService: ApiService) {
                 )
 
             emit(ResultState.Success(updateResponse))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    fun getDiamonds() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val diamonds = apiService.getDiamonds()
+            emit(ResultState.Success(diamonds))
         } catch (e: HttpException) {
             when (e.code()) {
                 401 -> {

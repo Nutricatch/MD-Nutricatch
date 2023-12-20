@@ -103,5 +103,8 @@ interface ApiService {
         @Field("salt") salt: Double,
         @Field("sugar") sugar: Double,
         @Field("fiber") fiber: Double
-    ) : FoodsResponseItem
+    ): FoodsResponseItem
+
+    @GET("/diamonds")
+    suspend fun getDiamonds(): Int
 }
