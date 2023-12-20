@@ -34,6 +34,9 @@ data class RestaurantResponseItem(
     @field:SerializedName("location")
     val location: Location? = null,
 
+    @field:SerializedName("imgUrl")
+    val imgUrl: String? = "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/health/wp-content/uploads/2022/01/foods_to_eat_to_lose_weight.jpeg",
+
     @field:SerializedName("id")
     val id: String? = null
 )
