@@ -1,9 +1,11 @@
 package com.nutricatch.dev.views.navigation.camera
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +15,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.common.util.concurrent.ListenableFuture
 import com.nutricatch.dev.R
@@ -26,10 +26,9 @@ import com.nutricatch.dev.databinding.FragmentCameraBinding
 import com.nutricatch.dev.helper.MLHelper
 import com.nutricatch.dev.helper.foodLabelsMap
 import com.nutricatch.dev.utils.Permissions
+import com.nutricatch.dev.utils.createCustomTempFile
 import com.nutricatch.dev.utils.showToast
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -41,6 +40,7 @@ class CameraFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraProvidedFuture: ListenableFuture<ProcessCameraProvider>
     private var uri: Uri? = null
+    private var isFromGallery = false
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -56,6 +56,7 @@ class CameraFragment : Fragment() {
             val result = foodLabelsMap[resultLabel.label]
             Log.d(TAG, "result: $result")
             if (resultLabel.isRecognized) {
+                isFromGallery = true
                 showSuccessCard(result ?: "unknown food, we will update it immediately")
                 showPreviewImage(this.uri!!)
             } else {
@@ -118,7 +119,9 @@ class CameraFragment : Fragment() {
 
         binding.btnNext.setOnClickListener {
             hideSuccessCard()
-            findNavController().navigate(CameraFragmentDirections.actionCameraFragmentToFoodDetailFragment())
+            val action = CameraFragmentDirections.actionCameraFragmentToFoodDetailFragment("$uri")
+            action.isfromGallery = isFromGallery
+            findNavController().navigate(action)
         }
 
     }
@@ -131,31 +134,56 @@ class CameraFragment : Fragment() {
         // get a stable reference of modifiable image capture
         val imageCapture = imageCapture ?: return
 
+        val photoFile = createCustomTempFile(requireContext().applicationContext)
+
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
         // Set up image capture listener, which is triggered after photo has
         // been taken
-        imageCapture.takePicture(executorService,
+        imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback, ImageCapture.OnImageCapturedCallback() {
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {}
-
-                override fun onCaptureSuccess(image: ImageProxy) {
-                    super.onCaptureSuccess(image)
-                    val resultLabel = mlHelper.processImageProxy(requireContext(), image)
-                    val result = foodLabelsMap[resultLabel.label]
-                    lifecycleScope.launch {
-                        withContext(Dispatchers.Main) {
-                            stopCamera()
-                            if (resultLabel.isRecognized) {
-                                showSuccessCard(
-                                    result ?: "unknown food, we will update it immediately"
-                                )
-                            } else {
-                                showToast(requireContext(), "Food is not recognized, try again")
-                                startCamera()
-                                showCaptureButton()
-                            }
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    uri = outputFileResults.savedUri
+                    if (uri != null) {
+                        val resultLabel = mlHelper.processImage(requireContext(), uri!!)
+                        val result = foodLabelsMap[resultLabel.label]
+                        stopCamera()
+                        if (resultLabel.isRecognized) {
+                            isFromGallery = false
+                            showSuccessCard(result ?: "Unknown food, we will update it immediately")
+                        } else {
+                            showToast(requireContext(), "Food is not recognized, try again")
+                            startCamera()
+                            showCaptureButton()
+                            /// delete temp iamge
+                            val filePath = getRealPathFromUri(requireContext(), uri!!)
+                            if (filePath != null) File(filePath).delete()
                         }
                     }
                 }
+
+//                override fun onCaptureSuccess(image: ImageProxy) {
+//                    super.onCaptureSuccess(image)
+//                    val resultLabel = mlHelper.processImageProxy(requireContext(), image)
+//                    val result = foodLabelsMap[resultLabel.label]
+//                    lifecycleScope.launch {
+//                        withContext(Dispatchers.Main) {
+//                            stopCamera()
+//                            if (resultLabel.isRecognized) {
+//                                isFromGallery = false
+//                                showSuccessCard(
+//                                    result ?: "unknown food, we will update it immediately"
+//                                )
+//                            } else {
+//                                showToast(requireContext(), "Food is not recognized, try again")
+//                                startCamera()
+//                                showCaptureButton()
+//                                val filePath = getRealPathFromUri(requireContext(), uri!!)
+//                                File(filePath).delete()
+//                            }
+//                        }
+//                    }
+//                }
 
                 override fun onError(exception: ImageCaptureException) {
                     val msg = "Something error"
@@ -164,6 +192,17 @@ class CameraFragment : Fragment() {
                 }
 
             })
+    }
+
+    fun getRealPathFromUri(context: Context, uri: Uri): String? {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(uri, projection, null, null, null)
+        cursor?.use {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            it.moveToFirst()
+            return it.getString(columnIndex)
+        }
+        return null
     }
 
     private fun startCamera() {
