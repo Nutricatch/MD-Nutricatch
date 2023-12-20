@@ -14,6 +14,11 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
+data class ScanResult(
+    var label: String = "unknown",
+    var isRecognized: Boolean = true
+)
+
 class MLHelper {
     private fun loadBitmapFromUri(context: Context, uri: Uri): Bitmap? {
         return try {
@@ -47,13 +52,13 @@ class MLHelper {
     }
 
     // Function to process the image using the TFLite model
-    fun processImage(context: Context, uri: Uri): String {
+    fun processImage(context: Context, uri: Uri): ScanResult {
         val model = SaveModel.newInstance(context)
 
         // Load bitmap from URI
         val bitmap = loadBitmapFromUri(context, uri)
 
-        var result = ""
+        val scanResult = ScanResult()
 
         bitmap?.let {
             // Preprocess the bitmap
@@ -76,24 +81,26 @@ class MLHelper {
             val index = tab.indexOfFirst { it == probability }
 
             val strings = labelResult
-            result = if (probability > 0.7) {
+
+            if (probability > 0.4) {
                 strings[index]
-            } else if (probability < 0.7 && probability > 0.4) {
-                "Is This ${strings[index]}?"
+                scanResult.label = strings[index]
+                scanResult.isRecognized = true
             } else {
-                "Image not recognized"
+                scanResult.label = "Image not recognized"
+                scanResult.isRecognized = false
             }
             // Release model resources if no longer used
-            model.close()
         }
+        model.close()
 
-        return result
+        return scanResult
     }
 
     @OptIn(ExperimentalGetImage::class)
-    fun processImageProxy(context: Context, image: ImageProxy): String {
+    fun processImageProxy(context: Context, image: ImageProxy): ScanResult {
         val mediaImage: Image? = image.image
-        var result = ""
+        val scanResult = ScanResult()
         mediaImage?.let {
             val inputBitmap = imageToBitmap(mediaImage)
             val inputBuffer = preprocessBitmap(inputBitmap)
@@ -114,19 +121,20 @@ class MLHelper {
 
             val strings = labelResult
 
-            result = if (probability > 0.7) {
+            if (probability > 0.4) {
                 strings[index]
-            } else if (probability < 0.7 && probability > 0.4) {
-                "Is This ${strings[index]}?"
+                scanResult.label = strings[index]
+                scanResult.isRecognized = true
             } else {
-                "Image not recognized"
+                scanResult.label = "Image not recognized"
+                scanResult.isRecognized = false
             }
 
             // Release model resources if no longer used
             model.close()
         }
 
-        return result
+        return scanResult
     }
 
     // Function to convert Image to Bitmap
