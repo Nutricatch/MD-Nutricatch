@@ -2,6 +2,7 @@ package com.nutricatch.dev.data.api
 
 import com.nutricatch.dev.data.api.response.DailyIntakeResponse
 import com.nutricatch.dev.data.api.response.HealthResponse
+import com.nutricatch.dev.data.api.response.RecommendedNutritionResponse
 import com.nutricatch.dev.data.api.response.RestaurantResponseItem
 import com.nutricatch.dev.data.api.response.UserResponse
 import com.nutricatch.dev.data.response.AuthResponse
@@ -55,14 +56,6 @@ interface ApiService {
     @GET("user-health/health")
     suspend fun getHealthData(): HealthResponse
 
-    //TODO Buat fungsi API Service untuk get daily Calories dan Post new food
-    @GET("user")
-    suspend fun getDailyIntake(): DailyIntakeResponse
-
-    @FormUrlEncoded
-    @POST
-    suspend fun insertNewFood(@Part foodImage: MultipartBody.Part): DailyIntakeResponse
-
     @FormUrlEncoded
     @POST("/user-health/update")
     suspend fun updateHealthData(
@@ -79,4 +72,19 @@ interface ApiService {
         @Query("latitude") lat: Double,
         @Query("longitude") lng: Double
     ): MutableList<RestaurantResponseItem>
+
+
+    /*
+    *   User daily food intake
+    * */
+    //TODO Buat fungsi API Service untuk get daily Calories dan Post new food
+    @GET("/daily-consumtion/all-daily-consumtion")
+    suspend fun getDailyIntake(): DailyIntakeResponse
+
+    @FormUrlEncoded
+    @POST()
+    suspend fun insertNewFood(@Part foodImage: MultipartBody.Part): DailyIntakeResponse
+
+    @GET("nutrition-recommender/daily-recomended-nutrition")
+    suspend fun getRecommendedNutrition(): RecommendedNutritionResponse
 }
