@@ -92,4 +92,16 @@ interface ApiService {
 
     @GET("nutrition-recommender/daily-recomended-nutrition")
     suspend fun getRecommendedNutrition(): RecommendedNutritionResponse
+
+    @FormUrlEncoded
+    @POST("/daily-consumtion/create-daily-consumtion")
+    suspend fun addNewEating(
+        @Field("calories") calories: Double,
+        @Field("carbohydates") carb: Double,
+        @Field("fat") fat: Double,
+        @Field("protein") protein: Double,
+        @Field("salt") salt: Double,
+        @Field("sugar") sugar: Double,
+        @Field("fiber") fiber: Double
+    ) : FoodsResponseItem
 }

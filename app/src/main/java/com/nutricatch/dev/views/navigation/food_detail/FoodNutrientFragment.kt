@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.data.ResultState
+import com.nutricatch.dev.data.api.response.FoodsResponseItem
 import com.nutricatch.dev.databinding.FragmentFoodDetailBinding
 import com.nutricatch.dev.helper.foodLabelsMap
 import com.nutricatch.dev.utils.getRealPathFromUri
+import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.FoodNutrientViewModelFactory
 import java.io.File
 
@@ -22,6 +24,8 @@ class FoodNutrientFragment : Fragment() {
     private val viewModel by viewModels<FoodNutrientViewModel> {
         FoodNutrientViewModelFactory.getInstance(requireContext())
     }
+
+    private lateinit var nutrient: FoodsResponseItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +49,7 @@ class FoodNutrientFragment : Fragment() {
             when (result) {
                 is ResultState.Success -> {
                     with(binding) {
-                        val nutrient = result.data
+                        nutrient = result.data
                         tvName.text = foodLabelsMap[nutrient.name]
                         tvCaloric.text = nutrient.calories.toString()
                         tvProtein.text = nutrient.protein.toString()
@@ -73,7 +77,35 @@ class FoodNutrientFragment : Fragment() {
                 val filePath = getRealPathFromUri(requireContext(), uri)
                 if (filePath != null) File(filePath).delete()
             }
-            findNavController().navigate(FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories())
+
+            viewModel.saveEating(
+                nutrient.calories!!,
+                nutrient.carbs!!,
+                nutrient.fat!!,
+                nutrient.protein!!,
+                nutrient.sodium!!,
+                nutrient.sugar!!,
+                nutrient.fibers!!
+            ).observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is ResultState.Loading -> {
+//                        showLoading(true)
+                    }
+
+                    is ResultState.Success -> {
+//                        showLoading(false)
+                        findNavController().navigate(FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories())
+                    }
+
+                    is ResultState.Error -> {
+//                        showLoading(false)
+                        showToast(
+                            requireContext(),
+                            "There is something wrong when loading your data"
+                        )
+                    }
+                }
+            }
         }
     }
 
