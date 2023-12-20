@@ -15,7 +15,7 @@ import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.ActivityHomeBinding
 import com.nutricatch.dev.views.navigation.home.HomeFragmentDirections
 
-class HomeActivity : AppCompatActivity(), View.OnClickListener {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var preferences: Preferences
