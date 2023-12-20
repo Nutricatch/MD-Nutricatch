@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ConsumeResponse(
 
+    @field:SerializedName("foodName")
+    val foodName: String? = null,
+
     @field:SerializedName("carbohydrates")
     val carbohydrates: Double? = null,
 
