@@ -50,7 +50,11 @@
         android:id="@+id/navigation_daily_calories"
         android:name="com.nutricatch.dev.views.navigation.daily_calories.DailyCaloriesFragment"
         android:label="@string/title_history"
-        tools:layout="@layout/fragment_daily_calories" />
+        tools:layout="@layout/fragment_daily_calories" >
+        <action
+            android:id="@+id/action_navigation_daily_calories_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
