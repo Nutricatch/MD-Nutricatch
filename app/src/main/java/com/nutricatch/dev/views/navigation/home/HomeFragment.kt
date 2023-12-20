@@ -79,7 +79,10 @@ class HomeFragment : Fragment() {
 
                 is ResultState.Error -> {
                     showLoading(false)
-                    showToast(requireContext(), result.error)
+                    if (result.errorCode != 401) {
+                        showToast(requireContext(), result.error)
+                    }
+                    setChartData(arrayOf(0, 0, 0, 0, 0, 0))
                 }
             }
         }

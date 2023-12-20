@@ -54,7 +54,7 @@ class DailyIntakeRepository internal constructor(
                 }
 
                 in 400..499 -> {
-                    emit(ResultState.Error("Request Error"))
+                    emit(ResultState.Error("Request Error", e.code()))
                 }
 
                 in 500..599 -> {

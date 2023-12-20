@@ -41,6 +41,7 @@
                 android:layout_marginStart="@dimen/margin_16"
                 android:textSize="21sp"
                 android:textStyle="bold"
+                android:text="Hello, "
                 app:layout_constraintBottom_toTopOf="@+id/tv_greeting"
                 app:layout_constraintStart_toEndOf="@id/ic_user"
                 app:layout_constraintTop_toTopOf="@id/ic_user"
