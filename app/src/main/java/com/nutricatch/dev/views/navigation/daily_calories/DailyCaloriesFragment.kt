@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentDailyCaloriesBinding
 import com.nutricatch.dev.views.factory.DailyCaloriesViewModelFactory
@@ -15,8 +16,6 @@ class DailyCaloriesFragment : Fragment() {
 
     private var _binding: FragmentDailyCaloriesBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private val viewModel by viewModels<DailyCaloriesViewModel> {
         DailyCaloriesViewModelFactory.getInstance(requireContext())
@@ -33,9 +32,16 @@ class DailyCaloriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.caloriesProgress.progress = 60
+        /// TODO later, update this goal
+        val goal = 2250
+        binding.caloriesProgress.progress = 10
 
-        viewModel.recommendedRepository.observe(viewLifecycleOwner) { result ->
+        val adapter = DailyCaloriesAdapter()
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvHistory.adapter = adapter
+        binding.rvHistory.layoutManager = layoutManager
+
+        viewModel.dailyData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Loading -> {
                     showLoading(true)
@@ -43,11 +49,16 @@ class DailyCaloriesFragment : Fragment() {
 
                 is ResultState.Success -> {
                     showLoading(false)
-                    val recommendedNutrition = result.data
-                    with(binding)
-                    {
-                        tvGoals.text = recommendedNutrition.calories.toString()
+                    var cal = 0
+
+                    for (food in result.data) {
+                        cal += food.calories?.toInt() ?: 0
                     }
+
+                    binding.tvCalories.text = cal.toString()
+                    binding.caloriesProgress.progress = cal * 100 / goal
+                    adapter.submitList(result.data)
+
                 }
 
                 is ResultState.Error -> {
@@ -57,7 +68,7 @@ class DailyCaloriesFragment : Fragment() {
                         //
                     } else {
                         /// TODO tampilkan error dengan toast
-                        Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, result.error, Toast.LENGTH_SHORT)
                             .show()
                     }
                 }

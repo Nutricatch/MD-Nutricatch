@@ -85,7 +85,7 @@ interface ApiService {
     * */
     //TODO Buat fungsi API Service untuk get daily Calories dan Post new food
     @GET("/daily-consumtion/all-daily-consumtion")
-    suspend fun getDailyIntake(): DailyIntakeResponse
+    suspend fun getDailyIntake(): List<ConsumeResponse>
 
     @FormUrlEncoded
     @POST()
@@ -95,7 +95,7 @@ interface ApiService {
     suspend fun getRecommendedNutrition(): RecommendedNutritionResponse
 
     @GET("/daily-consumtion/daily-consumtion-by-date")
-    suspend fun getTodayConsumption(
+    suspend fun getConsumptionByDate(
         @Query("date") date: String
     ): List<ConsumeResponse>
 

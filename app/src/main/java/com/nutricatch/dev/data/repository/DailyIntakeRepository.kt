@@ -11,10 +11,10 @@ import java.net.UnknownHostException
 class DailyIntakeRepository internal constructor(
     private val apiService: ApiService
 ) {
-    fun getDailyIntake() = liveData {
+    fun getDailyIntake(date: String = todayDate) = liveData {
         emit(ResultState.Loading)
         try {
-            val dailyIntakeResponse = apiService.getDailyIntake()
+            val dailyIntakeResponse = apiService.getConsumptionByDate(date)
             emit(ResultState.Success(dailyIntakeResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.message()
@@ -43,7 +43,7 @@ class DailyIntakeRepository internal constructor(
         emit(ResultState.Loading)
 
         try {
-            val consumeResponses = apiService.getTodayConsumption(todayDate)
+            val consumeResponses = apiService.getConsumptionByDate(todayDate)
             Log.d("TAG", "getTodayConsumption: $todayDate")
             emit(ResultState.Success(consumeResponses))
         } catch (e: HttpException) {

@@ -43,12 +43,12 @@
     <TextView
         android:id="@+id/tv_text_my_eating"
         style="@style/Theme.NutriCatch.TextStyle.Headline.Medium.Bold"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
         android:text="@string/my_eating_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warning_tv"
-        tools:ignoreViewBinding="true"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="10dp"/>
+        tools:ignoreViewBinding="true" />
 
     <!-- TODO : Tambahkan customview untuk total kalori -->
 
@@ -183,13 +183,13 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calories_card"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/calories_card" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/margin_16"
+        android:layout_marginHorizontal="@dimen/margin_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_text_my_eating"
@@ -200,11 +200,10 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

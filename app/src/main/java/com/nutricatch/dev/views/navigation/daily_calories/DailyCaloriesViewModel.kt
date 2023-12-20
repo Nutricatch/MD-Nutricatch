@@ -12,7 +12,8 @@ class DailyCaloriesViewModel(repository: DailyIntakeRepository) : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    val recommendedRepository = repository.getDailyIntake()
+    val dailyData = repository.getDailyIntake()
+
     fun getDailyCalories() {
 
     }
