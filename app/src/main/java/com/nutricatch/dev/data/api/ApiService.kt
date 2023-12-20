@@ -1,5 +1,6 @@
 package com.nutricatch.dev.data.api
 
+import com.nutricatch.dev.data.api.response.ConsumeResponse
 import com.nutricatch.dev.data.api.response.DailyIntakeResponse
 import com.nutricatch.dev.data.api.response.FoodsResponseItem
 import com.nutricatch.dev.data.api.response.HealthResponse
@@ -92,6 +93,11 @@ interface ApiService {
 
     @GET("nutrition-recommender/daily-recomended-nutrition")
     suspend fun getRecommendedNutrition(): RecommendedNutritionResponse
+
+    @GET("/daily-consumtion/daily-consumtion-by-date")
+    suspend fun getTodayConsumption(
+        @Query("date") date: String
+    ): List<ConsumeResponse>
 
     @FormUrlEncoded
     @POST("/daily-consumtion/create-daily-consumtion")

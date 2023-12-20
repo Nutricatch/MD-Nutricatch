@@ -47,9 +47,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val label: Array<String> = arrayOf("Calories", "Protein", "Fat", "Carbs", "Fiber", "Sugar")
-        var chartData: Array<Any> = arrayOf(0, 0, 0, 0, 0, 0)
-        viewModel.dailyIntake.observe(viewLifecycleOwner) { result ->
+
+        viewModel.todayConsumes.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Loading -> {
                     showLoading(true)
@@ -58,58 +57,32 @@ class HomeFragment : Fragment() {
                 is ResultState.Success -> {
                     //TODO Masukin data data di bawah ke dalam chart
                     showLoading(false)
-                    val cal = result.data.calories
-                    val protein = result.data.protein
-                    val fat = result.data.fats
-                    val carbs = result.data.carbohydrates
-                    val fiber = result.data.minFiber
-                    val sugar = result.data.maxSugar
+                    var cal = 0
+                    var protein = 0
+                    var fat = 0
+                    var carbs = 0
+                    var fiber = 0
+                    var sugar = 0
+
+                    result.data.forEach { data ->
+                        cal += data.calories?.toInt() ?: 0
+                        protein += data.protein?.toInt() ?: 0
+                        fat = data.fat?.toInt() ?: 0
+                        carbs = data.carbohydrates?.toInt() ?: 0
+                        fiber = data.fiber?.toInt() ?: 0
+                        sugar = data.sugar?.toInt() ?: 0
+                    }
+
+                    val chartData: Array<Any> = arrayOf(cal, protein, fat, carbs, fiber, sugar)
+                    setChartData(chartData)
                 }
 
                 is ResultState.Error -> {
                     showLoading(false)
-                    showToast(requireContext(), "${result.error} ${result.errorCode}")
-//                    Toast.makeText(
-//                        context,
-//                        "There is something wrong when loading your data",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+                    showToast(requireContext(), result.error)
                 }
             }
-
         }
-
-        val aaChartView = binding.chart
-        val aaChartModel: AAChartModel = AAChartModel()
-            //nentuin jenis chart, ada banyak macem
-            .chartType(AAChartType.Column)
-            //title, ilangin title biar muncul lebih besar
-            .title("")
-            .dataLabelsEnabled(false)
-            .legendEnabled(false)
-            //warna background
-            .backgroundColor("")
-            //warna tulisan dan garis
-            .axesTextColor("#000000")
-            //untuk ilangin title dari y
-            .yAxisTitle("")
-            .gradientColorEnable(true)
-            //untuk nama datral variablex
-            .categories(label)
-            //untuk ketebalan garis
-            .yAxisLineWidth(2)
-            //data
-            .series(
-                arrayOf(
-                    AASeriesElement()
-                        .name("")
-                        .dataLabels(null)
-                        .data(chartData)
-                        .color("#4b2b7f")
-                )
-            )
-        //drawing AAchart
-        aaChartView.aa_drawChartWithChartModel(aaChartModel)
 
         binding.vGroupDiamond.setOnClickListener {
             /// TODO show dialog to buy a diamond, if less than 5, show ads button
@@ -170,6 +143,42 @@ class HomeFragment : Fragment() {
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
         sliderView.scrollTimeInSec = 2
         sliderView.startAutoCycle()
+    }
+
+    private fun setChartData(chartData: Array<Any>) {
+        val aaChartView = binding.chart
+        val label: Array<String> = arrayOf("Calories", "Protein", "Fat", "Carbs", "Fiber", "Sugar")
+
+        val aaChartModel: AAChartModel = AAChartModel()
+            //nentuin jenis chart, ada banyak macem
+            .chartType(AAChartType.Column)
+            //title, ilangin title biar muncul lebih besar
+            .title("")
+            .dataLabelsEnabled(false)
+            .legendEnabled(false)
+            //warna background
+            .backgroundColor("")
+            //warna tulisan dan garis
+            .axesTextColor("#000000")
+            //untuk ilangin title dari y
+            .yAxisTitle("")
+            .gradientColorEnable(true)
+            //untuk nama datral variablex
+            .categories(label)
+            //untuk ketebalan garis
+            .yAxisLineWidth(2)
+            //data
+            .series(
+                arrayOf(
+                    AASeriesElement()
+                        .name("")
+                        .dataLabels(null)
+                        .data(chartData)
+                        .color("#4b2b7f")
+                )
+            )
+        //drawing AAchart
+        aaChartView.aa_drawChartWithChartModel(aaChartModel)
     }
 
     private fun onClickListener(position: Int) {

@@ -6,6 +6,10 @@ import android.provider.MediaStore
 import android.widget.Toast
 import com.nutricatch.dev.utils.Const.timeStamp
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
 
 fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -26,3 +30,13 @@ fun getRealPathFromUri(context: Context, uri: Uri): String? {
     }
     return null
 }
+private fun getCurrentDate(): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("GMT+7:00") // Set timezone to GMT+7 Jakarta
+
+    val calendar = Calendar.getInstance()
+    return dateFormat.format(calendar.time)
+}
+
+// Usage
+val todayDate = getCurrentDate()
