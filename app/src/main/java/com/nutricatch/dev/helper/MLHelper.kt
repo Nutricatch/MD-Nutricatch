@@ -5,9 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.Image
 import android.net.Uri
-import androidx.annotation.OptIn
-import androidx.camera.core.ExperimentalGetImage
-import androidx.camera.core.ImageProxy
 import com.nutricatch.dev.ml.SaveModel
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -93,46 +90,6 @@ class MLHelper {
             // Release model resources if no longer used
         }
         model.close()
-
-        return scanResult
-    }
-
-    @OptIn(ExperimentalGetImage::class)
-    fun processImageProxy(context: Context, image: ImageProxy): ScanResult {
-        val mediaImage: Image? = image.image
-        val scanResult = ScanResult()
-        mediaImage?.let {
-            val inputBitmap = imageToBitmap(mediaImage)
-            val inputBuffer = preprocessBitmap(inputBitmap)
-
-            val inputFeature0 =
-                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-            inputFeature0.loadBuffer(inputBuffer)
-
-            val model = SaveModel.newInstance(context)
-            val outputs = model.process(inputFeature0)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-            // Handle output as needed
-            // ...
-            val tab = outputFeature0.floatArray
-
-            val probability = tab.max()
-            val index = tab.indexOfFirst { it == probability }
-
-            val strings = labelResult
-
-            if (probability > 0.4) {
-                strings[index]
-                scanResult.label = strings[index]
-                scanResult.isRecognized = true
-            } else {
-                scanResult.label = "Image not recognized"
-                scanResult.isRecognized = false
-            }
-
-            // Release model resources if no longer used
-            model.close()
-        }
 
         return scanResult
     }
