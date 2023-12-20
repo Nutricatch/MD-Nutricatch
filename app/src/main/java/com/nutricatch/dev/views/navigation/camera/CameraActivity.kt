@@ -120,6 +120,7 @@ class CameraActivity : AppCompatActivity() {
         startCamera()
         showCaptureButton()
         hidePreviewImage()
+        hideSuccessCard()
     }
 
     private fun startGallery() {
