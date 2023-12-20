@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -45,10 +46,33 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val label: Array<String> = arrayOf("Calories", "Protein", "Fat", "Carbs", "Fiber", "Sugar")
+        var chartData: Array<Any> = arrayOf(0, 0, 0, 0, 0, 0)
+        viewModel.dailyIntake.observe(viewLifecycleOwner){result->
+            when(result)
+            {
+                is ResultState.Loading->{
+                    showLoading(true)
+                }
+                is ResultState.Success->{
+                    //TODO Masukin data data di bawah ke dalam chart
+                    showLoading(false)
+                    val cal = result.data.calories
+                    val protein = result.data.protein
+                    val fat = result.data.fats
+                    val carbs = result.data.carbohydrates
+                    val fiber = result.data.minFiber
+                    val sugar = result.data.maxSugar
+                }
+                is ResultState.Error->{
+                    showLoading(false)
+                    Toast.makeText(context, "There is something wrong when loading your data", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
 
         val aaChartView = binding.chart
-        val label: Array<String> = arrayOf("Carbs", "Fat", "Protein")
-        val chartData: Array<Any> = arrayOf(20,50, 80)
         val aaChartModel: AAChartModel = AAChartModel()
             //nentuin jenis chart, ada banyak macem
             .chartType(AAChartType.Column)
@@ -91,7 +115,7 @@ class HomeFragment : Fragment() {
                 binding.headerUser.setOnClickListener {
                     val action =
                         HomeFragmentDirections.actionNavigationHomeToMustLoginDialogFragment()
-                    navController.navigate(action)
+                        navController.navigate(action)
                 }
             } else {
                 binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(com.nutricatch.dev.R.id.action_navigation_home_to_navigation_setting))
