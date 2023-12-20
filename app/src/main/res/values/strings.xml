@@ -99,4 +99,5 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="no">NO</string>
     <string name="yes">YES</string>
     <string name="confirmation_text">Wow, looks tasty! Is this a %1$s?</string>
+    <string name="yes_i_ate_this">Yes, I ate this!</string>
 </resources>

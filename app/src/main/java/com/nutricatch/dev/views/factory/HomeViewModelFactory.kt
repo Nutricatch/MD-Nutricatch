@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.nutricatch.dev.data.injection.Injection
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.repository.DailyIntakeRepository
+
 import com.nutricatch.dev.data.repository.RecommendationRepository
 import com.nutricatch.dev.data.repository.UserRepository
 import com.nutricatch.dev.views.navigation.home.HomeViewModel

@@ -27,7 +27,8 @@ class RecipesViewModelFactory(private val recipesRepository: RecipesRepository) 
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: HomeViewModelFactory(
                     Injection.provideUserRepository(context),
-                    preferences
+                    preferences,
+                    Injection.provideDailyIntakeRepository(context)
                 )
             }.also { INSTANCE = it }
     }

@@ -42,9 +42,6 @@
             android:value="AIzaSyC_DC6bJSF_pTNcLdSogD24B9IzCY3MJow" />
 
         <activity
-            android:name=".views.navigation.camera.CameraActivity"
-            android:exported="false" />
-        <activity
             android:name=".views.navigation.HomeActivity"
             android:exported="false"
             android:label="HomeActivity" />

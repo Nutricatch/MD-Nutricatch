@@ -30,7 +30,8 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(
             Injection.provideUserRepository(requireContext()),
-            preferences
+            preferences,
+            Injection.provideDailyIntakeRepository(requireContext())
         )
     }
 
@@ -48,13 +49,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val label: Array<String> = arrayOf("Calories", "Protein", "Fat", "Carbs", "Fiber", "Sugar")
         var chartData: Array<Any> = arrayOf(0, 0, 0, 0, 0, 0)
-        viewModel.dailyIntake.observe(viewLifecycleOwner){result->
-            when(result)
-            {
-                is ResultState.Loading->{
+        viewModel.dailyIntake.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ResultState.Loading -> {
                     showLoading(true)
                 }
-                is ResultState.Success->{
+
+                is ResultState.Success -> {
                     //TODO Masukin data data di bawah ke dalam chart
                     showLoading(false)
                     val cal = result.data.calories
@@ -64,9 +65,14 @@ class HomeFragment : Fragment() {
                     val fiber = result.data.minFiber
                     val sugar = result.data.maxSugar
                 }
-                is ResultState.Error->{
+
+                is ResultState.Error -> {
                     showLoading(false)
-                    Toast.makeText(context, "There is something wrong when loading your data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "There is something wrong when loading your data",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -115,7 +121,7 @@ class HomeFragment : Fragment() {
                 binding.headerUser.setOnClickListener {
                     val action =
                         HomeFragmentDirections.actionNavigationHomeToMustLoginDialogFragment()
-                        navController.navigate(action)
+                    navController.navigate(action)
                 }
             } else {
                 binding.headerUser.setOnClickListener(Navigation.createNavigateOnClickListener(com.nutricatch.dev.R.id.action_navigation_home_to_navigation_setting))
