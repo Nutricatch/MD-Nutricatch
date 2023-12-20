@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nutricatch.dev.data.api.response.ConsumeResponse
 import com.nutricatch.dev.databinding.TodayCaloriesItemBinding
+import com.nutricatch.dev.helper.foodLabelsMap
 
 class DailyCaloriesAdapter:ListAdapter<ConsumeResponse, DailyCaloriesAdapter.ViewHolder>(DIFF_CALLBACK) {
     class ViewHolder (val binding: TodayCaloriesItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(history: ConsumeResponse) {
-            binding.tvTitle.text = history.foodName.toString()
+            val foodName = foodLabelsMap[history.foodName]
+            binding.tvTitle.text = foodName
             binding.tvCalories.text = history.calories.toString()
             binding.tvId.text = history.id.toString()
         }

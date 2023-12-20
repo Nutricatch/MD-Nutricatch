@@ -52,17 +52,17 @@
 
     <!-- TODO : Tambahkan customview untuk total kalori -->
 
-    <ImageButton
+    <ImageView
         android:id="@+id/img_calendar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/ic_calendar"
-        android:backgroundTint="?attr/colorOnPrimary"
+        android:src="@drawable/ic_calendar"
         android:contentDescription="@string/date_picker"
+        android:padding="9dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_text_track"
-        app:tint="?attr/colorControlNormal" />
+        app:tint="?attr/colorOnPrimary" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/calories_card"

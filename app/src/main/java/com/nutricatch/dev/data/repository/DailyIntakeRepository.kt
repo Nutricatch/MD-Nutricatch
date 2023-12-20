@@ -11,7 +11,7 @@ import java.net.UnknownHostException
 class DailyIntakeRepository internal constructor(
     private val apiService: ApiService
 ) {
-    fun getDailyIntake(date: String = todayDate) = liveData {
+    fun getDailyIntake(date: String) = liveData {
         emit(ResultState.Loading)
         try {
             val dailyIntakeResponse = apiService.getConsumptionByDate(date)

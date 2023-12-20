@@ -5,6 +5,7 @@ import androidx.lifecycle.asLiveData
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.repository.DailyIntakeRepository
 import com.nutricatch.dev.data.repository.UserRepository
+import com.nutricatch.dev.utils.todayDate
 
 class HomeViewModel(private val repository: UserRepository, preferences: Preferences, repository2: DailyIntakeRepository) :
     ViewModel() {
@@ -13,7 +14,7 @@ class HomeViewModel(private val repository: UserRepository, preferences: Prefere
 
     val userData = repository.getProfile()
 
-    val dailyIntake = repository2.getDailyIntake()
+    val dailyIntake = repository2.getDailyIntake(todayDate)
 
     val todayConsumes = repository2.getTodayConsumption()
 

@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_navigation_daily_calories_to_cameraFragment"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_navigation_daily_calories_to_datePickerFragment"
+            app:destination="@id/datePickerFragment" />
     </fragment>
 
     <fragment
@@ -211,4 +214,9 @@
             android:name="label"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/datePickerFragment"
+        android:name="com.nutricatch.dev.views.navigation.daily_calories.DatePickerFragment"
+        android:label="fragment_date_picker"
+        tools:layout="@layout/fragment_date_picker" />
 </navigation>
