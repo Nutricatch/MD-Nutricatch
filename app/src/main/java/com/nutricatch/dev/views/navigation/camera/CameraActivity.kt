@@ -98,7 +98,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener{
-            imageCapture
+            
         }
     }
 
