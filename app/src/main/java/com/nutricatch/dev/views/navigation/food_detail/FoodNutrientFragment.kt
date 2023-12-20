@@ -12,10 +12,8 @@ import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.api.response.FoodsResponseItem
 import com.nutricatch.dev.databinding.FragmentFoodDetailBinding
 import com.nutricatch.dev.helper.foodLabelsMap
-import com.nutricatch.dev.utils.getRealPathFromUri
 import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.FoodNutrientViewModelFactory
-import java.io.File
 
 class FoodNutrientFragment : Fragment() {
     private var _binding: FragmentFoodDetailBinding? = null
@@ -74,35 +72,37 @@ class FoodNutrientFragment : Fragment() {
 
         binding.btnSave.setOnClickListener {
             if (!isFromGallery) {
-                val filePath = getRealPathFromUri(requireContext(), uri)
-                if (filePath != null) File(filePath).delete()
-            }
+                /// TODO need to delete image from cache, this code currently not work
+                requireContext().cacheDir.deleteRecursively()
 
-            viewModel.saveEating(
-                nutrient.calories!!,
-                nutrient.carbs!!,
-                nutrient.fat!!,
-                nutrient.protein!!,
-                nutrient.sodium!!,
-                nutrient.sugar!!,
-                nutrient.fibers!!
-            ).observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is ResultState.Loading -> {
+
+                viewModel.saveEating(
+                    label,
+                    nutrient.calories!!,
+                    nutrient.carbs!!,
+                    nutrient.fat!!,
+                    nutrient.protein!!,
+                    nutrient.sodium!!,
+                    nutrient.sugar!!,
+                    nutrient.fibers!!
+                ).observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is ResultState.Loading -> {
 //                        showLoading(true)
-                    }
+                        }
 
-                    is ResultState.Success -> {
+                        is ResultState.Success -> {
 //                        showLoading(false)
-                        findNavController().navigate(FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories())
-                    }
+                            findNavController().navigate(FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories())
+                        }
 
-                    is ResultState.Error -> {
+                        is ResultState.Error -> {
 //                        showLoading(false)
-                        showToast(
-                            requireContext(),
-                            "There is something wrong when loading your data"
-                        )
+                            showToast(
+                                requireContext(),
+                                "There is something wrong when loading your data"
+                            )
+                        }
                     }
                 }
             }

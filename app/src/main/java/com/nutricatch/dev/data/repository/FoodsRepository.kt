@@ -43,6 +43,7 @@ class FoodsRepository(private val preferences: Preferences) {
     }
 
     fun addNewEating(
+        foodName: String,
         calories: Double,
         carbohydrates: Double,
         fat: Double,
@@ -59,7 +60,16 @@ class FoodsRepository(private val preferences: Preferences) {
             val apiService = ApiConfig.getApiService(token)
             /// TODO ambil dari api jika sudah ada
             val responseItem =
-                apiService.addNewEating(calories, carbohydrates, fat, protein, salt, sugar, fiber)
+                apiService.addNewEating(
+                    foodName,
+                    calories,
+                    carbohydrates,
+                    fat,
+                    protein,
+                    salt,
+                    sugar,
+                    fiber
+                )
 
             emit(ResultState.Success(responseItem))
         } catch (e: HttpException) {

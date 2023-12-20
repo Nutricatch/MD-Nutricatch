@@ -102,8 +102,9 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/daily-consumtion/create-daily-consumtion")
     suspend fun addNewEating(
+        @Field("foodName") foodName: String,
         @Field("calories") calories: Double,
-        @Field("carbohydates") carb: Double,
+        @Field("carbohydrates") carb: Double,
         @Field("fat") fat: Double,
         @Field("protein") protein: Double,
         @Field("salt") salt: Double,
