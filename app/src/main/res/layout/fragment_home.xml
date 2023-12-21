@@ -80,7 +80,7 @@
                     app:layout_constraintTop_toTopOf="@id/img_diamond"
                     tools:text="3" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/img_diamond"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -104,14 +104,6 @@
             android:text="@string/track_your_calories_journey2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_v_track_journey" />
-
-        <!--        <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView-->
-        <!--            android:id="@+id/chart"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="256dp"-->
-        <!--            android:layout_marginTop="24dp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/tv_food_recommendation"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/tv_v_track_journey_2" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/chart"

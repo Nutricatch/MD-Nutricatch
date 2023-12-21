@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -94,6 +95,7 @@ class HomeFragment : Fragment() {
 
         binding.vGroupDiamond.setOnClickListener {
             /// TODO show dialog to buy a diamond, if less than 5, show ads button
+            showDiamondDialog()
         }
 
         val navController = findNavController()
@@ -151,6 +153,20 @@ class HomeFragment : Fragment() {
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
         sliderView.scrollTimeInSec = 2
         sliderView.startAutoCycle()
+    }
+
+    private fun showDiamondDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.diamond_home_dialog, null)
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
+
+        // Add any additional customization to the dialog here
+        // For example:
+        // builder.setTitle("Custom Dialog Title")
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun getSummary() {
