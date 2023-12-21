@@ -101,7 +101,7 @@
 
     <fragment
         android:id="@+id/bodyDetailFragment"
-        android:name="com.nutricatch.dev.views.navigation.profile.BodyDetailFragment"
+        android:name="com.nutricatch.dev.views.navigation.profile.goal_setting.BodyDetailFragment"
         android:label="fragment_body_detail"
         tools:layout="@layout/fragment_body_detail">
         <action
@@ -109,7 +109,7 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_bodyDetailFragment_to_nutritionTargeFragment"
-            app:destination="@id/nutritionTargeFragment" />
+            app:destination="@id/nutritionTargetFragment" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
@@ -160,8 +160,8 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/action_registerFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            android:id="@+id/action_registerFragment_to_userGoalFragment"
+            app:destination="@id/userGoalFragment" />
     </fragment>
     <activity
         android:id="@+id/appCheckActivity"
@@ -223,8 +223,21 @@
         android:label="fragment_date_picker"
         tools:layout="@layout/fragment_date_picker" />
     <fragment
-        android:id="@+id/nutritionTargeFragment"
-        android:name="com.nutricatch.dev.views.navigation.profile.NutritionTargetFragment"
+        android:id="@+id/nutritionTargetFragment"
+        android:name="com.nutricatch.dev.views.navigation.profile.goal_setting.NutritionTargetFragment"
         android:label="fragment_nutrition_targe"
-        tools:layout="@layout/fragment_nutrition_target" />
+        tools:layout="@layout/fragment_nutrition_target" >
+        <action
+            android:id="@+id/action_nutritionTargetFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/userGoalFragment"
+        android:name="com.nutricatch.dev.views.navigation.profile.goal_setting.UserGoalFragment"
+        android:label="fragment_user_goal"
+        tools:layout="@layout/fragment_user_goal" >
+        <action
+            android:id="@+id/action_userGoalFragment_to_bodyDetailFragment"
+            app:destination="@id/bodyDetailFragment" />
+    </fragment>
 </navigation>

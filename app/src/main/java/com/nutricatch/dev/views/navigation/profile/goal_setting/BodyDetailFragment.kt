@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.navigation.profile
+package com.nutricatch.dev.views.navigation.profile.goal_setting
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.api.response.ActivityLevel
@@ -19,6 +18,7 @@ import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentBodyDetailBinding
 import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.UserProfileViewModelFactory
+import com.nutricatch.dev.views.navigation.profile.ProfileViewModel
 
 class BodyDetailFragment : Fragment() {
     private var _binding: FragmentBodyDetailBinding? = null
@@ -42,6 +42,8 @@ class BodyDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.rbMale.isChecked = true
 
         viewModel.userHealthData.observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -76,10 +78,11 @@ class BodyDetailFragment : Fragment() {
                     /// TODO Handle error here
                     if (result.errorCode == 401) {
                         //TODO navigate ke login page
-                       findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
+//                        findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
                     } else {
                         /// TODO tampilkan error dengan toast
-                        Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "${result.error}", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -124,10 +127,14 @@ class BodyDetailFragment : Fragment() {
                             /// TODO Handle error here
                             if (result.errorCode == 401) {
                                 /// TODO navigate ke login page
-                                findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
+//                                findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
                             } else {
                                 /// TODO tampilkan error dengan toast
-                                Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "${result.error}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }

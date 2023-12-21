@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="24dp"
-    tools:context=".views.navigation.profile.BodyDetailFragment">
+    tools:context=".views.navigation.profile.goal_setting.BodyDetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

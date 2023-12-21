@@ -59,7 +59,7 @@ class RegisterFragment : Fragment() {
                                     if (result.data.accessToken != null) {
                                         viewModel.saveSession(result.data.accessToken)
                                         withContext(Dispatchers.Main) {
-                                            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToNavigationHome())
+                                            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToUserGoalFragment())
                                         }
                                     }
                                 }

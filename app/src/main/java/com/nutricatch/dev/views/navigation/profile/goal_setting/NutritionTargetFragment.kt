@@ -1,10 +1,10 @@
-package com.nutricatch.dev.views.navigation.profile
+package com.nutricatch.dev.views.navigation.profile.goal_setting
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.nutricatch.dev.databinding.FragmentNutritionTargetBinding
 
 class NutritionTargetFragment : Fragment() {
