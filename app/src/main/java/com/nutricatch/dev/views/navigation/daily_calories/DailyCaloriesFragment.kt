@@ -97,15 +97,17 @@ class DailyCaloriesFragment : Fragment() {
             binding.tvCalories.text = cal.toString()
             binding.caloriesProgress.progress = cal * 100 / goal
             adapter.submitList(consumeResponses)
+
+            //TODO Handle Warning kalau lebih kalori jika udah dapet fungsi
+            if (Integer.parseInt(binding.tvCalories.text.toString()) > Integer.parseInt(binding.tvGoals.text.toString())) {
+                binding.warningTv.visibility = View.VISIBLE
+            }
+            else if(Integer.parseInt(binding.tvCalories.text.toString()) <= Integer.parseInt(binding.tvGoals.text.toString())){
+                binding.warningTv.visibility = View.INVISIBLE
+            }
         }
 
-        //TODO Handle Warning kalau lebih kalori jika udah dapet fungsi
-        if (Integer.parseInt(binding.tvCalories.text.toString()) >= Integer.parseInt(binding.tvGoals.text.toString())) {
-            binding.warningTv.visibility = View.INVISIBLE
-        }
-        else{
-            binding.warningTv.visibility = View.VISIBLE
-        }
+
 
         binding.imgCalendar.setOnClickListener {
             val date = getDate()

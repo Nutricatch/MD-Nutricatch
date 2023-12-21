@@ -106,7 +106,7 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="carb_value" translatable="false">%1$sgr</string>
     <string name="sugar_value" translatable="false">%1$sgr</string>
     <string name="fiber_value" translatable="false">%1$sgr</string>
-    <string name="sodium_value" translatable="false">%1$sgr</string>
+    <string name="sodium_value" translatable="false">%1$smgr</string>
     <string name="percentage" translatable="false">%1$s %%</string>
     <string name="nutrition_target_content">Take a look at the daily nutrition targets we’ve estimated for you based on your profile. You can adjust the targets as you need.</string>
     <string name="nutrition_target">Nutrition Target</string>
