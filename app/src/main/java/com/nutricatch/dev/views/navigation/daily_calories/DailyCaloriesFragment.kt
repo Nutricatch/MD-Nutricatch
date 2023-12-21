@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentDailyCaloriesBinding
+import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.utils.todayDate
 import com.nutricatch.dev.views.factory.DailyCaloriesViewModelFactory
 import java.text.SimpleDateFormat
@@ -43,8 +44,29 @@ class DailyCaloriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         /// TODO later, update this goal
-        val goal = 2250
+
+        var goal = 2250
         binding.caloriesProgress.progress = 10
+        viewModel.getRecommendedNutrients().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ResultState.Loading -> {
+                    showLoading(true)
+                }
+
+                is ResultState.Success -> {
+                    showLoading(false)
+                    goal = Integer.parseInt(result.data.calories)
+                    binding.tvGoals.text = result.data.calories
+                }
+
+                is ResultState.Error -> {
+                    showLoading(false)
+                    if (result.errorCode != 401) {
+                        showToast(requireContext(), result.error)
+                    }
+                }
+            }
+        }
 
         val adapter = DailyCaloriesAdapter()
         val layoutManager = LinearLayoutManager(requireContext())
@@ -112,7 +134,7 @@ class DailyCaloriesFragment : Fragment() {
                     showLoading(false)
                     /// TODO Handle error here
                     if (result.errorCode == 401) {
-                        //
+                        //TODO navigate ke login page
                     } else {
                         /// TODO tampilkan error dengan toast
                         Toast.makeText(context, result.error, Toast.LENGTH_SHORT)

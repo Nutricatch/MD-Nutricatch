@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nutricatch.dev.data.api.response.ConsumeResponse
+import com.nutricatch.dev.data.api.response.RecommendedNutritionResponse
 import com.nutricatch.dev.data.repository.DailyIntakeRepository
 import com.nutricatch.dev.utils.todayDate
 
 class DailyCaloriesViewModel(private val repository: DailyIntakeRepository) : ViewModel() {
-
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
     }
@@ -22,5 +22,8 @@ class DailyCaloriesViewModel(private val repository: DailyIntakeRepository) : Vi
     fun setDailyData(dailies: List<ConsumeResponse>) {
         _dailyData.value = dailies
     }
+
+    fun getRecommendedNutrients() = repository.getRecommendedNutrients()
+
 
 }
