@@ -107,4 +107,15 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="sugar_value" translatable="false">%1$sgr</string>
     <string name="fiber_value" translatable="false">%1$sgr</string>
     <string name="sodium_value" translatable="false">%1$sgr</string>
+    <string name="nutrition_target_content">Take a look at the daily nutrition targets we’ve estimated for you based on your profile. You can adjust the targets as you need.</string>
+    <string name="nutrition_target">Nutrition Target</string>
+    <string name="my_nutrition_target">My Nutrition Target</string>
+    <string name="calories_per_day">Calories/day</string>
+    <string name="protein_per_day">Proteins/day</string>
+    <string name="fats_per_day">Fats/day</string>
+    <string name="carbohydrates_per_day">Carbohydrates/day</string>
+    <string name="fiber_per_day">min. Fiber/day</string>
+    <string name="sodium_per_day">max. Sodium/day</string>
+    <string name="sugar_per_day">max. Sugar/day</string>
+    <string name="save">Save</string>
 </resources>
