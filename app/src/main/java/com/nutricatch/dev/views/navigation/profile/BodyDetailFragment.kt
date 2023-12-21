@@ -79,9 +79,10 @@ class BodyDetailFragment : Fragment() {
                        findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
                     } else {
                         /// TODO tampilkan error dengan toast
-                        Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "${result.error}", Toast.LENGTH_SHORT).show()
                     }
                 }
+                else -> {}
             }
         }
 
@@ -104,6 +105,48 @@ class BodyDetailFragment : Fragment() {
 
             val fitnessGoal: FitnessGoal = FitnessGoal.WeightGain
             val activityLevel: ActivityLevel = ActivityLevel.SEDENTARY
+
+            binding.toggleButtonGroup.addOnButtonCheckedListener { toggleButtonGroup, checkedId, isChecked ->
+
+                if (isChecked) {
+                    when (checkedId) {
+                        R.id.btnWeightLoss -> {
+                            val fitnessGoal: FitnessGoal = FitnessGoal.WeightLoss
+                        }
+                        R.id.btnWeightGain -> {
+                            val fitnessGoal: FitnessGoal = FitnessGoal.WeightGain
+                        }
+                        R.id.btnMaintenance -> {
+                            val fitnessGoal: FitnessGoal = FitnessGoal.Maintenance
+                        }
+                    }
+                } else {
+                    if (toggleButtonGroup.checkedButtonId == View.NO_ID) {
+                        Toast.makeText(context, "Please choose your Fitness Goal", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            binding.toggleButtonGroupAcvitivityLevel.addOnButtonCheckedListener { toggleButtonGroup, checkedId, isChecked ->
+
+                if (isChecked) {
+                    when (checkedId) {
+                        R.id.btnModeratelyActive -> {
+                            val activityLevel: ActivityLevel = ActivityLevel.MODERATELY_ACTIVE
+                        }
+                        R.id.btnVeryActive -> {
+                            val activityLevel: ActivityLevel = ActivityLevel.VERY_ACTIVE
+                        }
+                        R.id.btnSedentary -> {
+                            val activityLevel: ActivityLevel = ActivityLevel.SEDENTARY
+                        }
+                    }
+                } else {
+                    if (toggleButtonGroup.checkedButtonId == View.NO_ID) {
+                        Toast.makeText(context, "Please choose your Activity Level", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
 
             viewModel.updateHealthData(weight, height, age, gender, fitnessGoal, activityLevel)
                 .observe(viewLifecycleOwner) { result ->
@@ -130,6 +173,8 @@ class BodyDetailFragment : Fragment() {
                                 Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
                             }
                         }
+
+                        else -> {}
                     }
                 }
         }
