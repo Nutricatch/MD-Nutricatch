@@ -32,7 +32,7 @@ fun getRealPathFromUri(context: Context, uri: Uri): String? {
 }
 private fun getCurrentDate(): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    dateFormat.timeZone = TimeZone.getTimeZone("GMT+7:00") // Set timezone to GMT+7 Jakarta
+    dateFormat.timeZone = TimeZone.getTimeZone("GMT+0:00") // Set timezone to GMT+7 Jakarta
 
     val calendar = Calendar.getInstance()
     return dateFormat.format(calendar.time)
