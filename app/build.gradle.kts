@@ -106,4 +106,7 @@ dependencies {
 
     // chart
     implementation ("com.github.AAChartModel:AAChartCore-Kotlin:7.2.1")
+
+    //ads
+    implementation ("com.google.android.gms:play-services-ads:22.6.0")
 }

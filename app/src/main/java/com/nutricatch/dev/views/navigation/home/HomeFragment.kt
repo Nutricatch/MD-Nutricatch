@@ -1,5 +1,7 @@
 package com.nutricatch.dev.views.navigation.home
 
+import android.app.Activity
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +14,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.OnUserEarnedRewardListener
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.injection.Injection
@@ -26,6 +35,8 @@ import com.smarteist.autoimageslider.SliderAnimations
 
 
 class HomeFragment : Fragment() {
+    private var rewardedAd: RewardedAd? = null
+    private final var TAG = "MainActivity"
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -55,9 +66,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initAd()
         navController = findNavController()
-
         viewModel.getRecommendedNutrition().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Loading -> {
@@ -175,6 +185,7 @@ class HomeFragment : Fragment() {
         dialog.show()
 
         dialogBinding.btnAds.setOnClickListener {
+            showAd()
 
         }
         dialogBinding.btnSubscribe.setOnClickListener {
@@ -248,5 +259,82 @@ class HomeFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun initAd(){
+        var adRequest = AdRequest.Builder().build()
+        context?.let {
+            RewardedAd.load(it,"ca-app-pub-3940256099942544/5224354917", adRequest, object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError?.toString()?.let { it1 -> Log.d(TAG, it1) }
+                    rewardedAd = null
+                }
+
+                override fun onAdLoaded(ad: RewardedAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    rewardedAd = ad
+                    loadAd()
+                }
+            })
+        }
+    }
+
+    fun loadAd() {
+        rewardedAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            override fun onAdClicked() {
+                // Called when a click is recorded for an ad.
+                Log.d(TAG, "Ad was clicked.")
+            }
+
+            override fun onAdDismissedFullScreenContent() {
+                // Called when ad is dismissed.
+                // Set the ad reference to null so you don't show the ad a second time.
+                Log.d(TAG, "Ad dismissed fullscreen content.")
+                rewardedAd = null
+                viewModel.addDiamond(5).observe(viewLifecycleOwner){result->
+                    when(result)
+                    {
+                        is ResultState.Loading ->{
+
+                        }
+                        is ResultState.Success ->{
+                            binding.tvDiamondCount.text = result.data.diamonds.toString()
+                        }
+                        is ResultState.Error ->{
+
+                        }
+                    }
+                }
+            }
+
+            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                // Called when ad fails to show.
+                Log.e(TAG, "Ad failed to show fullscreen content.")
+                rewardedAd = null
+            }
+
+            override fun onAdImpression() {
+                // Called when an impression is recorded for an ad.
+                Log.d(TAG, "Ad recorded an impression.")
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                // Called when ad is shown.
+                Log.d(TAG, "Ad showed fullscreen content.")
+            }
+        }
+    }
+
+    fun showAd(){
+        rewardedAd?.let { ad ->
+            ad.show(context as Activity, OnUserEarnedRewardListener { rewardItem ->
+                // Handle the reward.
+                val rewardAmount = rewardItem.amount
+                val rewardType = rewardItem.type
+                Log.d(TAG, "User earned the reward.")
+            })
+        } ?: run {
+            Log.d(TAG, "The rewarded ad wasn't ready yet.")
+        }
     }
 }

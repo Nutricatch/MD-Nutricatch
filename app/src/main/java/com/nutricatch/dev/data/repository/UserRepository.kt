@@ -142,6 +142,26 @@ class UserRepository(private val apiService: ApiService) {
         }
     }
 
+    fun addDiamond(diamond: Int) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val diamonds = apiService.addDiamond(diamond)
+            emit(ResultState.Success(diamonds))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
     fun getRecommendedNutrition() = liveData {
         emit(ResultState.Loading)
 

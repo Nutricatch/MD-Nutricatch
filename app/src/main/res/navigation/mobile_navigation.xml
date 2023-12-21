@@ -215,6 +215,7 @@
         <action
             android:id="@+id/action_foodDetailFragment_to_navigation_daily_calories"
             app:destination="@id/navigation_daily_calories"
+            app:launchSingleTop="true"
             app:popUpTo="@id/navigation_home" />
         <argument
             android:name="label"

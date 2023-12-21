@@ -174,6 +174,11 @@ class DailyCaloriesFragment : Fragment() {
 //        return dateFormat.format(selectedDate.time)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -2,6 +2,7 @@ package com.nutricatch.dev.data.api
 
 import com.nutricatch.dev.data.api.response.ConsumeResponse
 import com.nutricatch.dev.data.api.response.DailyIntakeResponse
+import com.nutricatch.dev.data.api.response.DiamondResponse
 import com.nutricatch.dev.data.api.response.FoodsResponseItem
 import com.nutricatch.dev.data.api.response.HealthResponse
 import com.nutricatch.dev.data.api.response.RecommendedNutritionResponse
@@ -83,13 +84,6 @@ interface ApiService {
     /*
     *   User daily food intake
     * */
-    //TODO Buat fungsi API Service untuk get daily Calories dan Post new food
-    @GET("/daily-consumtion/all-daily-consumtion")
-    suspend fun getDailyIntake(): List<ConsumeResponse>
-
-    @FormUrlEncoded
-    @POST()
-    suspend fun insertNewFood(@Part foodImage: MultipartBody.Part): DailyIntakeResponse
 
     @GET("/nutrition-recommender/daily-recomended-nutrition")
     suspend fun getRecommendedNutrition(): RecommendedNutritionResponse
@@ -117,4 +111,8 @@ interface ApiService {
 
     @GET("/diamonds/use-one")
     suspend fun useDiamond()
+
+    @FormUrlEncoded
+    @POST("/diamonds/add")
+    suspend fun addDiamond(@Field("diamondCounts")diamondCounts: Int) :DiamondResponse
 }

@@ -67,4 +67,6 @@ class HomeViewModel(
 
     val diamonds = repository.getDiamonds()
 
+    fun addDiamond(diamond: Int) = repository.addDiamond(diamond)
+
 }
