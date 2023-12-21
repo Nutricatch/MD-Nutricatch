@@ -77,35 +77,57 @@ class FoodNutrientFragment : Fragment() {
             if (!isFromGallery) {
                 /// TODO need to delete image from cache, this code currently not work
                 requireContext().cacheDir.deleteRecursively()
-
-
-                viewModel.saveEating(
-                    label,
-                    nutrient.calories!!,
-                    nutrient.carbs!!,
-                    nutrient.fat!!,
-                    nutrient.protein!!,
-                    nutrient.sodium!!,
-                    nutrient.sugar!!,
-                    nutrient.fibers!!
-                ).observe(viewLifecycleOwner) { result ->
-                    when (result) {
-                        is ResultState.Loading -> {
+            }
+            viewModel.useDiamond().observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is ResultState.Loading -> {
 //                        showLoading(true)
+                    }
+
+                    is ResultState.Success -> {
+                        //showLoading(false)
+                        if (result.data) {
+                            viewModel.saveEating(
+                                label,
+                                nutrient.calories!!,
+                                nutrient.carbs!!,
+                                nutrient.fat!!,
+                                nutrient.protein!!,
+                                nutrient.sodium!!,
+                                nutrient.sugar!!,
+                                nutrient.fibers!!
+                            ).observe(viewLifecycleOwner) { result ->
+                                when (result) {
+                                    is ResultState.Loading -> {
+                                        //showLoading(true)
+                                    }
+
+                                    is ResultState.Success -> {
+                                        //showLoading(false)
+                                        findNavController().navigate(
+                                            FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories()
+                                        )
+                                    }
+
+                                    is ResultState.Error -> {
+//                        showLoading(false)
+                                        showToast(
+                                            requireContext(),
+                                            "There is something wrong when loading your data"
+                                        )
+                                    }
+                                }
+                            }
                         }
 
-                        is ResultState.Success -> {
-//                        showLoading(false)
-                            findNavController().navigate(FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories())
-                        }
+                    }
 
-                        is ResultState.Error -> {
+                    is ResultState.Error -> {
 //                        showLoading(false)
-                            showToast(
-                                requireContext(),
-                                "There is something wrong when loading your data"
-                            )
-                        }
+                        showToast(
+                            requireContext(),
+                            "There is something wrong when loading your data"
+                        )
                     }
                 }
             }

@@ -2,9 +2,13 @@ package com.nutricatch.dev.views.navigation.food_detail
 
 import androidx.lifecycle.ViewModel
 import com.nutricatch.dev.data.repository.FoodsRepository
+import com.nutricatch.dev.data.repository.UserRepository
 
-class FoodNutrientViewModel(private val repository: FoodsRepository) : ViewModel() {
-    fun getFoodNutrient(name: String) = repository.getFoodByName(name)
+class FoodNutrientViewModel(
+    private val foodsRepository: FoodsRepository,
+    private val userRepository: UserRepository
+) : ViewModel() {
+    fun getFoodNutrient(name: String) = foodsRepository.getFoodByName(name)
 
     fun saveEating(
         foodName: String,
@@ -15,5 +19,16 @@ class FoodNutrientViewModel(private val repository: FoodsRepository) : ViewModel
         salt: Double,
         sugar: Double,
         fiber: Double
-    ) = repository.addNewEating(foodName, calories, carbohydrates, fat, protein, salt, sugar, fiber)
+    ) = foodsRepository.addNewEating(
+        foodName,
+        calories,
+        carbohydrates,
+        fat,
+        protein,
+        salt,
+        sugar,
+        fiber
+    )
+
+    fun useDiamond() = userRepository.useDiamond()
 }

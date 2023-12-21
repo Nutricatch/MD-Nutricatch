@@ -114,4 +114,7 @@ interface ApiService {
 
     @GET("/diamonds")
     suspend fun getDiamonds(): Int
+
+    @GET("/diamonds/use-one")
+    suspend fun useDiamond()
 }

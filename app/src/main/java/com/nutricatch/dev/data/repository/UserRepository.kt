@@ -117,6 +117,31 @@ class UserRepository(private val apiService: ApiService) {
         }
     }
 
+    fun useDiamond() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            /*
+            * call to use one diamond
+            * */
+            apiService.useDiamond()
+            emit(ResultState.Success(true))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: UserRepository? = null
