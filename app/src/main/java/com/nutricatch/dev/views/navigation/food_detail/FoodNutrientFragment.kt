@@ -8,6 +8,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.api.response.FoodsResponseItem
 import com.nutricatch.dev.databinding.FragmentFoodDetailBinding
@@ -49,13 +50,15 @@ class FoodNutrientFragment : Fragment() {
                     with(binding) {
                         nutrient = result.data
                         tvName.text = foodLabelsMap[nutrient.name]
-                        tvCaloric.text = nutrient.calories.toString()
-                        tvProtein.text = nutrient.protein.toString()
-                        tvFat.text = nutrient.fat.toString()
-                        tvCarb.text = nutrient.carbs.toString()
-                        tvSugar.text = nutrient.sugar.toString()
-                        tvFiber.text = nutrient.fibers.toString()
-                        tvSodium.text = nutrient.sodium.toString()
+                        tvCaloric.text =
+                            getString(R.string.caloric_value, nutrient.calories.toString())
+                        tvProtein.text =
+                            getString(R.string.protein_value, nutrient.protein.toString())
+                        tvFat.text = getString(R.string.fat_value, nutrient.fat.toString())
+                        tvCarb.text = getString(R.string.carb_value, nutrient.carbs.toString())
+                        tvSugar.text = getString(R.string.sugar_value, nutrient.sugar.toString())
+                        tvFiber.text = getString(R.string.fiber_value, nutrient.fibers.toString())
+                        tvSodium.text = getString(R.string.sodium_value, nutrient.sodium.toString())
                     }
                 }
 

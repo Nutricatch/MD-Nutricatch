@@ -94,10 +94,17 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="message">Message</string>
     <string name="getting_your_location">getting your current location</string>
     <string name="must_activate_gps">You must activate gps to use this feature . . .</string>
-    <string name="cannot_get_location">Tidak dapat mengambil lokasi</string>
-    <string name="location_retrieved">Berhasil mendapatkan lokasi</string>
+    <string name="cannot_get_location">Can\'t get your location</string>
+    <string name="location_retrieved">Location retrieved</string>
     <string name="no">NO</string>
     <string name="yes">YES</string>
     <string name="confirmation_text">Wow, looks tasty! Is this a %1$s?</string>
     <string name="yes_i_ate_this">Yes, I ate this!</string>
+    <string name="caloric_value" translatable="false">%1$s Kcal</string>
+    <string name="protein_value" translatable="false">%1$sgr</string>
+    <string name="fat_value" translatable="false">%1$sgr</string>
+    <string name="carb_value" translatable="false">%1$sgr</string>
+    <string name="sugar_value" translatable="false">%1$sgr</string>
+    <string name="fiber_value" translatable="false">%1$sgr</string>
+    <string name="sodium_value" translatable="false">%1$sgr</string>
 </resources>
