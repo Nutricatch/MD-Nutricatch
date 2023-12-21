@@ -107,4 +107,5 @@ Thank you for your trust and continued support of NutriCatch!</string>
     <string name="sugar_value" translatable="false">%1$sgr</string>
     <string name="fiber_value" translatable="false">%1$sgr</string>
     <string name="sodium_value" translatable="false">%1$sgr</string>
+    <string name="percentage" translatable="false">%1$s \%</string>
 </resources>

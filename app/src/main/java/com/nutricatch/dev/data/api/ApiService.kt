@@ -91,7 +91,7 @@ interface ApiService {
     @POST()
     suspend fun insertNewFood(@Part foodImage: MultipartBody.Part): DailyIntakeResponse
 
-    @GET("nutrition-recommender/daily-recomended-nutrition")
+    @GET("/nutrition-recommender/daily-recomended-nutrition")
     suspend fun getRecommendedNutrition(): RecommendedNutritionResponse
 
     @GET("/daily-consumtion/daily-consumtion-by-date")

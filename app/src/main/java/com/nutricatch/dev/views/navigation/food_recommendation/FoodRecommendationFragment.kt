@@ -132,7 +132,6 @@ class FoodRecommendationFragment : Fragment(), View.OnClickListener {
                     if (location == null)
                         showToast(requireContext(), getString(R.string.cannot_get_location))
                     else {
-                        showToast(requireContext(), getString(R.string.location_retrieved))
                         /// TOOD hit api di sini karena sudah dapat lat long nya
 
                         val lat = location.latitude
@@ -143,7 +142,7 @@ class FoodRecommendationFragment : Fragment(), View.OnClickListener {
                         viewModel.getNearbyRestaurants(lat, lng).observe(viewLifecycleOwner) {
                             when (val result = it) {
                                 is ResultState.Loading -> {
-                                    showToast(requireContext(), "Getting Data")
+//                                    showToast(requireContext(), "Getting Data")
                                 }
 
                                 is ResultState.Success -> {
@@ -151,7 +150,7 @@ class FoodRecommendationFragment : Fragment(), View.OnClickListener {
                                 }
 
                                 is ResultState.Error -> {
-                                    showToast(requireContext(), "Error")
+                                    showToast(requireContext(), "Something Error Happened")
                                 }
                             }
                         }
@@ -178,12 +177,7 @@ class FoodRecommendationFragment : Fragment(), View.OnClickListener {
         val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         val client = LocationServices.getSettingsClient(requireContext())
         client.checkLocationSettings(builder.build())
-            .addOnSuccessListener {
-                showToast(
-                    requireContext(),
-                    getString(R.string.getting_your_location)
-                )
-            }
+            .addOnSuccessListener { }
             .addOnFailureListener { exception ->
                 if (exception is ResolvableApiException) {
                     try {
