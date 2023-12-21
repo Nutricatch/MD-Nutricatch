@@ -37,7 +37,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         binding.btnLogin.setOnClickListener(this)
         binding.tbRegister.setOnClickListener(this)
-        binding.btnLoginWithGoogle.setOnClickListener(this)
+//        binding.btnLoginWithGoogle.setOnClickListener(this)
     }
 
     override fun onDestroyView() {
@@ -87,9 +87,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     }
                 }
 
-                btnLoginWithGoogle -> {
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToWebViewLoginFragment())
-                }
+//                btnLoginWithGoogle -> {
+//                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToWebViewLoginFragment())
+//                }
 
                 tbRegister -> {
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
