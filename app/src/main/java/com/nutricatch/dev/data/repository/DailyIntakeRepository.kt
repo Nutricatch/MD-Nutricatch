@@ -69,6 +69,33 @@ class DailyIntakeRepository internal constructor(
         }
     }
 
+    fun getRecommendedNutrients() = liveData {
+        emit(ResultState.Loading)
+        try {
+            val recommendedNutritionResponse = apiService.getRecommendedNutrition()
+            emit(ResultState.Success(recommendedNutritionResponse))
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.message()
+            when (e.code()) {
+                in 300..399 -> {
+                    emit(ResultState.Error("Need To Reconfigure. Please Contact Administrator"))
+                }
+
+                in 400..499 -> {
+                    emit(ResultState.Error("Request Error. code ${e.code()} $errorBody"))
+                }
+
+                in 500..599 -> {
+                    emit(ResultState.Error("Server Error"))
+                }
+            }
+        } catch (e: UnknownHostException) {
+            emit(ResultState.Error("Error... Please check your connection"))
+        } catch (e: Exception) {
+            Log.e("TAG", "getDailyIntake: ${e.message}")
+            emit(ResultState.Error("Unknown Error "))
+        }
+    }
     companion object {
         @Volatile
         private var INSTANCE: DailyIntakeRepository? = null
