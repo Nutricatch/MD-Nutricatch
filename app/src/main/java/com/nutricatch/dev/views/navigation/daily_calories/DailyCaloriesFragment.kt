@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.databinding.FragmentDailyCaloriesBinding
 import com.nutricatch.dev.utils.todayDate
@@ -52,6 +55,17 @@ class DailyCaloriesFragment : Fragment() {
         * Initiate today data
         * */
         getDailyData(todayDate)
+
+        val navController = findNavController()
+        val destination = NavController.OnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.navigation_home) {
+                /// TODO implement api call get newest diamonds
+                // This fragment is becoming visible again after pop
+                // Call your API here
+
+            }
+        }
+        navController.addOnDestinationChangedListener(destination)
 
         viewModel.dailyData.observe(viewLifecycleOwner) { consumeResponses ->
             var cal = 0
@@ -119,7 +133,8 @@ class DailyCaloriesFragment : Fragment() {
             { _, year, month, dayOfMonth ->
                 selectedDate.set(year, month, dayOfMonth)
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                dateFormat.timeZone = TimeZone.getTimeZone("GMT+7:00") // Set timezone to GMT+7 Jakarta
+                dateFormat.timeZone =
+                    TimeZone.getTimeZone("GMT+7:00") // Set timezone to GMT+7 Jakarta
                 getDailyData(dateFormat.format(selectedDate.time))
             },
             calendar.get(Calendar.YEAR),
