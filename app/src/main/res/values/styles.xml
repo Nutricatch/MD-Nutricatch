@@ -46,8 +46,19 @@
     <style name="roundedCornersView">
         <item name="cornerSize">15%</item>
     </style>
+
     <style name="circleView">
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/r_btn_selector</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@drawable/rbtn_textcolor_selector</item>
+        <item name="android:button">@null</item>
     </style>
 
 </resources>

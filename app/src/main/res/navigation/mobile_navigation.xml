@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_navigation_home_to_cameraFragment"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_paymentWebViewFragment"
+            app:destination="@id/paymentWebViewFragment" />
     </fragment>
 
     <fragment
@@ -229,7 +232,8 @@
         tools:layout="@layout/fragment_nutrition_target" >
         <action
             android:id="@+id/action_nutritionTargetFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/userGoalFragment"
@@ -240,4 +244,9 @@
             android:id="@+id/action_userGoalFragment_to_bodyDetailFragment"
             app:destination="@id/bodyDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/paymentWebViewFragment"
+        android:name="com.nutricatch.dev.PaymentWebViewFragment"
+        android:label="fragment_payment_web_view"
+        tools:layout="@layout/fragment_payment_web_view" />
 </navigation>

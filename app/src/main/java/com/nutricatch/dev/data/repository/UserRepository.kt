@@ -61,9 +61,9 @@ class UserRepository(private val apiService: ApiService) {
         weight: Double,
         height: Double,
         age: Double,
-        gender: Gender,
-        fitnessGoal: FitnessGoal,
-        activityLevel: ActivityLevel
+        gender: String,
+        fitnessGoal: String,
+        activityLevel: String
     ) = liveData {
         emit(ResultState.Loading)
 
@@ -73,9 +73,9 @@ class UserRepository(private val apiService: ApiService) {
                     weight,
                     height,
                     age,
-                    gender.name,
-                    fitnessGoal.name,
-                    activityLevel.name
+                    gender,
+                    fitnessGoal,
+                    activityLevel
                 )
 
             emit(ResultState.Success(updateResponse))

@@ -122,131 +122,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_gender">
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
+            <RadioButton
                 android:id="@+id/rb_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/male" />
+                android:background="@drawable/r_btn_selector"
+                android:button="@null"
+                android:paddingHorizontal="8dp"
+                android:text="@string/male"
+                android:textAlignment="center"
+                android:textColor="@drawable/rbtn_textcolor_selector" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
+            <RadioButton
                 android:id="@+id/rb_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/female" />
+                android:background="@drawable/r_btn_selector"
+                android:button="@null"
+                android:paddingHorizontal="8dp"
+                android:text="@string/female"
+                android:textAlignment="center"
+                android:textColor="@drawable/rbtn_textcolor_selector" />
         </RadioGroup>
-
-        <TextView
-            android:id="@+id/v_fitness_goal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Fitness Goal"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rg_gender" />
-
-
-        <TextView
-            android:id="@+id/v_activity_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Activity Level"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleButtonGroup"
-            />
-
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleButtonGroupAcvitivityLevel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_activity_level"
-            app:singleSelection="true">
-
-            <Button
-                android:id="@+id/btnSedentary"
-                style="@style/ButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sedentary"
-                android:textSize="12dp"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/btnModeratelyActive"
-                style="@style/ButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Moderately Active"
-                android:textSize="12dp"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/btnVeryActive"
-                style="@style/ButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Very Active"
-                android:textSize="12dp"
-                android:layout_weight="1"/>
-
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleButtonGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_fitness_goal"
-            app:singleSelection="true">
-
-            <Button
-                android:id="@+id/btnWeightGain"
-                style="@style/ButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Weight Gain"
-                android:textSize="12dp"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/btnMaintenance"
-                style="@style/ButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Maintenance"
-                android:textSize="12dp"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/btnWeightLoss"
-                style="@style/ButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WeightLoss"
-                android:textSize="12dp"
-                android:layout_weight="1"/>
-
-        </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <TextView
             android:id="@+id/tv_result"
             style="@style/Theme.NutriCatch.TextStyle.Headline.Small"
+            android:layout_marginTop="24dp"
             android:text="@string/result"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleButtonGroupAcvitivityLevel" />
+            app:layout_constraintTop_toBottomOf="@+id/rg_gender" />
 
         <TextView
             android:id="@+id/tv_bmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_result"
             tools:text="BMI = 20.1 Kg/m2" />

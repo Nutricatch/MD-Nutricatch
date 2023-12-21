@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
@@ -16,6 +17,7 @@ import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.injection.Injection
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
+import com.nutricatch.dev.databinding.DiamondHomeDialogBinding
 import com.nutricatch.dev.databinding.FragmentHomeBinding
 import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.HomeViewModelFactory
@@ -27,7 +29,12 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var _dialogBinding: DiamondHomeDialogBinding? = null
+    private val dialogBinding get() = _dialogBinding!!
+
     private lateinit var preferences: Preferences
+    private lateinit var navController: NavController
+
     private val viewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(
             Injection.provideUserRepository(requireContext()),
@@ -48,6 +55,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = findNavController()
 
         viewModel.getRecommendedNutrition().observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -156,17 +165,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun showDiamondDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.diamond_home_dialog, null)
+        _dialogBinding = DiamondHomeDialogBinding.inflate(layoutInflater)
+        val dialogView = dialogBinding.root
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(dialogView)
 
-        // Add any additional customization to the dialog here
-        // For example:
-        // builder.setTitle("Custom Dialog Title")
-
         val dialog = builder.create()
         dialog.show()
+
+        dialogBinding.btnAds.setOnClickListener {
+
+        }
+        dialogBinding.btnSubscribe.setOnClickListener {
+            dialog.hide()
+            navController.navigate(HomeFragmentDirections.actionNavigationHomeToPaymentWebViewFragment())
+        }
+
     }
 
     private fun getSummary() {
@@ -228,6 +243,7 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _dialogBinding = null
     }
 
     private fun showLoading(isLoading: Boolean) {
