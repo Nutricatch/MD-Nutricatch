@@ -43,8 +43,6 @@ class DailyCaloriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /// TODO later, update this goal
-
         var goal = 2250
         binding.caloriesProgress.progress = 10
         viewModel.getRecommendedNutrients().observe(viewLifecycleOwner) { result ->
@@ -102,14 +100,12 @@ class DailyCaloriesFragment : Fragment() {
         }
 
         //TODO Handle Warning kalau lebih kalori jika udah dapet fungsi
-//        if ()
-//        {
-//            binding.warningTv.visibility = View.VISIBLE
-//        }
-//        else if ()
-//        {
-//            binding.warningTv.visibility = View.INVISIBLE
-//        }
+        if (Integer.parseInt(binding.tvCalories.text.toString()) >= Integer.parseInt(binding.tvGoals.text.toString())) {
+            binding.warningTv.visibility = View.INVISIBLE
+        }
+        else{
+            binding.warningTv.visibility = View.VISIBLE
+        }
 
         binding.imgCalendar.setOnClickListener {
             val date = getDate()
