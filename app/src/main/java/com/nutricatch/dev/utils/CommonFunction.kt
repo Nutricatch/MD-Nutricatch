@@ -16,7 +16,7 @@ fun showToast(context: Context, message: String) {
 }
 
 fun createCustomTempFile(context: Context): File {
-    val filesDir = context.externalCacheDir
+    val filesDir = context.cacheDir
     return File.createTempFile(timeStamp, ".jpg", filesDir)
 }
 

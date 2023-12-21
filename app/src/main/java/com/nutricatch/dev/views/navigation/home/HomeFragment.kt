@@ -186,7 +186,6 @@ class HomeFragment : Fragment() {
 
         dialogBinding.btnAds.setOnClickListener {
             showAd()
-
         }
         dialogBinding.btnSubscribe.setOnClickListener {
             dialog.hide()
@@ -305,6 +304,7 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
+                refreshCurrentFragment()
             }
 
             override fun onAdFailedToShowFullScreenContent(p0: AdError) {
@@ -336,5 +336,11 @@ class HomeFragment : Fragment() {
         } ?: run {
             Log.d(TAG, "The rewarded ad wasn't ready yet.")
         }
+    }
+
+    private fun refreshCurrentFragment(){
+        val id = navController.currentDestination?.id
+        navController.popBackStack(id!!,true)
+        navController.navigate(id)
     }
 }

@@ -30,6 +30,7 @@ class DailyCaloriesFragment : Fragment() {
     private val viewModel by viewModels<DailyCaloriesViewModel> {
         DailyCaloriesViewModelFactory.getInstance(requireContext())
     }
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -186,5 +187,11 @@ class DailyCaloriesFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun refreshCurrentFragment(){
+        val id = navController.currentDestination?.id
+        navController.popBackStack(id!!,true)
+        navController.navigate(id)
     }
 }

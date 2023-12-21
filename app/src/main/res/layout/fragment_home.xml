@@ -314,8 +314,8 @@
 
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSlider"
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintEnd_toEndOf="parent"
