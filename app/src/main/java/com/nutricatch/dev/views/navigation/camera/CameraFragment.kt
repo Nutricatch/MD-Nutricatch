@@ -140,7 +140,7 @@ class CameraFragment : Fragment() {
         // get a stable reference of modifiable image capture
         val imageCapture = imageCapture ?: return
 
-        val photoFile = createCustomTempFile(requireContext().applicationContext)
+        val photoFile = createCustomTempFile(requireContext())
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
@@ -176,8 +176,13 @@ class CameraFragment : Fragment() {
 
                 override fun onError(exception: ImageCaptureException) {
                     val msg = "Something error"
+
                     showToast(requireContext(), msg)
-                    Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
+                    Log.e(
+                        TAG,
+                        "Photo capture failed: ${exception.message} ${exception.cause}",
+                        exception
+                    )
                 }
 
             })
