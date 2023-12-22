@@ -1,4 +1,4 @@
-package com.nutricatch.dev.views.navigation.profile
+package com.nutricatch.dev.views.navigation.profile.goal_setting
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
-import com.nutricatch.dev.data.api.response.ActivityLevel
-import com.nutricatch.dev.data.api.response.FitnessGoal
 import com.nutricatch.dev.data.api.response.Gender
 import com.nutricatch.dev.data.prefs.Preferences
 import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentBodyDetailBinding
-import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.UserProfileViewModelFactory
+import com.nutricatch.dev.views.navigation.profile.ProfileViewModel
 
 class BodyDetailFragment : Fragment() {
     private var _binding: FragmentBodyDetailBinding? = null
@@ -43,6 +41,69 @@ class BodyDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.rbMale.isChecked = true
+        viewModel.token.observe(viewLifecycleOwner) {
+            if (it != null) {
+                observeHealthData()
+            } else {
+                binding.btnUpdate.text = "Save"
+            }
+        }
+
+        binding.btnBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnUpdate.setOnClickListener {
+
+            val weight = binding.edtMyWeight.text.toString().trim().toIntOrNull() ?: 0
+            val height = binding.edtMyHeight.text.toString().trim().toIntOrNull() ?: 0
+            val age = binding.edtAge.text.toString().trim().toIntOrNull() ?: 0
+            val genderId = binding.rgGender.checkedRadioButtonId
+            val gender = if (genderId == binding.rbMale.id) {
+                Gender.MALE
+            } else {
+                Gender.FEMALE
+            }
+
+            viewModel.setUserWeight(weight, height, age, gender.name)
+            viewModel.updateData().observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is ResultState.Loading -> {
+                        showLoading(true)
+                    }
+
+                    is ResultState.Success -> {
+                        showLoading(false)
+                        findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToNutritionTargeFragment())
+                    }
+
+                    is ResultState.Error -> {
+                        showLoading(false)
+                        /// TODO Handle error here
+                        if (result.errorCode == 401) {
+                            //TODO navigate ke login page
+//                        findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
+                        } else {
+                            /// TODO tampilkan error dengan toast
+                            Toast.makeText(context, "${result.error}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    else -> {}
+                }
+            }
+        }
+
+        binding.edtMyHeight.addTextChangedListener {
+            binding.tvBmi.text = calculateBmi()
+        }
+        binding.edtMyWeight.addTextChangedListener {
+            binding.tvBmi.text = calculateBmi()
+        }
+    }
+
+    private fun observeHealthData() {
         viewModel.userHealthData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Loading -> {
@@ -76,69 +137,15 @@ class BodyDetailFragment : Fragment() {
                     /// TODO Handle error here
                     if (result.errorCode == 401) {
                         //TODO navigate ke login page
-                       findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
+//                        findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
                     } else {
                         /// TODO tampilkan error dengan toast
-                        Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "${result.error}", Toast.LENGTH_SHORT).show()
                     }
                 }
+
+                else -> {}
             }
-        }
-
-
-        binding.btnBack.setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
-
-        binding.btnUpdate.setOnClickListener {
-
-            val weight: Double = binding.edtMyWeight.text.toString().trim().toDoubleOrNull() ?: 0.0
-            val height: Double = binding.edtMyHeight.text.toString().trim().toDoubleOrNull() ?: 0.0
-            val age: Double = binding.edtAge.text.toString().trim().toDoubleOrNull() ?: 0.0
-            val genderId = binding.rgGender.checkedRadioButtonId
-            val gender = if (genderId == binding.rbMale.id) {
-                Gender.MALE
-            } else {
-                Gender.FEMALE
-            }
-
-            val fitnessGoal: FitnessGoal = FitnessGoal.WeightGain
-            val activityLevel: ActivityLevel = ActivityLevel.SEDENTARY
-
-            viewModel.updateHealthData(weight, height, age, gender, fitnessGoal, activityLevel)
-                .observe(viewLifecycleOwner) { result ->
-                    when (result) {
-                        is ResultState.Loading -> {
-                            /// TODO Show Loading
-                            showLoading(true)
-                        }
-
-                        is ResultState.Success -> {
-                            showLoading(false)
-                            showToast(requireContext(), getString(R.string.success_update_data))
-                            requireActivity().onBackPressedDispatcher.onBackPressed()
-                        }
-
-                        is ResultState.Error -> {
-                            showLoading(false)
-                            /// TODO Handle error here
-                            if (result.errorCode == 401) {
-                                /// TODO navigate ke login page
-                                findNavController().navigate(BodyDetailFragmentDirections.actionBodyDetailFragmentToLoginFragment2())
-                            } else {
-                                /// TODO tampilkan error dengan toast
-                                Toast.makeText(context, "${result.error.toString()}", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                }
-        }
-
-        binding.edtMyHeight.addTextChangedListener {
-            binding.tvBmi.text = calculateBmi()
-        }
-        binding.edtMyWeight.addTextChangedListener {
-            binding.tvBmi.text = calculateBmi()
         }
     }
 

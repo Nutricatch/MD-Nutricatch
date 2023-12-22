@@ -5,14 +5,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.Image
 import android.net.Uri
-import androidx.annotation.OptIn
-import androidx.camera.core.ExperimentalGetImage
-import androidx.camera.core.ImageProxy
 import com.nutricatch.dev.ml.SaveModel
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+
+data class ScanResult(
+    var label: String = "unknown",
+    var isRecognized: Boolean = true
+)
 
 class MLHelper {
     private fun loadBitmapFromUri(context: Context, uri: Uri): Bitmap? {
@@ -47,13 +49,13 @@ class MLHelper {
     }
 
     // Function to process the image using the TFLite model
-    fun processImage(context: Context, uri: Uri): String {
+    fun processImage(context: Context, uri: Uri): ScanResult {
         val model = SaveModel.newInstance(context)
 
         // Load bitmap from URI
         val bitmap = loadBitmapFromUri(context, uri)
 
-        var result = ""
+        val scanResult = ScanResult()
 
         bitmap?.let {
             // Preprocess the bitmap
@@ -76,57 +78,20 @@ class MLHelper {
             val index = tab.indexOfFirst { it == probability }
 
             val strings = labelResult
-            result = if (probability > 0.7) {
+
+            if (probability > 0.4) {
                 strings[index]
-            } else if (probability < 0.7 && probability > 0.4) {
-                "Is This ${strings[index]}?"
+                scanResult.label = strings[index]
+                scanResult.isRecognized = true
             } else {
-                "Image not recognized"
+                scanResult.label = "Image not recognized"
+                scanResult.isRecognized = false
             }
             // Release model resources if no longer used
-            model.close()
         }
+        model.close()
 
-        return result
-    }
-
-    @OptIn(ExperimentalGetImage::class)
-    fun processImageProxy(context: Context, image: ImageProxy): String {
-        val mediaImage: Image? = image.image
-        var result = ""
-        mediaImage?.let {
-            val inputBitmap = imageToBitmap(mediaImage)
-            val inputBuffer = preprocessBitmap(inputBitmap)
-
-            val inputFeature0 =
-                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-            inputFeature0.loadBuffer(inputBuffer)
-
-            val model = SaveModel.newInstance(context)
-            val outputs = model.process(inputFeature0)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-            // Handle output as needed
-            // ...
-            val tab = outputFeature0.floatArray
-
-            val probability = tab.max()
-            val index = tab.indexOfFirst { it == probability }
-
-            val strings = labelResult
-
-            result = if (probability > 0.7) {
-                strings[index]
-            } else if (probability < 0.7 && probability > 0.4) {
-                "Is This ${strings[index]}?"
-            } else {
-                "Image not recognized"
-            }
-
-            // Release model resources if no longer used
-            model.close()
-        }
-
-        return result
+        return scanResult
     }
 
     // Function to convert Image to Bitmap

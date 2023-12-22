@@ -39,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
+                android:text="Hello, "
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_greeting"
@@ -57,28 +58,36 @@
                 app:layout_constraintStart_toEndOf="@id/ic_user"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
 
-            <TextView
-                android:id="@+id/tv_diamond_count"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/v_group_diamond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_corner_shape_4"
-                android:backgroundTint="?attr/colorPrimary"
-                android:paddingHorizontal="12dp"
-                android:text="0"
-                android:textColor="?attr/colorSurface"
-                app:layout_constraintBottom_toBottomOf="@id/img_diamond"
-                app:layout_constraintEnd_toStartOf="@id/img_diamond"
-                app:layout_constraintTop_toTopOf="@id/img_diamond"
-                tools:text="3" />
-
-            <ImageButton
-                android:id="@+id/img_diamond"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_diamond_2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_diamond_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/rounded_corner_shape_4"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:paddingHorizontal="12dp"
+                    android:text="0"
+                    android:textColor="?attr/colorSurface"
+                    app:layout_constraintBottom_toBottomOf="@id/img_diamond"
+                    app:layout_constraintEnd_toStartOf="@id/img_diamond"
+                    app:layout_constraintTop_toTopOf="@id/img_diamond"
+                    tools:text="3" />
+
+                <ImageView
+                    android:id="@+id/img_diamond"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_diamond_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -96,13 +105,203 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_v_track_journey" />
 
-        <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toTopOf="@id/tv_food_recommendation"
-            app:layout_constraintTop_toBottomOf="@id/tv_v_track_journey_2" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_v_track_journey_2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/v_carbs"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@id/v_fats"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/v_bg_carbs"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/rounded_corner_shape_16"
+                    android:backgroundTint="#CA82E3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/v_fg_carbs"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/rounded_corner_shape_16_bottom"
+                    android:backgroundTint="#A62ED0"
+                    app:layout_constraintBottom_toBottomOf="@id/v_bg_carbs"
+                    app:layout_constraintEnd_toEndOf="@id/v_bg_carbs"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_carbs_percents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="50%" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_v_carbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Carbs"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/v_carbs"
+                app:layout_constraintTop_toBottomOf="@id/v_carbs" />
+
+            <TextView
+                android:id="@+id/tv_carb_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_v_carbs"
+                app:layout_constraintTop_toBottomOf="@id/tv_v_carbs"
+                tools:text="25gr" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/v_fats"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@id/v_proteins"
+                app:layout_constraintStart_toEndOf="@id/v_carbs"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/v_bg_fats"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/rounded_corner_shape_16"
+                    android:backgroundTint="#fbcc87"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/v_fg_fats"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/rounded_corner_shape_16_bottom"
+                    android:backgroundTint="#F9AA02"
+                    app:layout_constraintBottom_toBottomOf="@id/v_fats"
+                    app:layout_constraintEnd_toEndOf="@id/v_fats"
+                    app:layout_constraintStart_toStartOf="@id/v_fats" />
+
+                <TextView
+                    android:id="@+id/tv_fat_percents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="50%" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_v_fats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Fats"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/v_fats"
+                app:layout_constraintTop_toBottomOf="@id/v_fats" />
+
+            <TextView
+                android:id="@+id/tv_fat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_v_fats"
+                app:layout_constraintTop_toBottomOf="@id/tv_v_fats"
+                tools:text="25gr" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/v_proteins"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/v_fats"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/v_bg_proteins"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/rounded_corner_shape_16"
+                    android:backgroundTint="#FBA0A0"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/v_fg_proteins"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/rounded_corner_shape_16_bottom"
+                    android:backgroundTint="#F96161"
+                    app:layout_constraintBottom_toBottomOf="@id/v_bg_proteins"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/v_bg_proteins" />
+
+                <TextView
+                    android:id="@+id/tv_protein_percents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="50%" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_v_proteins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Proteins"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/v_proteins"
+                app:layout_constraintTop_toBottomOf="@id/v_proteins" />
+
+            <TextView
+                android:id="@+id/tv_proteins_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_v_proteins"
+                app:layout_constraintTop_toBottomOf="@id/tv_v_proteins"
+                tools:text="25gr" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_food_recommendation"
@@ -115,8 +314,8 @@
 
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSlider"
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintEnd_toEndOf="parent"

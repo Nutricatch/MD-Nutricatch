@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.nutricatch.dev.data.api.response.RestaurantResponseItem
 import com.nutricatch.dev.databinding.RecommendationItemBinding
 
@@ -28,6 +29,7 @@ class NearbyRestaurantAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(restaurant: RestaurantResponseItem) {
             binding.tvTitle.text = restaurant.displayName?.text
+            Glide.with(binding.root.context).load(restaurant.imgUrl).into(binding.imgRecipe)
         }
     }
 

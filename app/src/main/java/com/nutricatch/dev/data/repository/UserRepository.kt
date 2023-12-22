@@ -8,7 +8,7 @@ import com.nutricatch.dev.data.api.response.FitnessGoal
 import com.nutricatch.dev.data.api.response.Gender
 import retrofit2.HttpException
 
-class UserRepository (private val apiService: ApiService) {
+class UserRepository(private val apiService: ApiService) {
     /*
     *  get user profile
     * */
@@ -61,9 +61,9 @@ class UserRepository (private val apiService: ApiService) {
         weight: Double,
         height: Double,
         age: Double,
-        gender: Gender,
-        fitnessGoal: FitnessGoal,
-        activityLevel: ActivityLevel
+        gender: String,
+        fitnessGoal: String,
+        activityLevel: String
     ) = liveData {
         emit(ResultState.Loading)
 
@@ -73,12 +73,101 @@ class UserRepository (private val apiService: ApiService) {
                     weight,
                     height,
                     age,
-                    gender.name,
-                    fitnessGoal.name,
-                    activityLevel.name
+                    gender,
+                    fitnessGoal,
+                    activityLevel
                 )
 
             emit(ResultState.Success(updateResponse))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    fun getDiamonds() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val diamonds = apiService.getDiamonds()
+            emit(ResultState.Success(diamonds))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    fun useDiamond() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            /*
+            * call to use one diamond
+            * */
+            apiService.useDiamond()
+            emit(ResultState.Success(true))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    fun addDiamond(diamond: Int) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val diamonds = apiService.addDiamond(diamond)
+            emit(ResultState.Success(diamonds))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+    fun getRecommendedNutrition() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val userResponse = apiService.getRecommendedNutrition()
+            emit(ResultState.Success(userResponse))
         } catch (e: HttpException) {
             when (e.code()) {
                 401 -> {

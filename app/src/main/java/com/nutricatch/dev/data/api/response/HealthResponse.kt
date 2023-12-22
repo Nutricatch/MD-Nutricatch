@@ -2,10 +2,10 @@ package com.nutricatch.dev.data.api.response
 
 import com.google.gson.annotations.SerializedName
 
-enum class ActivityLevel {
-    SEDENTARY,
-    MODERATELY_ACTIVE,
-    VERY_ACTIVE
+enum class ActivityLevel(val label: String) {
+    SEDENTARY("Sedentary"),
+    MODERATELY_ACTIVE("Moderately Active"),
+    VERY_ACTIVE("Very Active")
 }
 
 enum class FitnessGoal {

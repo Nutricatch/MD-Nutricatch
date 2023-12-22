@@ -43,26 +43,26 @@
     <TextView
         android:id="@+id/tv_text_my_eating"
         style="@style/Theme.NutriCatch.TextStyle.Headline.Medium.Bold"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
         android:text="@string/my_eating_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warning_tv"
-        tools:ignoreViewBinding="true"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="10dp"/>
+        tools:ignoreViewBinding="true" />
 
     <!-- TODO : Tambahkan customview untuk total kalori -->
 
-    <ImageButton
+    <ImageView
         android:id="@+id/img_calendar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/ic_calendar"
-        android:backgroundTint="?attr/colorOnPrimary"
+        android:src="@drawable/ic_calendar"
         android:contentDescription="@string/date_picker"
+        android:padding="9dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_text_track"
-        app:tint="?attr/colorControlNormal" />
+        app:tint="?attr/colorOnPrimary" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/calories_card"
@@ -183,16 +183,27 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calories_card"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/calories_card" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/margin_16"
+        android:layout_marginHorizontal="@dimen/margin_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_text_my_eating"
         tools:listitem="@layout/today_calories_item" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
