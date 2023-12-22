@@ -33,7 +33,7 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
 
 ## How To Run 
   1. Install Android Studio
-  2. Clone this Repository 'git clone https://github.com/Nutricatch/nutricatch-mobile_app.git'
+  2. Clone this Repository `git clone https://github.com/Nutricatch/nutricatch-mobile_app.git`
   3. Open the cloned folder in Android Studio
   4. Sync Gradle 
   5. Rebuild the project 'Build > Rebuild Project'
