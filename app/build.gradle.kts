@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -19,7 +21,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"http://34.101.167.150:3000/\"")
+        val projectProperties = readProperties(project.rootProject.file("local.properties"))
+        buildConfigField("String", "BASE_URL", projectProperties["BASE_URL"] as String)
     }
 
     buildFeatures {
@@ -109,4 +112,10 @@ dependencies {
 
     //ads
     implementation ("com.google.android.gms:play-services-ads:22.6.0")
+}
+
+fun readProperties(properties: File) = Properties().apply {
+    properties.inputStream().use { fis ->
+        load(fis)
+    }
 }
