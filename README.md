@@ -39,8 +39,10 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
 ## Documentation
   1. [Figma Prototype](https://www.figma.com/file/pEB7OPXiz4DXmhIDlOLLey/NutriCatch?type=design&node-id=0%3A1&mode=design&t=bagjd3odg0kG56LD-1)
   2. Screen
-     - Auth Screen
-       ![Login](/documentationScreen/login_screen.jpeg|height=50) ![Register](/documentationScreen/register_screen.jpeg|height=50)
+     - Auth Screen /n
+       <img src="/documentationScreen/login_screen.png" width="200">
+       <img src="/documentationScreen/register_screen.png" width="200">
+
      - Home Screen
        
      - My Calories Screen
