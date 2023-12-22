@@ -15,7 +15,7 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
 ### 3. Machine Learning
    - [Herdy Hardiyant  M193BSY0024](https://github.com/herdyhardiyant)
    - [Riko Airlan R.  M193BSY0238](https://github.com/Rikoairlan57)
-   - [Dhea Fesa Athallah  M624BSX0347](https://github.com/Fikr17)
+   - [Dhea Fesa Athallah  M624BSX0347](https://github.com/dheafesaa)
 
 ## Table Of Contents
   - [Features](#features)
@@ -37,7 +37,7 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
   3. Open the cloned folder in Android Studio
   4. Sync Gradle 
   5. Rebuild the project 'Build > Rebuild Project'
-  6. Run the app with your desired Phone (min. Os : Android ) 
+  6. Run the app with your desired Phone (min. Os : Android 7.0 or above) 
 
 ## Libraries
   1. Junit
@@ -54,19 +54,19 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
   1. [Figma Prototype](https://www.figma.com/file/pEB7OPXiz4DXmhIDlOLLey/NutriCatch?type=design&node-id=0%3A1&mode=design&t=bagjd3odg0kG56LD-1)
   2. Screen
      - Auth Screen <br />
-      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/register_screen.jpeg" width="300" height="666" />
-      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/login_screen.jpeg" width="300" height="666" />
+      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/register_screen.jpeg" width="200" height="444" />
+      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/login_screen.jpeg" width="200" height="444" />
       
      - Home Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/home_screen.jpeg" width="360" height="800" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/home_screen.jpeg" width="200" height="444" />
        
      - My Calories Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen1.jpeg" width="360" height="800" />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen2.jpeg" width="360" height="800" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen1.jpeg" width="200" height="444" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen2.jpeg" width="200" height="444" />
        
      - Camera Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen1.jpeg" width="360" height="800" />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen2.jpeg" width="360" height="800" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen1.jpeg" width="200" height="444" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen2.jpeg" width="200" height="444" />
        
      - Profile Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/profile_screen.jpeg" width="360" height="800" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/profile_screen.jpeg" width="200" height="444" />
