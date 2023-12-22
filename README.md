@@ -1,5 +1,7 @@
 <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/nutricatch.png" width="400" height="400" />
+
 # NutriCatch Mobile Application
+
 NutriCatch health tracking app with all-in-one solution for a healthier lifestyle through the nutrients in your plate.
 
 This project was created as a Capstone Project for Bangkit 2023 Batch 2, this project was created by the CH2-PS072 team.
