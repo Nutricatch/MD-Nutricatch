@@ -11,7 +11,8 @@ import com.nutricatch.dev.model.Recipe
 
 class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.ViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RecipeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            RecipeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -20,11 +21,12 @@ class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.ViewHolder>(DIFF_CALLBAC
         holder.bind(recipe)
     }
 
-    class ViewHolder(val binding: RecipeItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: RecipeItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
-            binding.tvTitle.text = recipe.title
-            binding.tvEstimationTime.text = recipe.estimation
-            Glide.with(binding.root.context).load(recipe.imgUrl).into(binding.imgRecipe)
+            binding.tvName.text = recipe.title
+            binding.tvCalories.text = recipe.caloric
+            Glide.with(binding.root.context).load(recipe.imgUrl).into(binding.imgRecommendation)
         }
     }
 

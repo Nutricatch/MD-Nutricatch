@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="136dp"
-    android:layout_height="128dp">
+    android:layout_width="match_parent"
+    android:layout_height="205dp"
+    android:layout_marginVertical="8dp">
 
-    <ImageView
-        android:id="@+id/img_recommendation"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/img_recommendation"
-        app:layout_constraintTop_toBottomOf="@id/img_recommendation"
-        tools:text="Potato Rebus" />
+        <ImageView
+            android:id="@+id/img_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/tv_calories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_corner_shape_r4"
-        android:backgroundTint="#99ffffff"
-        android:foregroundTint="#fff"
-        android:paddingHorizontal="1dp"
-        app:layout_constraintEnd_toEndOf="@id/img_recommendation"
-        app:layout_constraintTop_toTopOf="@id/img_recommendation"
-        tools:text="200 Kcal" />
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Theme.NutriCatch.TextStyle.Headline.Medium"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/img_recipe"
+            tools:text="Title Recipe" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_distance"
+            style="@style/Theme.NutriCatch.TextStyle.Headline.Small"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_recipe"
+            tools:text="20 m" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

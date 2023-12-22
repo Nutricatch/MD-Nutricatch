@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginVertical="8dp"
-    android:layout_height="170dp">
+    android:layout_height="256dp"
+    android:layout_margin="4dp"
+    tools:layout_width="200dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/img_recipe"
+            android:id="@+id/img_recommendation"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,22 +22,33 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/tv_title"
-            style="@style/Theme.NutriCatch.TextStyle.Headline.Medium"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Title Recipe" />
-
-        <TextView
-            android:id="@+id/tv_estimation_time"
-            style="@style/Theme.NutriCatch.TextStyle.Headline.Small"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/circle_rect_256_radius"
+            android:backgroundTint="#fff"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="20 Min" />
+            app:layout_constraintStart_toStartOf="@id/img_recommendation"
+            tools:text="Potato Rebus" />
+
+        <TextView
+            android:id="@+id/tv_calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/circle_rect_256_radius"
+            android:backgroundTint="#fff"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            app:layout_constraintStart_toStartOf="@id/img_recommendation"
+            app:layout_constraintTop_toTopOf="@id/img_recommendation"
+            tools:text="200 Kcal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

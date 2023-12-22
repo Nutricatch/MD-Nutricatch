@@ -24,6 +24,7 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
     private val tokenKey = stringPreferencesKey(Const.TOKEN_NAME)
     private val onBoard = booleanPreferencesKey(Const.ON_BOARD)
     private val theme = intPreferencesKey(Const.THEME)
+    private val locale = stringPreferencesKey(Const.LOCALE)
 
 //    suspend fun saveToken(token: String) {
 //        dataStore.edit {
@@ -31,21 +32,20 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
 //        }
 //    }
 
-    suspend fun saveSession(user: UserModel) {
+    suspend fun saveSession(token:String) {
         dataStore.edit { preferences ->
-            preferences[EMAIL_KEY] = user.email
-            preferences[API_TOKEN] = user.token
-            preferences[IS_LOGIN_KEY] = true
+            /*
+            * Save token only, if want to check is logged in,
+            * use get token, if null, user is not logged in
+            * if not null, user is logged in
+            * */
+            preferences[tokenKey] = token
         }
     }
 
-    fun getToken(): Flow<UserModel> {
+    fun getToken(): Flow<String?> {
         return dataStore.data.map { preferences ->
-            UserModel(
-                preferences[EMAIL_KEY] ?: "",
-                preferences[API_TOKEN] ?: "",
-                preferences[IS_LOGIN_KEY] ?: false
-            )
+            preferences[tokenKey]
         }
     }
 
@@ -76,20 +76,24 @@ class Preferences private constructor(private val dataStore: DataStore<Preferenc
         }
     }
 
-    val themeMode: Flow<Theme> = dataStore.data
-        .map { mode ->
-            when (mode[theme]) {
-                AppCompatDelegate.MODE_NIGHT_YES -> Theme.Dark
-                else -> Theme.Light
-            }
+    val themeMode: Flow<Theme> = dataStore.data.map { mode ->
+        when (mode[theme]) {
+            AppCompatDelegate.MODE_NIGHT_YES -> Theme.Dark
+            else -> Theme.Light
         }
+    }
+
+    val appLocale = dataStore.data.map {
+        it[locale]
+    }
+
+    suspend fun setLocale(localeList: String) {
+        dataStore.edit { it[locale] = localeList }
+    }
 
     companion object {
         @Volatile
         private var INSTANCE: com.nutricatch.dev.data.prefs.Preferences? = null
-        private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
-        private val EMAIL_KEY = stringPreferencesKey("email")
-        private val API_TOKEN = stringPreferencesKey("apiToken")
         fun getInstance(dataStore: DataStore<Preferences>): com.nutricatch.dev.data.prefs.Preferences {
             return INSTANCE ?: synchronized(this) {
                 val instance = Preferences(dataStore)

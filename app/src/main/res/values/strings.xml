@@ -1,27 +1,18 @@
 <resources>
-    <string name="app_name">NutriCatch</string>
+    <string name="app_name" translatable="false">NutriCatch</string>
     <string name="onboard_headline_1">Get the exact nutrition value of everything you eat</string>
     <string name="onboard_body_1">We are updating our food database every minute to help you track you calories.</string>
     <string name="onboard_headline_2">Get all the healthy recipes that you need</string>
-    <string name="onboard_body_2">Whether you are losing or gaining, we have all recipes you’ll need.</string>
+    <string name="onboard_body_2">Whether you are losing or gaining, we have all recipes you’ll need</string>
     <string name="onboard_headline_3">Get daily calorie targets based on your body weight</string>
-    <string name="onboard_body_3">Set you target weight and select your monthly schedule, and we’ll do the rest.</string>
+    <string name="onboard_body_3">Set you target weight and select your monthly schedule, and we’ll do the rest</string>
     <string name="skip">Skip</string>
     <string name="get_started">Get Started</string>
     <string name="next">Next</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="title_home">Home</string>
     <string name="title_history">History</string>
     <string name="title_setting">Setting</string>
@@ -31,7 +22,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recipes">Recipes</string>
-    <string name="latest_blog_posts">Latest blog posts!</string>
     <string name="home_greeting">Hello, %1$s</string>
     <string name="profile">Profile</string>
     <string name="account">Account</string>
@@ -56,9 +46,77 @@
     <string name="contact_us">Contact Us</string>
     <string name="languages">Languages</string>
     <string name="help">Help</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="great_day_to_control_your_calories">Great day to control your calories!</string>
     <string name="we_ve_picked_you_a_delicious_food">We\'ve picked you a delicious food</string>
     <string name="we_also_have_recipe_for_you">We also have recipe for you</string>
+    <string name="my_calories">My Calories</string>
+    <string name="track_your_calories">Track Your Calories</string>
+    <string name="my_eating_history">My Eating History</string>
+    <string name="calories_count">0 Kcal</string>
+    <string name="date_picker">Date Picker</string>
+    <string name="foods">Foods</string>
+    <string name="privacy_policy_text">We have revamped our Terms and Conditions and Privacy Notice (earlier called Privacy Policy). The key changes are: \n\n
+For Privacy Notice, we have:\n
+NutriCatch which is a revolutionary application designed for calorie detection through camera scans. This updated Privacy Notice aims to enhance clarity and transparency regarding the collection, use, and protection of your data.\n
+Updated the disclosure on users’ legal rights.\n
+Provided a summary and redesigned the structure for better understanding.\n
+\n
+For Terms of Use, we have:\n
+Added NutriCatch Profile Terms and Conditions to provide you with seamless experience when using this app.\n
+\n
+We encourage you to read the entire Privacy Notice, NutriCatch Profile Terms, and Conditions for more information and to provide your consent by clicking the “Accept All” button below.\n
+\n
+Thank you for your trust and continued support of NutriCatch!</string>
+    <string name="calories">Calories</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="scan_result">Scan result</string>
+    <string name="delet_account">Request For Account Deletion</string>
+    <string name="cancel">Cancel</string>
+    <string name="underweight">Underweight</string>
+    <string name="extremely_overweight">Extremely Overweight</string>
+    <string name="slightly_underweight">Slightly Underweight</string>
+    <string name="overweight">Overweight</string>
+    <string name="slightly_overweight">Slightly Overweight</string>
+    <string name="success_update_data">Success update data</string>
+    <string name="track_your_calories_journey1">Track Your </string>
+    <string name="track_your_calories_journey2">Calories Journey</string>
+    <string name="or">or</string>
+    <string name="login_with_google">Login With Google</string>
+    <string name="delicious_food_only_for_you">Delicious food, only for you 😉</string>
+    <string name="map_view">Map View</string>
+    <string name="share_nutricatch">Share NutriCatch</string>
+    <string name="share_nutricatch_content">Let\'s invite your friends to try NutriCatch so they can also feel the pleasure of being helped to control their daily food intake with NutriCatch.</string>
+    <string name="name">Name</string>
+    <string name="enter_your_message">Enter Your Message</string>
+    <string name="send_your_message">Send Your Message</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="message">Message</string>
+    <string name="getting_your_location">getting your current location</string>
+    <string name="must_activate_gps">You must activate gps to use this feature . . .</string>
+    <string name="cannot_get_location">Can\'t get your location</string>
+    <string name="location_retrieved">Location retrieved</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="confirmation_text">Wow, looks tasty! Is this a %1$s?</string>
+    <string name="yes_i_ate_this">Yes, I ate this!</string>
+    <string name="caloric_value" translatable="false">%1$s Kcal</string>
+    <string name="protein_value" translatable="false">%1$sgr</string>
+    <string name="fat_value" translatable="false">%1$sgr</string>
+    <string name="carb_value" translatable="false">%1$sgr</string>
+    <string name="sugar_value" translatable="false">%1$sgr</string>
+    <string name="fiber_value" translatable="false">%1$sgr</string>
+    <string name="sodium_value" translatable="false">%1$smgr</string>
+    <string name="percentage" translatable="false">%1$s %%</string>
+    <string name="nutrition_target_content">Take a look at the daily nutrition targets we’ve estimated for you based on your profile. You can adjust the targets as you need.</string>
+    <string name="nutrition_target">Nutrition Target</string>
+    <string name="my_nutrition_target">My Nutrition Target</string>
+    <string name="calories_per_day">Calories/day</string>
+    <string name="protein_per_day">Proteins/day</string>
+    <string name="fats_per_day">Fats/day</string>
+    <string name="carbohydrates_per_day">Carbohydrates/day</string>
+    <string name="fiber_per_day">min. Fiber/day</string>
+    <string name="sodium_per_day">max. Sodium/day</string>
+    <string name="sugar_per_day">max. Sugar/day</string>
+    <string name="save">Save</string>
 </resources>

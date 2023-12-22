@@ -6,28 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.nutricatch.dev.data.ResultState
+import com.nutricatch.dev.data.injection.Injection
+import com.nutricatch.dev.data.prefs.Preferences
+import com.nutricatch.dev.data.prefs.dataStore
 import com.nutricatch.dev.databinding.FragmentRecipesBinding
 import com.nutricatch.dev.views.factory.RecipesViewModelFactory
 
 class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     val binding get() = _binding!!
+    private lateinit var preferences: Preferences
 
-    private val viewModel by viewModels<RecipesViewModel> {
-        RecipesViewModelFactory.getInstance(requireContext())
+    private val viewModel by viewModels<RecipeViewModel> {
+        RecipesViewModelFactory(Injection.provideRecipeRepository(requireContext()))
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        preferences = Preferences.getInstance(requireContext().applicationContext.dataStore)
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.rvRecipes.layoutManager = layoutManager
+        val layoutManager =
+            GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+        binding.rvTodayCaloriesEating.layoutManager = layoutManager
 
         viewModel.recipes.observe(viewLifecycleOwner) {
             when (it) {
@@ -36,10 +42,13 @@ class RecipesFragment : Fragment() {
                     val recipes = it.data.recipes
                     val adapter = RecipeAdapter()
                     adapter.submitList(recipes)
-                    binding.rvRecipes.adapter = adapter
+                    binding.rvTodayCaloriesEating.adapter = adapter
                 }
 
                 is ResultState.Error -> {}
+                else -> {
+
+                }
             }
         }
 

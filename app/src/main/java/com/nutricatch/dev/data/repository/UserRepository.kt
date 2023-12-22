@@ -1,44 +1,195 @@
 package com.nutricatch.dev.data.repository
 
 import androidx.lifecycle.liveData
-import com.google.gson.Gson
+import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.api.ApiService
-import com.nutricatch.dev.data.prefs.Preferences
-import com.nutricatch.dev.data.prefs.UserModel
-import com.nutricatch.dev.data.response.AuthResponse
+import com.nutricatch.dev.data.api.response.ActivityLevel
+import com.nutricatch.dev.data.api.response.FitnessGoal
+import com.nutricatch.dev.data.api.response.Gender
 import retrofit2.HttpException
 
-class UserRepository constructor(val  userPreferences: Preferences, val apiService: ApiService){
-    //Auth Method
-    fun login(email: String, password: String) = liveData {
-        emit(Result.Loading)
+class UserRepository(private val apiService: ApiService) {
+    /*
+    *  get user profile
+    * */
+
+    fun getProfile() = liveData {
+        emit(ResultState.Loading)
+
         try {
-            val success = apiService.loginUser(email, password)
-            emit(Result.Success(success))
-        }
-        catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, AuthResponse::class.java)
-            val errorMessage = errorBody.message.toString()
-            emit(Error(errorMessage))
+            val userResponse = apiService.getProfile()
+            emit(ResultState.Success(userResponse))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
         }
     }
 
-    fun register(name: String, email: String, password: String) = liveData {
-        emit(Result.Loading)
+    fun getUserHealth() = liveData {
+        emit(ResultState.Loading)
+
         try {
-            val success = apiService.registerUser(name, email, password)
-            emit(Result.Success(success))
+            val userHeathData = apiService.getHealthData()
+            emit(ResultState.Success(userHeathData))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
         }
-        catch (e: HttpException){
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, AuthResponse::class.java)
-            val errorMessage = errorBody.message.toString()
-            emit(Error(errorMessage))
-        }
-    }
-    suspend fun saveSession(userModel: UserModel) {
-        userPreferences.saveSession(userModel)
     }
 
+    fun updateHealthProfile(
+        weight: Double,
+        height: Double,
+        age: Double,
+        gender: String,
+        fitnessGoal: String,
+        activityLevel: String
+    ) = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val updateResponse =
+                apiService.updateHealthData(
+                    weight,
+                    height,
+                    age,
+                    gender,
+                    fitnessGoal,
+                    activityLevel
+                )
+
+            emit(ResultState.Success(updateResponse))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    fun getDiamonds() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val diamonds = apiService.getDiamonds()
+            emit(ResultState.Success(diamonds))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    fun useDiamond() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            /*
+            * call to use one diamond
+            * */
+            apiService.useDiamond()
+            emit(ResultState.Success(true))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    fun addDiamond(diamond: Int) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val diamonds = apiService.addDiamond(diamond)
+            emit(ResultState.Success(diamonds))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+    fun getRecommendedNutrition() = liveData {
+        emit(ResultState.Loading)
+
+        try {
+            val userResponse = apiService.getRecommendedNutrition()
+            emit(ResultState.Success(userResponse))
+        } catch (e: HttpException) {
+            when (e.code()) {
+                401 -> {
+                    /// Nantinya user didirect ke login
+                    emit(ResultState.Error("Unauthenticated", e.code()))
+                }
+
+                else -> {
+                    emit(ResultState.Error("Something error. Please contact support"))
+                }
+            }
+        } catch (e: Exception) {
+            emit(ResultState.Error("Unknown Error"))
+        }
+    }
+
+    companion object {
+        @Volatile
+        private var INSTANCE: UserRepository? = null
+        fun getInstance(apiService: ApiService) =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: UserRepository(apiService)
+            }.also { INSTANCE = it }
+    }
 }
