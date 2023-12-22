@@ -31,4 +31,5 @@ class FoodNutrientViewModel(
     )
 
     fun useDiamond() = userRepository.useDiamond()
+    val diamond = userRepository.getDiamonds()
 }

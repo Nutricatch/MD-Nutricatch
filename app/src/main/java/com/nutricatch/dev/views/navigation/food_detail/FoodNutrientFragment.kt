@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,10 +12,12 @@ import androidx.navigation.fragment.findNavController
 import com.nutricatch.dev.R
 import com.nutricatch.dev.data.ResultState
 import com.nutricatch.dev.data.api.response.FoodsResponseItem
+import com.nutricatch.dev.databinding.DiamondHomeDialogBinding
 import com.nutricatch.dev.databinding.FragmentFoodDetailBinding
 import com.nutricatch.dev.helper.foodLabelsMap
 import com.nutricatch.dev.utils.showToast
 import com.nutricatch.dev.views.factory.FoodNutrientViewModelFactory
+import com.nutricatch.dev.views.navigation.home.HomeFragmentDirections
 
 class FoodNutrientFragment : Fragment() {
     private var _binding: FragmentFoodDetailBinding? = null
@@ -25,7 +28,8 @@ class FoodNutrientFragment : Fragment() {
     }
 
     private lateinit var nutrient: FoodsResponseItem
-
+    private var _dialogBinding: DiamondHomeDialogBinding? = null
+    private val dialogBinding get() = _dialogBinding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,62 +82,103 @@ class FoodNutrientFragment : Fragment() {
                 /// TODO need to delete image from cache, this code currently not work
                 requireContext().cacheDir.deleteRecursively()
             }
-            viewModel.useDiamond().observe(viewLifecycleOwner) { result ->
+            viewModel.diamond.observe(viewLifecycleOwner) { result ->
                 when (result) {
-                    is ResultState.Loading -> {
+                    is ResultState.Success -> if (result.data == 0)
+                    {
+                        viewModel.useDiamond().observe(viewLifecycleOwner) { result ->
+                            when (result) {
+                                is ResultState.Loading -> {
 //                        showLoading(true)
-                    }
+                                }
 
-                    is ResultState.Success -> {
-                        //showLoading(false)
-                        if (result.data) {
-                            viewModel.saveEating(
-                                label,
-                                nutrient.calories!!,
-                                nutrient.carbs!!,
-                                nutrient.fat!!,
-                                nutrient.protein!!,
-                                nutrient.sodium!!,
-                                nutrient.sugar!!,
-                                nutrient.fibers!!
-                            ).observe(viewLifecycleOwner) { result ->
-                                when (result) {
-                                    is ResultState.Loading -> {
-                                        //showLoading(true)
-                                    }
+                                is ResultState.Success -> {
+                                    //showLoading(false)
+                                    if (result.data) {
+                                        viewModel.saveEating(
+                                            label,
+                                            nutrient.calories!!,
+                                            nutrient.carbs!!,
+                                            nutrient.fat!!,
+                                            nutrient.protein!!,
+                                            nutrient.sodium!!,
+                                            nutrient.sugar!!,
+                                            nutrient.fibers!!
+                                        ).observe(viewLifecycleOwner) { result ->
+                                            when (result) {
+                                                is ResultState.Loading -> {
+                                                    //showLoading(true)
+                                                }
 
-                                    is ResultState.Success -> {
-                                        //showLoading(false)
-                                        findNavController().navigate(
-                                            FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories()
-                                        )
-                                    }
+                                                is ResultState.Success -> {
+                                                    //showLoading(false)
+                                                    findNavController().navigate(
+                                                        FoodNutrientFragmentDirections.actionFoodDetailFragmentToNavigationDailyCalories()
+                                                    )
+                                                }
 
-                                    is ResultState.Error -> {
+                                                is ResultState.Error -> {
 //                        showLoading(false)
-                                        showToast(
-                                            requireContext(),
-                                            "There is something wrong when loading your data"
-                                        )
+                                                    showToast(
+                                                        requireContext(),
+                                                        "There is something wrong when loading your data"
+                                                    )
+                                                }
+                                            }
+                                        }
                                     }
+
+                                }
+
+                                is ResultState.Error -> {
+//                        showLoading(false)
+                                    showToast(
+                                        requireContext(),
+                                        "There is something wrong when loading your data"
+                                    )
                                 }
                             }
                         }
-
+                    }
+                    else{
+                        showBackDialog()
+                    }
+                    is ResultState.Loading -> {
+                        // showLoading(true)
                     }
 
                     is ResultState.Error -> {
-//                        showLoading(false)
-                        showToast(
-                            requireContext(),
-                            "There is something wrong when loading your data"
-                        )
+                        // showLoading(false)
+                        // handle error
                     }
                 }
             }
+
+
+
         }
     }
 
+    private fun showBackDialog() {
+        _dialogBinding = DiamondHomeDialogBinding.inflate(layoutInflater)
+        val dialogView = dialogBinding.root
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
+
+        val dialog = builder.create()
+        dialog.show()
+        dialogBinding.vEnoughAmount.text = "You don't Have enough"
+        dialogBinding.btnAds.text = "Back"
+        dialogBinding.btnAds.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        dialogBinding.btnSubscribe.text = "Cancel"
+        dialogBinding.btnSubscribe.setOnClickListener {
+            dialog.hide()
+        }
+
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
