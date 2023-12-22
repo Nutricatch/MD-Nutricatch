@@ -50,23 +50,21 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
   8. Android Navigation
   9. Android KTX
   10. GMS Ads
-## Documentation
+## Gallery
+
+<img src="https://github.com/Nutricatch/nutricatch-mobile_app/assets/60059041/232afbb1-78d4-471b-b9b5-f79b578d1d7c" width="600" height="450">
+
+
   1. [Figma Prototype](https://www.figma.com/file/pEB7OPXiz4DXmhIDlOLLey/NutriCatch?type=design&node-id=0%3A1&mode=design&t=bagjd3odg0kG56LD-1)
-  2. Screen
+  2. Gallery
      - Auth Screen <br />
-      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/register_screen.jpeg" width="200" height="444" />
-      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/login_screen.jpeg" width="200" height="444" />
-      
-     - Home Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/home_screen.jpeg" width="200" height="444" />
-       
-     - My Calories Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen1.jpeg" width="200" height="444" />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen2.jpeg" width="200" height="444" />
-       
-     - Camera Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen1.jpeg" width="200" height="444" />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen2.jpeg" width="200" height="444" />
-       
-     - Profile Screen <br />
-       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/profile_screen.jpeg" width="200" height="444" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/assets/60059041/b0492225-434f-4bdf-8fdb-02d50e1a2396" width=372 height=400 />
+
+     - Main Screen <br />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/assets/60059041/9893b00e-a316-43f6-b05a-dc340da77b1c" width=372 height=400/>
+
+     - Food Recognition Screen <br />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/assets/60059041/dff4da11-f46a-4262-bc2b-5b34a72d96a1" width=372 height=400 />
+
+     - User Profile <br />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/assets/60059041/4dce027b-6045-4d10-b3ba-7f94e7fe2ab4" width=400 height=300 />
