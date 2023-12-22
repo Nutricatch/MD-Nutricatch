@@ -22,9 +22,21 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
   - [Documentation](#documentation)
 
 ## Features
-  
+  - **Authentication**, ensures users access only permitted functionalities, following the least privilege principle and maintaining data security through encryption and monitoring.
+  - **Macronutrients Tracker**, Effortlessly monitor your carb, protein, and fat intake for a balanced, healthier lifestyle with our intuitive macronutrient tracking feature. Take charge of your nutrition, one meal at a time!
+  - **Recommended Restaurant**, Search nearyby recommended restaurant near you
+  - **Calories and Nutrients Scan**, Scan calories and macronutrients such as Protein Carbs and more with a Machine Learning Model
+  - **Theme**,  User can change the app to dark and light theme
+  - **Language**, User can change the app language between Bahasa Indonesia and English
+
 ## How To Run 
-  
+  1. Install Android Studio
+  2. Clone this Repository 'git clone https://github.com/Nutricatch/nutricatch-mobile_app.git'
+  3. Open the cloned folder in Android Studio
+  4. Sync Gradle 
+  5. Rebuild the project 'Build > Rebuild Project'
+  6. Run the app with your desired Phone (min. Os : Android ) 
+
 ## Libraries
   1. Junit
   2. Espresso
@@ -40,12 +52,19 @@ This project was created as a Capstone Project for Bangkit 2023 Batch 2, this pr
   1. [Figma Prototype](https://www.figma.com/file/pEB7OPXiz4DXmhIDlOLLey/NutriCatch?type=design&node-id=0%3A1&mode=design&t=bagjd3odg0kG56LD-1)
   2. Screen
      - Auth Screen <br />
-      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/register_screen.jpeg" width="360" height="800" />
-      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/login_screen.jpeg" width="360" height="800" />
-     - Home Screen
+      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/register_screen.jpeg" width="300" height="666" />
+      <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/login_screen.jpeg" width="300" height="666" />
+      
+     - Home Screen <br />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/home_screen.jpeg" width="360" height="800" />
        
-     - My Calories Screen
+     - My Calories Screen <br />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen1.jpeg" width="360" height="800" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/my_calories_screen2.jpeg" width="360" height="800" />
        
-     - Camera Screen
+     - Camera Screen <br />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen1.jpeg" width="360" height="800" />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/camera_screen2.jpeg" width="360" height="800" />
        
-     - Profile Screen
+     - Profile Screen <br />
+       <img src="https://github.com/Nutricatch/nutricatch-mobile_app/blob/main/documentationScreen/profile_screen.jpeg" width="360" height="800" />
