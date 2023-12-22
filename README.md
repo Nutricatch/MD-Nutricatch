@@ -1,4 +1,4 @@
-![NutriCatch](nutricatch.png)
+![NutriCatch](/documentationScreen/nutricatch.png)
 # NutriCatch Mobile Application
 NutriCatch health tracking app with all-in-one solution for a healthier lifestyle through the nutrients in your plate.
 
